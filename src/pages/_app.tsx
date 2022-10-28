@@ -5,8 +5,9 @@ import { ThemeProvider } from '@mui/material/styles';
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import theme from '../styles/theme';
 import createEmotionCache from '../../config/createEmotionCache';
-import { GlobalStyle } from '../styles/globals';
-
+import '../styles/globals.scss';
+import { ProSidebarProvider } from 'react-pro-sidebar';
+import { BaseLayout } from '../components/Layout';
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -22,8 +23,11 @@ export default function MyApp(props: MyAppProps) {
         <title>Brave finances</title>
       </Head>
       <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <Component {...pageProps} />
+        <ProSidebarProvider>
+          <BaseLayout>
+            <Component {...pageProps} />
+          </BaseLayout>
+        </ProSidebarProvider>
       </ThemeProvider>
     </CacheProvider>
   );
