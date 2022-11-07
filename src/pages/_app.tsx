@@ -7,7 +7,7 @@ import theme from '../styles/theme';
 import createEmotionCache from '../../config/createEmotionCache';
 import '../styles/globals.scss';
 import { ProSidebarProvider } from 'react-pro-sidebar';
-import { BaseLayout } from '../components/Layout';
+import { BaseLayout } from '../Layout';
 
 const clientSideEmotionCache = createEmotionCache();
 

@@ -1,219 +1,142 @@
-import { ReactNode, useState } from "react";
-import Link from "next/link";
-
+import { useState } from "react";
 import { Menu, MenuItem, useProSidebar } from "react-pro-sidebar";
 import { Sidebar as ProSidebar } from "react-pro-sidebar";
 
-import { Box, IconButton, Typography } from "@mui/material";
+import Add from '@mui/icons-material/Add';
+
+import { Box, IconButton } from "@mui/material";
 
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
-import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
-import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
-import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
-import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
-import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
-import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import ListIcon from '@mui/icons-material/List';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import EmojiFlagsIcon from '@mui/icons-material/EmojiFlags';
+import ReceiptIcon from '@mui/icons-material/Receipt';
+import BarChartIcon from '@mui/icons-material/BarChart';
+
 import Image from "next/image";
+import myBillsLogo from '../../assets/mybills-logo-noBg.png'
+import logo from '../../assets/logo.png'
 
-interface ItemProps {
-  title: string;
-  to: string;
-  icon: ReactNode;
-  selected: string;
-  setSelected(item: string): void;
-}
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
-const Item = ({ title, to, icon, selected, setSelected }: ItemProps) => {
-  return (
-    <MenuItem
-      active={selected === title}
-      style={{
-        color: "#141414",
-      }}
-      onClick={() => setSelected(title)}
-      icon={icon}
-    >
-      <Typography>{title}</Typography>
-    </MenuItem>
-  );
-};
+import Button from '@mui/material/Button';
+
+import { ButtonContained, ButtonExpanded, SidebarButton } from './styles';
+import { SidebarMenuItem } from "./SidebarMenuItem";
 
 export function Sidebar() {
   const { collapseSidebar, collapsed } = useProSidebar();
   const [selected, setSelected] = useState("Dashboard");
 
   return (
-    <ProSidebar backgroundColor={"#FFFFFF"} style={{ height: '100vh' }}>
+    <ProSidebar collapsedWidth="100px" width="260px" backgroundColor={"#FFFFFF"} style={{ height: '100vh' }}>
       <Box
         sx={{
-          // "& .pro-inner-item": {
-          //   padding: "5px 35px 5px 20px !important",
-          // },
           "& .menu-anchor": {
             backgroundColor: "transparent !important",
           },
           "& .active > .menu-anchor": {
-            color: "#e2726e !important",
-          },
-          "& .menu-anchor:hover": {
-            color: "#6870fa !important",
+            color: "#6514dd !important",
           },
         }}
       >
+
         <Menu>
-          <MenuItem
-            onClick={() => collapseSidebar()}
-            icon={collapsed ? <MenuOutlinedIcon /> : undefined}
-            style={{
-              margin: "10px 0 20px 0",
-              color: "#141414",
-            }}
-          >
-            {!collapsed && (
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-                ml="15px"
-              >
-                <Typography variant="h3" color={"#141414"}>
-                  ADMINS
-                </Typography>
-                <IconButton onClick={() => collapseSidebar()}>
-                  <MenuOutlinedIcon />
-                </IconButton>
-              </Box>
-            )}
+          <MenuItem>
+            {collapsed ? <Image src={logo} width={60} alt="" /> : <Image src={myBillsLogo} width={140} alt="" />}
           </MenuItem>
 
-          {!collapsed && (
-            <Box mb="25px">
-              <Box textAlign="center">
-                <Typography
-                  variant="h2"
-                  color={"#141414"}
-                  fontWeight="bold"
-                  sx={{ m: "10px 0 0 0" }}
-                >
-                  Ed Roh
-                </Typography>
-                <Typography variant="h5" color={"#4cceac"}>
-                  VP Fancy Admin
-                </Typography>
-              </Box>
-            </Box>
-          )}
-
-          <Box paddingLeft={collapsed ? undefined : "10%"}>
-            <Item
-              title="Dashboard"
-              to="/"
-              icon={<HomeOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-
-            <Typography
-              variant="h6"
-              color={"#3d3d3d"}
-              sx={{ m: "15px 0 5px 20px" }}
+          <Box sx={{
+            margin: "1rem 0",
+            position: "relative",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}>
+            {!collapsed ? (
+              <SidebarButton>
+                <ButtonExpanded>
+                  <Button variant="contained" startIcon={< Add />} >
+                    Novo
+                  </Button>
+                </ButtonExpanded>
+              </SidebarButton>
+            ) : (
+              <SidebarButton>
+                <ButtonContained>
+                  <Button variant="contained">
+                    < Add />
+                  </Button>
+                </ButtonContained>
+              </SidebarButton>
+            )
+            }
+            <IconButton
+              onClick={() => collapseSidebar()}
+              sx={{
+                position: "absolute",
+                right: 0,
+                top: -30,
+                boxShadow: "0px 3px 5px -1px rgb(0 0 0 / 20%)"
+              }}
             >
-              Data
-            </Typography>
-            <Item
-              title="Manage Team"
-              to="/team"
-              icon={<PeopleOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Contacts Information"
-              to="/contacts"
-              icon={<ContactsOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Invoices Balances"
-              to="/invoices"
-              icon={<ReceiptOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-
-            <Typography
-              variant="h6"
-              color={"#3d3d3d"}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Pages
-            </Typography>
-            <Item
-              title="Profile Form"
-              to="/form"
-              icon={<PersonOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Calendar"
-              to="/calendar"
-              icon={<CalendarTodayOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="FAQ Page"
-              to="/faq"
-              icon={<HelpOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-
-            <Typography
-              variant="h6"
-              color={"#3d3d3d"}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Charts
-            </Typography>
-            <Item
-              title="Bar Chart"
-              to="/bar"
-              icon={<BarChartOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Pie Chart"
-              to="/pie"
-              icon={<PieChartOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Line Chart"
-              to="/line"
-              icon={<TimelineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Geography Chart"
-              to="/geography"
-              icon={<MapOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
+              {collapsed ? <ArrowForwardIosIcon fontSize="small" /> : <ArrowBackIosIcon fontSize="small" />}
+            </IconButton>
           </Box>
+
+          <SidebarMenuItem
+            title="Dashboard"
+            to="/"
+            icon={<HomeOutlinedIcon />}
+            selected={selected}
+            setSelected={setSelected}
+          />
+          <SidebarMenuItem
+            title="Contas"
+            to="/accounts"
+            icon={<AccountBalanceIcon />}
+            selected={selected}
+            setSelected={setSelected}
+          />
+          <SidebarMenuItem
+            title="Transações"
+            to="/"
+            icon={<ListIcon />}
+            selected={selected}
+            setSelected={setSelected}
+          />
+          <SidebarMenuItem
+            title="Cartões de crédito"
+            to="/"
+            icon={<AccountBalanceWalletIcon />}
+            selected={selected}
+            setSelected={setSelected}
+          />
+          <SidebarMenuItem
+            title="Planejamento"
+            to="/"
+            icon={<EmojiFlagsIcon />}
+            selected={selected}
+            setSelected={setSelected}
+          />
+          <SidebarMenuItem
+            title="Relatórios"
+            to="/"
+            icon={<ReceiptIcon />}
+            selected={selected}
+            setSelected={setSelected}
+          />
+          <SidebarMenuItem
+            title="Mais opções"
+            to="/"
+            icon={<BarChartIcon />}
+            selected={selected}
+            setSelected={setSelected}
+          />
         </Menu>
       </Box>
-    </ProSidebar>
+    </ProSidebar >
   );
 }

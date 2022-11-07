@@ -14,5 +14,33 @@ const theme = createTheme({
     },
     common: {},
   },
+  typography: {
+    fontFamily: ["Maven Pro", "Source Sans Pro", "sans-serif"].join(","),
+    fontSize: 14,
+    h1: {
+      fontFamily: ["Maven Pro", "Source Sans Pro", "sans-serif"].join(","),
+      fontSize: 40,
+    },
+    h2: {
+      fontFamily: ["Maven Pro", "Source Sans Pro", "sans-serif"].join(","),
+      fontSize: 32,
+    },
+    h3: {
+      fontFamily: ["Maven Pro", "Source Sans Pro", "sans-serif"].join(","),
+      fontSize: 24,
+    },
+    h4: {
+      fontFamily: ["Maven Pro", "Source Sans Pro", "sans-serif"].join(","),
+      fontSize: 20,
+    },
+    h5: {
+      fontFamily: ["Maven Pro", "Source Sans Pro", "sans-serif"].join(","),
+      fontSize: 16,
+    },
+    h6: {
+      fontFamily: ["Maven Pro", "Source Sans Pro", "sans-serif"].join(","),
+      fontSize: 14,
+    },
+  },
 });
 export default theme;
