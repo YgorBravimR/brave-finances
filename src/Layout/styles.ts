@@ -21,6 +21,5 @@ export const ChildrenLayout = styled.div`
   width: calc(100% - 2.5rem);
   height: calc(100% - 2rem);
   margin: 1rem 1.25rem 0;
-  box-sizing: border-box;
   overflow-y: scroll;
 `;

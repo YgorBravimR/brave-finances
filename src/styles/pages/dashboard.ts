@@ -12,3 +12,10 @@ export const DashboardContainer = styled.div`
     align-self: center;
   }
 `;
+
+export const BalanceCardContainer = styled.div`
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 1rem;
+`;

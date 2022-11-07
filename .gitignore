@@ -14,7 +14,6 @@
 
 # production
 /build
-.vscode
 
 # misc
 .DS_Store
@@ -22,6 +21,8 @@
 
 # general
 annotations.md
+BaseComponent
+.vscode
 
 # debug
 npm-debug.log*
