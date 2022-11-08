@@ -8,6 +8,7 @@ import createEmotionCache from '../../config/createEmotionCache';
 import '../styles/globals.scss';
 import { ProSidebarProvider } from 'react-pro-sidebar';
 import { BaseLayout } from '../Layout';
+import { TransactionContextProvider } from '../contexts/TransactionsContext';
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -23,11 +24,13 @@ export default function MyApp(props: MyAppProps) {
         <title>Brave finances</title>
       </Head>
       <ThemeProvider theme={theme}>
-        <ProSidebarProvider>
-          <BaseLayout>
-            <Component {...pageProps} />
-          </BaseLayout>
-        </ProSidebarProvider>
+        <TransactionContextProvider>
+          <ProSidebarProvider>
+            <BaseLayout>
+              <Component {...pageProps} />
+            </BaseLayout>
+          </ProSidebarProvider>
+        </TransactionContextProvider>
       </ThemeProvider>
     </CacheProvider>
   );

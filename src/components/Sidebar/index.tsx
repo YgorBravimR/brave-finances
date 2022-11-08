@@ -13,18 +13,19 @@ import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import EmojiFlagsIcon from '@mui/icons-material/EmojiFlags';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import BarChartIcon from '@mui/icons-material/BarChart';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import Image from "next/image";
 import myBillsLogo from '../../assets/mybills-logo-noBg.png'
 import logo from '../../assets/logo.png'
 
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import Button from '@mui/material/Button';
 
 import { ButtonContained, ButtonExpanded, SidebarButton } from './styles';
 import { SidebarMenuItem } from "./SidebarMenuItem";
+import { NewTransactionSidebarButton } from "../NewTransactionSidebarButton";
 
 export function Sidebar() {
   const { collapseSidebar, collapsed } = useProSidebar();
@@ -58,17 +59,15 @@ export function Sidebar() {
             {!collapsed ? (
               <SidebarButton>
                 <ButtonExpanded>
-                  <Button variant="contained" startIcon={< Add />} >
-                    Novo
-                  </Button>
+                  <NewTransactionSidebarButton buttonText="Novo" startIcon={<Add />} />
                 </ButtonExpanded>
               </SidebarButton>
             ) : (
               <SidebarButton>
                 <ButtonContained>
-                  <Button variant="contained">
-                    < Add />
-                  </Button>
+                  <ButtonExpanded>
+                    <NewTransactionSidebarButton startIcon={<Add />} />
+                  </ButtonExpanded>
                 </ButtonContained>
               </SidebarButton>
             )

@@ -11,6 +11,15 @@ export const DashboardContainer = styled.div`
   img {
     align-self: center;
   }
+
+  button {
+    text-transform: capitalize;
+    font-size: 1rem;
+    font-weight: 400;
+    border-radius: 25px;
+
+    margin-top: 1rem;
+  }
 `;
 
 export const BalanceCardContainer = styled.div`
@@ -18,4 +27,8 @@ export const BalanceCardContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   column-gap: 1rem;
+`;
+
+export const MainCardsContent = styled.div`
+  margin-top: 3rem;
 `;

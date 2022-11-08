@@ -18,5 +18,6 @@ export const SidebarMenuItemContainer = styled.div`
 
   p {
     margin-left: 1rem;
+    text-align: left;
   }
 `;
