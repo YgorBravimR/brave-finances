@@ -20,9 +20,6 @@ import Image from "next/image";
 import myBillsLogo from '../../assets/mybills-logo-noBg.png'
 import logo from '../../assets/logo.png'
 
-
-import Button from '@mui/material/Button';
-
 import { ButtonContained, ButtonExpanded, SidebarButton } from './styles';
 import { SidebarMenuItem } from "./SidebarMenuItem";
 import { NewTransactionSidebarButton } from "../NewTransactionSidebarButton";

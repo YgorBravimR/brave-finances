@@ -5,7 +5,8 @@ export interface ITransaction {
   type: "income" | "outcome" | "creditCard";
   price: number;
   category: string;
-  createdAt: string;
+  // createdAt: string;
+  date: string;
 }
 
 interface TransactionContextType {
@@ -13,6 +14,7 @@ interface TransactionContextType {
   incomes: ITransaction[]
   outcomes: ITransaction[]
   creditCard: ITransaction[]
+  setTransactions: any  // Conferir tipo 
 }
 
 interface TransactionsContextProviderProps {
@@ -28,42 +30,52 @@ export function TransactionContextProvider({ children }: TransactionsContextProv
       price: 3000,
       category: "Salário",
       type: "income",
-      createdAt: "",
+      // createdAt: "",
+      date: "2022-07-18"
     },
     {
       description: "Vendas",
       price: 25000,
       category: "Salário",
       type: "income",
-      createdAt: "",
+      // createdAt: "",
+      date: "2022-07-18"
+
     },
     {
       description: "Gastos Pessoais",
       price: 12000,
       category: "Salário",
       type: "outcome",
-      createdAt: "",
+      // createdAt: "",
+      date: "2022-07-18"
+
     },
     {
       description: "Recebido",
       price: 2000,
       category: "Salário",
       type: "income",
-      createdAt: "",
+      // createdAt: "",
+      date: "2022-07-18"
+
     },
     {
       description: "PC Novo",
       price: 3400,
       category: "Salário",
       type: "outcome",
-      createdAt: "",
+      // createdAt: "",
+      date: "2022-07-18"
+
     },
     {
       description: "Recebido",
       price: 2222,
       category: "Salário",
       type: "income",
-      createdAt: "",
+      // createdAt: "",
+      date: "2022-07-18"
     },
   ])
 
@@ -72,7 +84,7 @@ export function TransactionContextProvider({ children }: TransactionsContextProv
   const creditCard = transactions.filter((transaction) => transaction.type === 'creditCard')
 
   return (
-    <TransactionsContext.Provider value={{ transactions, incomes, outcomes, creditCard }}>
+    <TransactionsContext.Provider value={{ transactions, setTransactions, incomes, outcomes, creditCard }}>
       {children}
     </TransactionsContext.Provider>
   )

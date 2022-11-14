@@ -23,6 +23,7 @@
 annotations.md
 BaseComponent
 .vscode
+loogTheme.js
 
 # debug
 npm-debug.log*

@@ -1,6 +1,6 @@
 import { useSummary } from '../../../hooks/useSummary'
 import { useTransactionsContext } from '../../../hooks/useTransactionsContext'
-import { numberToCurrency } from '../../../utils/numberToCurrency'
+import { numberToCurrency } from '../../../utils/formatter'
 import { MyExpensesContainer, TransactionsListContainer } from './styles'
 
 

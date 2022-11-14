@@ -1,4 +1,5 @@
 import { Button, Typography } from "@mui/material";
+import Link from "next/link";
 import { ReactNode } from "react";
 import { MenuItem } from "react-pro-sidebar";
 import { SidebarMenuItemContainer } from "./styles";

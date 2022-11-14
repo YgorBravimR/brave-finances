@@ -6,3 +6,9 @@ export function numberToCurrency(numberValue: number) {
 
   return formattedValue;
 }
+
+export function InputDateFormatter(dateValue: number) {
+  const formattedDate = new Intl.DateTimeFormat("fr-CA").format(dateValue);
+
+  return formattedDate;
+}

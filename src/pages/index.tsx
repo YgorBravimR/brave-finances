@@ -20,7 +20,7 @@ import { MyIncomes } from '../components/ResumeCard/MyIncomes';
 import { MyExpenses } from '../components/ResumeCard/MyExpenses';
 
 import { useSummary } from '../hooks/useSummary';
-import { numberToCurrency } from '../utils/numberToCurrency';
+import { numberToCurrency } from '../utils/formatter';
 
 export default function Dashboard() {
   const { incomeSum, outcomeSum, total } = useSummary()
