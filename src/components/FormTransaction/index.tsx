@@ -1,4 +1,4 @@
-import { FormTransactionContainer } from './styles'
+import { FormTransactionContainer, FormTypeRadioGroupContainer } from './styles'
 
 import * as yup from 'yup'
 import { InputDateFormatter } from '../../utils/formatter';
@@ -112,11 +112,17 @@ export function FormTransaction() {
 					value={formik.values.type}
 					onChange={formik.handleChange}
 				>
-					<div>
-						<FormControlLabel value="income" label="Receita" control={<Radio />} />
-						<FormControlLabel value="outcome" label="Despesa" control={<Radio />} />
-						<FormControlLabel value="creditCard" label="Cartão de Crédito" control={<Radio />} />
-					</div>
+					<FormTypeRadioGroupContainer>
+						<Button>
+							<FormControlLabel value="income" label="Receita" control={<Radio />} />
+						</Button>
+						<Button>
+							<FormControlLabel value="outcome" label="Despesa" control={<Radio />} />
+						</Button>
+						<Button>
+							<FormControlLabel value="creditCard" label="Cartão de Crédito" control={<Radio />} />
+						</Button>
+					</FormTypeRadioGroupContainer>
 				</RadioGroup>
 				<Button color="primary" variant="contained" type="submit">
 					Submit

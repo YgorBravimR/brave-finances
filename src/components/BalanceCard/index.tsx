@@ -1,4 +1,4 @@
-import { Avatar, Card, SliderValueLabel, Tooltip } from '@mui/material'
+import { Avatar, Card, Tooltip } from '@mui/material'
 import { BalanceCardContent } from './styles'
 import Link from 'next/link';
 import { ReactNode } from 'react';
