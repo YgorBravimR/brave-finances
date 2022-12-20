@@ -1,9 +1,9 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react";
 
 interface ModalContextType {
-  openModal: any
-  handleCloseModal: any
-  setOpenModal: any
+  openModal: boolean
+  handleCloseModal: () => void
+  setOpenModal: Dispatch<SetStateAction<boolean>>
 }
 
 interface ModalContextProviderProps {
@@ -21,5 +21,4 @@ export function ModalContextProvider({ children }: ModalContextProviderProps) {
       {children}
     </ModalContext.Provider>
   )
-
 }

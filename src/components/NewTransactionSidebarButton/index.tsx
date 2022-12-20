@@ -1,12 +1,12 @@
 import { Backdrop, Button, Fade, Menu, MenuItem, Modal } from '@mui/material';
-import { NewTransactionMenuContainer, ModalContainer } from './styles';
+import { ModalContainer } from './styles';
 
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import TrendingDownIcon from '@mui/icons-material/TrendingDown';
 
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { FormTransaction } from '../FormTransaction';
-import { useModalContext } from '../../hooks/useModalContext';
+import { ModalContext } from '../../contexts/ModalContext';
 
 type Props = {
 	buttonText?: React.ReactNode
@@ -14,7 +14,7 @@ type Props = {
 }
 
 export function NewTransactionSidebarButton({ buttonText, startIcon }: Props) {
-	const { handleCloseModal, openModal, setOpenModal } = useModalContext()
+	const { handleCloseModal, openModal, setOpenModal } = useContext(ModalContext)
 
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const openMenu = Boolean(anchorEl);
@@ -31,7 +31,7 @@ export function NewTransactionSidebarButton({ buttonText, startIcon }: Props) {
 	}
 
 	return (
-		<NewTransactionMenuContainer>
+		<div>
 			<Button
 				onClick={handleClickMenu}
 				variant="contained"
@@ -87,7 +87,6 @@ export function NewTransactionSidebarButton({ buttonText, startIcon }: Props) {
 				</Fade>
 			</Modal>
 
-		</NewTransactionMenuContainer>
+		</div>
 	);
 }
-

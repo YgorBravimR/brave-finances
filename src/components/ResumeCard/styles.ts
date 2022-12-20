@@ -11,18 +11,7 @@ export const ResumeCardContainer = styled.div`
     border-radius: 25px;
   }
 
-  > div > :first-child {
+  > div > :first-of-type {
     padding: 1rem;
-  }
-`;
-
-export const SeeMoreContainer = styled.div`
-  border-top: 1px solid lightgray;
-  text-align: center;
-
-  button {
-    text-transform: uppercase;
-    margin: 0.5rem;
-    padding: 0.5rem 1rem;
   }
 `;

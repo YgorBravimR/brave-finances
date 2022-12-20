@@ -3,12 +3,14 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-
+import { AuthContext } from '../../contexts/AuthContext';
 
 export function ProfileMenu() {
+  const { user } = useContext(AuthContext)
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -26,7 +28,7 @@ export function ProfileMenu() {
         endIcon={<KeyboardArrowDownIcon />}
       >
         <Typography>
-          Ygor
+          {user?.fullname}
         </Typography>
       </Button>
       <Menu

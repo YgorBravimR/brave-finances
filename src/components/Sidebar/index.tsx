@@ -1,138 +1,129 @@
-import { useState } from "react";
-import { Menu, MenuItem, useProSidebar } from "react-pro-sidebar";
-import { Sidebar as ProSidebar } from "react-pro-sidebar";
-
-import Add from '@mui/icons-material/Add';
-
-import { Box, IconButton } from "@mui/material";
-
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
-import ListIcon from '@mui/icons-material/List';
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
-import EmojiFlagsIcon from '@mui/icons-material/EmojiFlags';
-import ReceiptIcon from '@mui/icons-material/Receipt';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import MuiDrawer from '@mui/material/Drawer';
+import IconButton from '@mui/material/IconButton';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { useContext, useState } from 'react';
 
 import Image from "next/image";
 import myBillsLogo from '../../assets/mybills-logo-noBg.png'
 import logo from '../../assets/logo.png'
 
-import { ButtonContained, ButtonExpanded, SidebarButton } from './styles';
-import { SidebarMenuItem } from "./SidebarMenuItem";
-import { NewTransactionSidebarButton } from "../NewTransactionSidebarButton";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import ListIcon from '@mui/icons-material/List';
+import { Add } from '@mui/icons-material';
+import { List } from '@mui/material';
+import { NewTransactionSidebarButton } from '../NewTransactionSidebarButton';
+import { MaterialUiSidebarItem } from './SidebarMenu';
+import { SidebarButton, ButtonExpanded, ButtonContained } from './styles';
+import { SidebarContext } from '../../contexts/SidebarContext';
 
-export function Sidebar() {
-  const { collapseSidebar, collapsed } = useProSidebar();
-  const [selected, setSelected] = useState("Dashboard");
+const drawerWidth = 240;
+
+const openedMixin = (theme: Theme): CSSObject => ({
+  width: drawerWidth,
+  transition: theme.transitions.create('width', {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.enteringScreen,
+  }),
+  overflowX: 'hidden',
+});
+
+const closedMixin = (theme: Theme): CSSObject => ({
+  transition: theme.transitions.create('width', {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  overflowX: 'hidden',
+  width: `calc(${theme.spacing(7)} + 1px)`,
+  [theme.breakpoints.up('sm')]: {
+    width: `calc(${theme.spacing(8)} + 1px)`,
+  },
+});
+
+const DrawerHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-end',
+  padding: theme.spacing(0, 1),
+  ...theme.mixins.toolbar,
+}));
+
+
+const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
+  ({ theme, open }) => ({
+    width: drawerWidth,
+    flexShrink: 0,
+    whiteSpace: 'nowrap',
+    boxSizing: 'border-box',
+    ...(open && {
+      ...openedMixin(theme),
+      '& .MuiDrawer-paper': openedMixin(theme),
+    }),
+    ...(!open && {
+      ...closedMixin(theme),
+      '& .MuiDrawer-paper': closedMixin(theme),
+    }),
+  }),
+);
+
+export default function Sidebar() {
+  const [selected, setSelected] = useState('');
+  const { sidebarOpened, setSidebarOpened } = useContext(SidebarContext)
+
+  const handleOpenCloseDrawer = () => {
+    setSidebarOpened(openClose => !openClose);
+  };
 
   return (
-    <ProSidebar collapsedWidth="100px" width="260px" backgroundColor={"#FFFFFF"} style={{ height: '100vh' }}>
-      <Box
-        sx={{
-          "& .menu-anchor": {
-            backgroundColor: "transparent !important",
-          },
-          "& .active > .menu-anchor": {
-            color: "#6514dd !important",
-          },
-        }}
-      >
-
-        <Menu>
-          <MenuItem>
-            {collapsed ? <Image src={logo} width={60} alt="" /> : <Image src={myBillsLogo} width={140} alt="" />}
-          </MenuItem>
-
-          <Box sx={{
-            margin: "1rem 0",
-            position: "relative",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}>
-            {!collapsed ? (
-              <SidebarButton>
-                <ButtonExpanded>
-                  <NewTransactionSidebarButton buttonText="Novo" startIcon={<Add />} />
-                </ButtonExpanded>
-              </SidebarButton>
-            ) : (
-              <SidebarButton>
-                <ButtonContained>
-                  <ButtonExpanded>
-                    <NewTransactionSidebarButton startIcon={<Add />} />
-                  </ButtonExpanded>
-                </ButtonContained>
-              </SidebarButton>
-            )
-            }
-            <IconButton
-              onClick={() => collapseSidebar()}
-              sx={{
-                position: "absolute",
-                right: 0,
-                top: -30,
-                boxShadow: "0px 3px 5px -1px rgb(0 0 0 / 20%)"
-              }}
-            >
-              {collapsed ? <ArrowForwardIosIcon fontSize="small" /> : <ArrowBackIosIcon fontSize="small" />}
-            </IconButton>
-          </Box>
-
-          <SidebarMenuItem
+    <Box sx={{ display: 'flex' }}>
+      <Drawer variant="permanent" open={sidebarOpened} >
+        {sidebarOpened ? <Image src={myBillsLogo} width={140} height={60} alt="" /> : <Image src={logo} width={60} height={60} alt="" />}
+        <DrawerHeader>
+          <IconButton onClick={handleOpenCloseDrawer} >
+            {sidebarOpened ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+          </IconButton>
+        </DrawerHeader>
+        {sidebarOpened ? (
+          <SidebarButton>
+            <ButtonExpanded>
+              <NewTransactionSidebarButton buttonText="Novo" startIcon={<Add />} />
+            </ButtonExpanded>
+          </SidebarButton>
+        ) : (
+          <SidebarButton>
+            <ButtonContained>
+              <NewTransactionSidebarButton startIcon={<Add />} />
+            </ButtonContained>
+          </SidebarButton >
+        )
+        }
+        <List>
+          <MaterialUiSidebarItem
             title="Dashboard"
-            to="/"
+            to="/dashboard"
             icon={<HomeOutlinedIcon />}
             selected={selected}
             setSelected={setSelected}
           />
-          <SidebarMenuItem
+          <MaterialUiSidebarItem
             title="Contas"
             to="/accounts"
             icon={<AccountBalanceIcon />}
             selected={selected}
             setSelected={setSelected}
           />
-          <SidebarMenuItem
+          <MaterialUiSidebarItem
             title="Transações"
-            to="/"
+            to="/transactions"
             icon={<ListIcon />}
             selected={selected}
             setSelected={setSelected}
           />
-          <SidebarMenuItem
-            title="Cartões de crédito"
-            to="/"
-            icon={<AccountBalanceWalletIcon />}
-            selected={selected}
-            setSelected={setSelected}
-          />
-          <SidebarMenuItem
-            title="Planejamento"
-            to="/"
-            icon={<EmojiFlagsIcon />}
-            selected={selected}
-            setSelected={setSelected}
-          />
-          <SidebarMenuItem
-            title="Relatórios"
-            to="/"
-            icon={<ReceiptIcon />}
-            selected={selected}
-            setSelected={setSelected}
-          />
-          <SidebarMenuItem
-            title="Mais opções"
-            to="/"
-            icon={<BarChartIcon />}
-            selected={selected}
-            setSelected={setSelected}
-          />
-        </Menu>
-      </Box>
-    </ProSidebar >
+        </List>
+      </Drawer >
+    </Box >
   );
 }

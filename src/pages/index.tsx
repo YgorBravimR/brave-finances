@@ -1,103 +1,38 @@
-import bottomImage from '../assets/dashboard-bottom-img.svg'
-import Image from 'next/image'
+import { HomepageContainer } from "../styles/pages/homepage";
 
-import { DashboardContainer, BalanceCardContainer, MainCardsContent } from '../styles/pages/dashboard'
-import { BalanceCard } from '../components/BalanceCard'
+import mobills_home from '../assets/mobills_home.svg'
+import mobills_logo from '../assets/mybills-logo-noBg.png'
 
-import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
-import ArrowUpwardOutlinedIcon from '@mui/icons-material/ArrowUpwardOutlined';
-import ArrowDownwardOutlinedIcon from '@mui/icons-material/ArrowDownwardOutlined';
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
-import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
+import Image from "next/image";
+import { Button, Divider, Link } from "@mui/material";
+import { LoginUserForm } from "../components/LoginUserForm";
 
-import { Button, Grid } from '@mui/material';
-import { ResumeCard } from '../components/ResumeCard';
+import { ImageSectionContainer, FormSectionContainer } from '../styles/pages/homepage'
+import { RegisterUserForm } from "../components/RegisterUserForm";
+import { useState } from "react";
 
-import PieChartOutlineIcon from '@mui/icons-material/PieChartOutline';
-
-import EmojiFlagsIcon from '@mui/icons-material/EmojiFlags';
-import { MyIncomes } from '../components/ResumeCard/MyIncomes';
-import { MyExpenses } from '../components/ResumeCard/MyExpenses';
-
-import { useSummary } from '../hooks/useSummary';
-import { numberToCurrency } from '../utils/formatter';
-
-export default function Dashboard() {
-  const { incomeSum, outcomeSum, total } = useSummary()
+export default function HomePage() {
+  const [userPageShowed, setUserPageShowed] = useState('register')
 
   return (
-    <DashboardContainer>
-      <div>
-        <BalanceCardContainer>
-          <BalanceCard
-            title="Saldo atual"
-            value={numberToCurrency(total)}
-            iconColor="#2296f3"
-            icon={<AccountBalanceIcon />}
-            to="/"
-            tooltip="Esse aqui é apenas um teste do Saldo atual"
-          />
-          <BalanceCard
-            title="Receitas"
-            value={numberToCurrency(incomeSum)}
-            iconColor="#4caf50"
-            icon={<ArrowUpwardOutlinedIcon />}
-            to="/accounts"
-            tooltip="Outro teste, dessa vez.. Receitas"
-          />
-          <BalanceCard
-            title="Despesas"
-            value={numberToCurrency(outcomeSum)}
-            iconColor="#f44336"
-            icon={<ArrowDownwardOutlinedIcon />}
-            to="/"
-            tooltip="Testando.. depesas"
-          />
-          <BalanceCard
-            title="Cartão de Crédito"
-            value="R$ 11.378,81"
-            iconColor="#00796b"
-            icon={<AccountBalanceWalletIcon />}
-            to="/accounts"
-            tooltip="Por ultimo, um teste, Cartão de credito"
-          />
-          <Button endIcon={<ArrowForwardOutlinedIcon />}>Meu Desempenho</Button>
-        </BalanceCardContainer>
-        <MainCardsContent>
-          <Grid container rowSpacing={4} columnSpacing={2}>
-            <Grid item xs={6}>
-              <ResumeCard
-                cardTitle="Receitas"
-                icon={< PieChartOutlineIcon />}
-                title="Opa! Você ainda não possui receitas neste mês"
-                subtitle="Adicione suas receitas no mês atual através do botão (+), para ver seus gráficos."
-                cardContent={<MyIncomes />}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <ResumeCard
-                cardTitle="Despesas"
-                icon={< PieChartOutlineIcon />}
-                title="Opa! Você ainda não possui um planejamento definido para este mês."
-                subtitle="Melhore seu controle financeiro agora!"
-                cardContent={<MyExpenses />}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <ResumeCard
-                cardTitle="Seu planejamento financeiro"
-                icon={< EmojiFlagsIcon />}
-                title="Opa! Você ainda não possui um planejamento definido para este mês."
-                subtitle="Melhore seu controle financeiro agora!"
-                cardContent=""
-                emptyCard
-              />
-            </Grid>
-          </Grid>
-        </MainCardsContent>
-      </div>
-      <Image src={bottomImage} alt="" width={600} height={325} />
-    </DashboardContainer>
+    <HomepageContainer>
+      <Link href="/dashboard" className="mobills_logo">
+        <Image src={mobills_logo} alt={""} height={45} width={140} />
+      </Link>
+      <ImageSectionContainer>
+        <p>Time to boost your finances.</p>
+        <Image src={mobills_home} alt={""} height={456} width={320} />
+        <p>The path is up ahead. You've taken the first step on the transformation of your entire finacial life and we'll guide you on this journey</p>
+      </ImageSectionContainer>
+      <FormSectionContainer>
+        <div>
+          <Button variant="outlined" onClick={() => (setUserPageShowed('register'))}>Sign up</Button>
+          <Button variant="outlined" onClick={() => (setUserPageShowed('login'))}>Log In</Button>
+        </div>
+        {
+          userPageShowed === 'register' ? <RegisterUserForm /> : <LoginUserForm />
+        }
+      </FormSectionContainer>
+    </HomepageContainer>
   )
-
 }

@@ -1,8 +1,9 @@
-import { Button, Card } from '@mui/material'
-import { ResumeCardContainer, SeeMoreContainer } from './styles'
+import { Divider, Card } from '@mui/material'
+import { ResumeCardContainer } from './styles'
 
 import { EmptyDashboardCard, EmptyDashboardCardProps } from '../EmptyDashboardCard';
 import { ReactNode } from 'react';
+import { SeeMoreButton } from '../SeeMoreButton';
 
 interface ResumeCardProps extends EmptyDashboardCardProps {
   emptyCard?: boolean;
@@ -21,11 +22,8 @@ export function ResumeCard({ icon, title, subtitle, emptyCard, cardContent, card
           subtitle={subtitle}
         />
         ) : cardContent}
-        <SeeMoreContainer>
-          <Button>
-            ver mais
-          </Button>
-        </SeeMoreContainer>
+        <Divider />
+        <SeeMoreButton text="see more" />
       </Card>
     </ResumeCardContainer>
   )

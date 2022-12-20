@@ -11,7 +11,6 @@ import { ProfileMenu } from "../ProfileMenu";
 export function Header() {
   return (
     <HeaderContainer>
-      {/* Mybills shop coins */}
       <CoinsShopContainer>
         <Button>
           <Image src={mybillsShop} alt="" width={32} height={32} />
@@ -19,14 +18,12 @@ export function Header() {
         </Button>
       </CoinsShopContainer>
 
-      {/* Calendar buttom */}
       <CalendarButtonContainer>
         <Button variant="outlined" endIcon={<KeyboardArrowDownIcon />}>
           Novembro
         </Button>
       </CalendarButtonContainer>
 
-      {/* Profile modal */}
       <ProfileModalContainer>
         <ProfileMenu />
       </ProfileModalContainer>

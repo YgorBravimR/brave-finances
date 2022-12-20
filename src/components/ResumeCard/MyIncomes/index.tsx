@@ -1,12 +1,12 @@
-import { useSummary } from '../../../hooks/useSummary'
-import { useTransactionsContext } from '../../../hooks/useTransactionsContext'
+import { useContext } from 'react'
+import { TransactionsContext } from '../../../contexts/TransactionsContext'
 import { numberToCurrency } from '../../../utils/formatter'
 import { MyIncomesContainer, TransactionsListContainer } from './styles'
 
 
 
 export function MyIncomes() {
-  const { incomes } = useTransactionsContext()
+  const { incomes } = useContext(TransactionsContext)
 
   return (
     <MyIncomesContainer>

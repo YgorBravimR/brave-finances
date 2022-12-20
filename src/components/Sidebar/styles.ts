@@ -34,7 +34,9 @@ export const ButtonExpanded = styled.div`
 
 export const ButtonContained = styled.div`
   button {
-    width: 1rem;
     border-radius: 99px;
+    height: 4rem;
+    width: 4rem;
+    min-width: 0;
   }
 `;

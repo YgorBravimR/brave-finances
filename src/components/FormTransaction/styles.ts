@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const FormTransactionContainer = styled.div``;
+export const FormTransactionContainer = styled.form``;
 
 export const FormTypeRadioGroupContainer = styled.div`
   display: flex;

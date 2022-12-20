@@ -1,9 +1,8 @@
 import { TransactionsContext } from "../contexts/TransactionsContext";
-import { useMemo } from "react";
-import { useTransactionsContext } from "./useTransactionsContext";
+import { useContext, useMemo } from "react";
 
 export function useSummary() {
-  const { transactions } = useTransactionsContext()
+  const { transactions } = useContext(TransactionsContext)
 
   const summary = useMemo(() => {
     return transactions.reduce(

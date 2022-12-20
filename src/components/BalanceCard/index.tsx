@@ -2,14 +2,15 @@ import { Avatar, Card, Tooltip } from '@mui/material'
 import { BalanceCardContent } from './styles'
 import Link from 'next/link';
 import { ReactNode } from 'react';
+import { DotsThreeVertical } from 'phosphor-react';
 
 interface BalanceCardProps {
   title: string;
-  value: string;
+  value: number;
   icon: ReactNode;
   to: string;
   iconColor: string;
-  tooltip: string;
+  tooltip?: string;
 }
 
 export function BalanceCard({ title, value, icon, to, iconColor, tooltip }: BalanceCardProps) {
@@ -29,6 +30,5 @@ export function BalanceCard({ title, value, icon, to, iconColor, tooltip }: Bala
         </BalanceCardContent>
       </Tooltip>
     </Link>
-
   )
 }

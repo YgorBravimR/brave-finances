@@ -1,11 +1,5 @@
 import styled from "@emotion/styled";
 
-export const NewTransactionMenuContainer = styled.div`
-  button {
-    background-color: var(--mybillsMainPurple);
-  }
-`;
-
 export const ModalContainer = styled.aside`
   position: absolute;
   top: 50%;

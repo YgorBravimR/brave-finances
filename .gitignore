@@ -20,10 +20,8 @@
 *.pem
 
 # general
-annotations.md
-BaseComponent
 .vscode
-loogTheme.js
+baseComponent
 
 # debug
 npm-debug.log*
