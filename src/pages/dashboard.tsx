@@ -1,30 +1,19 @@
-import bottomImage from '../assets/dashboard-bottom-img.svg'
 import Image from 'next/image'
-import { useSummary } from '../hooks/useSummary';
-import { numberToCurrency } from '../utils/formatter';
-
-import { DashboardContainer, BalanceCardContainer, MainCardsContent } from '../styles/pages/dashboard'
-
-import { BalanceCard } from '../components/BalanceCard'
-import { ResumeCard } from '../components/ResumeCard';
-import { MyIncomes } from '../components/ResumeCard/MyIncomes';
-import { MyExpenses } from '../components/ResumeCard/MyExpenses';
-import { Button, Grid } from '@mui/material';
-
-import {
-  AccountBalance,
-  PieChartOutline,
-  ArrowUpwardOutlined,
-  ArrowDownwardOutlined,
-  AccountBalanceWallet,
-  ArrowForwardOutlined
-} from '@mui/icons-material/';
-import { DashboardTable } from '../components/Table';
 import { useContext } from 'react';
-import { AuthContext } from '../contexts/AuthContext';
 import { GetServerSideProps } from 'next';
 import { parseCookies } from 'nookies';
-import { getAPIClient } from '../lib/axios';
+import { useSummary } from '../hooks/useSummary';
+import { getAPIClient } from '../services/axios';
+import { AuthContext } from '../contexts/AuthContext';
+import bottomImage from '../assets/dashboard-bottom-img.svg'
+import { Button, Grid } from '@mui/material';
+import { AccountBalance, PieChartOutline, ArrowUpwardOutlined, ArrowDownwardOutlined, ArrowForwardOutlined, AccountBalanceWallet, EmojiFlags } from '@mui/icons-material/';
+import { DashboardContainer, BalanceCardContainer, MainCardsContent } from '../styles/pages/dashboard'
+import { BalanceCard } from '../components/shared/BalanceCard';
+import { ResumeCard } from '../components/shared/ResumeCard';
+import { MyIncomes } from '../components/shared/ResumeCard/MyIncomes';
+import { MyExpenses } from '../components/shared/ResumeCard/MyExpenses';
+import { TableTransactions } from '../components/dashboard/TableTransactions';
 
 export default function Dashboard() {
   const { incomeSum, outcomeSum, total } = useSummary()
@@ -60,14 +49,14 @@ export default function Dashboard() {
             to="/"
             tooltip="Testando.. depesas"
           />
-          {/* <BalanceCard
+          <BalanceCard
             title="Cartão de Crédito"
             value={11375.80}
             iconColor="#00796b"
             icon={<AccountBalanceWallet />}
             to="/accounts"
             tooltip="Por ultimo, um teste, Cartão de credito"
-          /> */}
+          />
           <Button endIcon={<ArrowForwardOutlined />}>Meu Desempenho</Button>
         </BalanceCardContainer>
         <MainCardsContent>
@@ -90,19 +79,19 @@ export default function Dashboard() {
                 cardContent={<MyExpenses />}
               />
             </Grid>
-            {/* <Grid item xs={6}>
+            <Grid item xs={6}>
               <ResumeCard
                 cardTitle="Seu planejamento financeiro"
-                icon={< EmojiFlagsIcon />}
+                icon={< EmojiFlags />}
                 title="Opa! Você ainda não possui um planejamento definido para este mês."
                 subtitle="Melhore seu controle financeiro agora!"
                 cardContent=""
                 emptyCard
               />
-            </Grid> */}
+            </Grid>
           </Grid>
         </MainCardsContent>
-        <DashboardTable />
+        <TableTransactions />
       </div>
       <Image src={bottomImage} alt="" width={600} height={325} />
     </DashboardContainer>

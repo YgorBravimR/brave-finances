@@ -6,7 +6,7 @@ import { CacheProvider, EmotionCache } from '@emotion/react';
 import theme from '../styles/theme.js';
 import createEmotionCache from '../../config/createEmotionCache';
 import '../styles/globals.scss';
-import { BaseLayout } from '../Layout';
+import { BaseLayout } from '../layouts';
 import { TransactionContextProvider } from '../contexts/TransactionsContext';
 import { ModalContextProvider } from '../contexts/ModalContext';
 import { SidebarContextProvider } from '../contexts/SidebarContext';

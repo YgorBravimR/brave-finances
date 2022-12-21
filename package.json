@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "eslint": "eslint \"**/*.+(js|jsx|ts|tsx)\"",
+    "eslint:fix": "eslint --fix \"**/*.+(js|jsx|ts|tsx)\"",
+    "prettier": "prettier --check \"**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|scss|css)\"",
+    "prettier:fix": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|scss|css)\""
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -21,7 +25,6 @@
     "phosphor-react": "^1.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-number-format": "^5.1.1",
     "sass": "^1.55.0",
     "styled-components": "^5.3.6",
     "yup": "^0.32.11"
@@ -32,11 +35,29 @@
     "@types/react": "18.0.24",
     "@types/react-dom": "18.0.8",
     "@types/styled-components": "^5.1.26",
-    "eslint": "8.26.0",
-    "eslint-config-next": "13.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.47.0",
+    "@typescript-eslint/parser": "^5.47.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-next": "^11.1.2",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^7.0.0",
+    "lint-staged": "^11.1.2",
+    "prettier": "2.4.0",
     "typescript": "4.8.4"
   },
-  "resolutions": {
-    "styled-components": "^5"
+  "lint-staged": {
+    "./*/**/*.{js,jsx,ts,tsx}": [
+      "npm run prettier:fix",
+      "npm run eslint:fix"
+    ],
+    "*.{json,md}": [
+      "npm run prettier:fix"
+    ]
   }
 }

@@ -1,10 +1,12 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme } from '@mui/material/styles';
 
-const mybillsMainPurple = "#6514dd";
-const mybillsLightBlue = "#2296f3";
-const mybillsIncome = "#4caf50";
-const mybillsOutcome = "#f44336";
-const mybillsCreditCard = "#00796b";
+// const white = "#FFFFFF";
+// const background = "#ecf3fb";
+const mybillsMainPurple = '#6514dd';
+const mybillsLightBlue = '#2296f3';
+const mybillsIncome = '#4caf50';
+const mybillsOutcome = '#f44336';
+const mybillsCreditCard = '#00796b';
 
 export const theme = createTheme({
   palette: {
@@ -20,7 +22,7 @@ export const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: ["Maven Pro", "Source Sans Pro", "sans-serif"].join(","),
+    fontFamily: ['Maven Pro', 'Source Sans Pro', 'sans-serif'].join(','),
     fontSize: 14,
   },
 });
