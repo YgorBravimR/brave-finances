@@ -1,28 +1,18 @@
-import { Backdrop, Box, Button, Fade, Modal, Typography } from "@mui/material";
-import { Bank, Money, Coin, Plus } from "phosphor-react";
 import { useState } from "react";
-import { AccountCard } from "../components/AccountCard";
-import { BalanceCard } from "../components/BalanceCard";
+import { Button, Fade, Modal } from "@mui/material";
+import { Bank, Money, Coin, Plus } from "phosphor-react";
 import { AccountsPageHeader, BalancesContainer, AccountsPageContainer, AccountsCardsContainer } from '../styles/pages/accounts'
-import { ModalContainer } from '../components/NewTransactionSidebarButton/styles'
-import { AccountForm } from "../components/AccountForm";
+import { AccountCard } from "../components/account/AccountCard";
+import { AccountForm } from "../components/account/AccountForm";
+import { BalanceCard } from "../components/shared/BalanceCard";
+import { ModalContainer } from "../components/shared/Sidebar/NewTransactionSidebarButton/styles";
+
+
 
 export default function Accounts() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-  };
 
   return (
     <AccountsPageContainer>

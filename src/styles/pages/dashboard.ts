@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled'
 
 export const DashboardContainer = styled.div`
   display: flex;
@@ -20,16 +20,16 @@ export const DashboardContainer = styled.div`
 
     margin-top: 1rem;
   }
-`;
+`
 
 export const BalanceCardContainer = styled.div`
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   column-gap: 2rem;
-`;
+`
 
 export const MainCardsContent = styled.div`
   margin-top: 3rem;
   margin-bottom: 3rem;
-`;
+`

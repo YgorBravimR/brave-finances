@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const HomepageContainer = styled.div`
   padding: 5rem;
@@ -10,7 +10,7 @@ export const HomepageContainer = styled.div`
   grid-template-columns: repeat(2, 1fr);
   gap: 3rem;
 
-  .mobills_logo{
+  .mobills_logo {
     position: absolute;
     left: 0.5rem;
     top: 0.5rem;

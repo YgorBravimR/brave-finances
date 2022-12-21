@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
-import { api } from "../lib/axios";
-import { parseCookies, setCookie } from 'nookies'
 import { useRouter } from "next/router";
+import { api } from "../services/axios";
+import { parseCookies, setCookie } from 'nookies'
 
 interface SignInCredentials {
   email: string;
