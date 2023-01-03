@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { Button, Fade, Modal } from "@mui/material";
 import { Bank, Money, Coin, Plus } from "phosphor-react";
-import { AccountsPageHeader, BalancesContainer, AccountsPageContainer, AccountsCardsContainer } from '../styles/pages/accounts'
+import { AccountsPageHeader, BalancesContainer, AccountsPageContainer, AccountsCardsContainer, AccountsPageBody } from '../styles/pages/accounts'
 import { AccountCard } from "../components/account/AccountCard";
 import { AccountForm } from "../components/account/AccountForm";
 import { BalanceCard } from "../components/shared/BalanceCard";
-import { ModalContainer } from "../components/shared/Sidebar/NewTransactionSidebarButton/styles";
 
 
 
@@ -29,24 +28,26 @@ export default function Accounts() {
           closeAfterTransition
         >
           <Fade in={open}>
-            <ModalContainer>
+            <div>
               <AccountForm />
-            </ModalContainer>
+            </div>
           </Fade>
         </Modal>
       </AccountsPageHeader>
 
-      <BalancesContainer>
-        <BalanceCard icon={<Money size={32} />} iconColor='purple' title='Current Balance' value={300} to={'/'} />
-        <BalanceCard icon={<Coin size={32} />} iconColor='green' title='Predicted Balance' value={300} to={'/'} />
-      </BalancesContainer>
+      <AccountsPageBody>
+        <AccountsCardsContainer>
+          <AccountCard account_name="NuBank" balance={200} icon={<Bank size={32} />} predicted_balance={200} />
+          <AccountCard account_name="NuBank" balance={200} icon={<Bank size={32} />} predicted_balance={200} />
+          <AccountCard account_name="NuBank" balance={200} icon={<Bank size={32} />} predicted_balance={200} />
+          <AccountCard account_name="NuBank" balance={200} icon={<Bank size={32} />} predicted_balance={200} />
+        </AccountsCardsContainer>
 
-      <AccountsCardsContainer>
-        <AccountCard account_name="NuBank" balance={200} icon={<Bank size={32} />} predicted_balance={200} />
-        <AccountCard account_name="NuBank" balance={200} icon={<Bank size={32} />} predicted_balance={200} />
-        <AccountCard account_name="NuBank" balance={200} icon={<Bank size={32} />} predicted_balance={200} />
-        <AccountCard account_name="NuBank" balance={200} icon={<Bank size={32} />} predicted_balance={200} />
-      </AccountsCardsContainer>
+        <BalancesContainer>
+          <BalanceCard icon={<Money size={32} />} iconColor='purple' title='Current Balance' value={300} to={'/'} />
+          <BalanceCard icon={<Coin size={32} />} iconColor='green' title='Predicted Balance' value={300} to={'/'} />
+        </BalancesContainer>
+      </AccountsPageBody>
     </AccountsPageContainer>
   )
 }

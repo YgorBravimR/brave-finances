@@ -1,17 +1,17 @@
-import { useContext, useState } from 'react'
-import { Backdrop, Button, Fade, Menu, MenuItem, Modal } from '@mui/material';
+import { useContext, useState, ReactNode } from 'react'
+import { Button, Menu, MenuItem } from '@mui/material';
 import { TrendingUp, TrendingDown } from '@mui/icons-material';
-import { ModalContainer } from './styles';
-import { ModalContext } from '../../../../contexts/ModalContext';
-import { FormTransaction } from '../../../transactions/FormTransaction';
+import { TransactionsModalContext } from '../../../../contexts/TransactionsModalContext';
+import { BaseModal } from '../../BaseModal';
+import { FormTransaction } from '../../TransactionModal/FormTransaction';
 
 type Props = {
-	buttonText?: React.ReactNode
-	startIcon?: React.ReactNode
+	buttonText?: ReactNode
+	startIcon?: ReactNode
 }
 
 export function NewTransactionSidebarButton({ buttonText, startIcon }: Props) {
-	const { handleCloseModal, openModal, setOpenModal } = useContext(ModalContext)
+	const { handleCloseModal, openTransactionModal, setOpenTransactionModal } = useContext(TransactionsModalContext)
 
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const openMenu = Boolean(anchorEl);
@@ -24,7 +24,7 @@ export function NewTransactionSidebarButton({ buttonText, startIcon }: Props) {
 
 	const handleCLoseMenuOpenModal = () => {
 		setAnchorEl(null)
-		setOpenModal(true)
+		setOpenTransactionModal(true)
 	}
 
 	return (
@@ -68,22 +68,9 @@ export function NewTransactionSidebarButton({ buttonText, startIcon }: Props) {
 					<p>Receita</p>
 				</MenuItem>
 			</Menu>
-			<Modal
-				open={openModal}
-				onClose={handleCloseModal}
-				closeAfterTransition
-				BackdropComponent={Backdrop}
-				BackdropProps={{
-					timeout: 500,
-				}}
-			>
-				<Fade in={openModal}>
-					<ModalContainer>
-						<FormTransaction />
-					</ModalContainer>
-				</Fade>
-			</Modal>
-
+			<BaseModal closeModal={handleCloseModal} openModal={openTransactionModal}>
+				<FormTransaction />
+			</BaseModal>
 		</div>
 	);
 }

@@ -1,23 +1,22 @@
-import styled from '@emotion/styled'
+import styled from "@emotion/styled";
 
-export const SidebarMenuItemContainer = styled.div`
-  font-size: 1.25rem;
-  text-align: left;
+export const SidebarMenuContainer = styled.div`
 
-  button {
-    width: 100%;
-    color: black;
-    justify-content: flex-start;
-    text-transform: capitalize;
-  }
+.MuiButtonBase-root {
+  padding-left: 0;
+  padding-right: 0;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+}
 
-  svg {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
+.MuiListItemButton-root {
+}
 
-  p {
-    margin-left: 1rem;
-    text-align: left;
-  }
+  .MuiListItem-root{
+
+  .Mui-selected {
+    border-left: 4px solid var(--mybillsMainPurple);
+    border-right: 4px solid transparent;
+}
+}
 `

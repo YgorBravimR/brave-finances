@@ -1,14 +1,10 @@
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 
 export const AccountsPageContainer = styled.div`
-  display: grid;
-  grid-template-areas:
-    'head head head head head head'
-    'card card card card card bala'
-    'card card card card card bala';
+  display: flex;
+  flex-direction: column;
 `
 export const AccountsPageHeader = styled.div`
-  grid-area: head;
   display: flex;
   justify-content: space-between;
   margin-bottom: 3rem;
@@ -21,17 +17,21 @@ export const AccountsPageHeader = styled.div`
   }
 `
 
-export const AccountsCardsContainer = styled.div`
-  grid-area: card;
+export const AccountsPageBody = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+    gap: 4rem;
+
+`
+
+export const AccountsCardsContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
-  margin-right: 3rem;
 `
 
 export const BalancesContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  grid-area: bala;
 `

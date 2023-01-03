@@ -21,6 +21,8 @@ export const HeaderContainer = styled.header`
     :hover {
       background-color: rgba(0, 0, 0, 0.04);
     }
+
+
   }
 `
 

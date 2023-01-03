@@ -1,6 +1,7 @@
-import styled from '@emotion/styled'
+import { styled } from "@mui/system"
 
-export const DashboardContainer = styled.div`
+
+export const DashboardContainer = styled('div')(({ theme }) => `
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -20,16 +21,16 @@ export const DashboardContainer = styled.div`
 
     margin-top: 1rem;
   }
-`
+`)
 
-export const BalanceCardContainer = styled.div`
+export const BalanceCardContainer = styled('div')(({ theme }) => `
   width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   column-gap: 2rem;
-`
+`)
 
-export const MainCardsContent = styled.div`
+export const MainCardsContent = styled('div')(({ theme }) => `
   margin-top: 3rem;
   margin-bottom: 3rem;
-`
+`)

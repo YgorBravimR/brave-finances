@@ -14,7 +14,7 @@ interface TransactionContextType {
   incomes: ITransaction[]
   outcomes: ITransaction[]
   creditCard: ITransaction[]
-  setTransactions: any  // Conferir tipo 
+  setTransactions: any  // Conferir tipo
 }
 
 interface TransactionsContextProviderProps {
@@ -24,60 +24,7 @@ interface TransactionsContextProviderProps {
 export const TransactionsContext = createContext({} as TransactionContextType)
 
 export function TransactionContextProvider({ children }: TransactionsContextProviderProps) {
-  const [transactions, setTransactions] = useState<ITransaction[]>([
-    {
-      description: "Salário",
-      price: 3000,
-      category: "Salário",
-      type: "income",
-      // createdAt: "",
-      date: "2022-07-18"
-    },
-    {
-      description: "Vendas",
-      price: 25000,
-      category: "Salário",
-      type: "income",
-      // createdAt: "",
-      date: "2022-07-18"
-
-    },
-    {
-      description: "Gastos Pessoais",
-      price: 12000,
-      category: "Salário",
-      type: "outcome",
-      // createdAt: "",
-      date: "2022-07-18"
-
-    },
-    {
-      description: "Recebido",
-      price: 2000,
-      category: "Salário",
-      type: "income",
-      // createdAt: "",
-      date: "2022-07-18"
-
-    },
-    {
-      description: "PC Novo",
-      price: 3400,
-      category: "Salário",
-      type: "outcome",
-      // createdAt: "",
-      date: "2022-07-18"
-
-    },
-    {
-      description: "Recebido",
-      price: 2222,
-      category: "Salário",
-      type: "income",
-      // createdAt: "",
-      date: "2022-07-18"
-    },
-  ])
+  const [transactions, setTransactions] = useState<ITransaction[]>([])
 
   const incomes = transactions.filter((transaction) => transaction.type === 'income')
   const outcomes = transactions.filter((transaction) => transaction.type === 'outcome')

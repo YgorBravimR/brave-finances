@@ -1,8 +1,9 @@
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 
 export const AccountCardContainer = styled.div`
   .MuiPaper-root {
     border-radius: 25px;
+    min-width: 22rem;
   }
 `
 

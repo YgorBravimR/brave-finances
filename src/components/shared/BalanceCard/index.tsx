@@ -5,7 +5,7 @@ import { BalanceCardContent } from './styles'
 
 interface BalanceCardProps {
   title: string;
-  value: number;
+  value: number | string;
   icon: ReactNode;
   to: string;
   iconColor: string;

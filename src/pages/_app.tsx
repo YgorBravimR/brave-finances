@@ -8,7 +8,7 @@ import createEmotionCache from '../../config/createEmotionCache';
 import '../styles/globals.scss';
 import { BaseLayout } from '../layouts';
 import { TransactionContextProvider } from '../contexts/TransactionsContext';
-import { ModalContextProvider } from '../contexts/ModalContext';
+import { ModalContextProvider } from '../contexts/TransactionsModalContext';
 import { SidebarContextProvider } from '../contexts/SidebarContext';
 import { AuthContextProvider } from '../contexts/AuthContext';
 

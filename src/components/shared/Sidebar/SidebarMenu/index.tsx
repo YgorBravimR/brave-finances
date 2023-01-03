@@ -2,6 +2,7 @@ import router from "next/router";
 import { ReactNode, useContext } from "react";
 import { ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import { SidebarContext } from "../../../../contexts/SidebarContext";
+import { SidebarMenuContainer } from "./styles";
 
 interface ItemProps {
   title: string;
@@ -14,29 +15,33 @@ interface ItemProps {
 export function MaterialUiSidebarItem({ title, to, icon, selected, setSelected }: ItemProps) {
   const { sidebarOpened } = useContext(SidebarContext)
   return (
-    <ListItem key={title} disablePadding sx={{ display: 'block' }}>
-      <ListItemButton
-        sx={{
-          minHeight: 48,
-          justifyContent: 'center',
-          px: 2.5,
-          display: 'flex',
-          gap: sidebarOpened ? 0 : 2,
-        }}
-        onClick={() => { router.push(to), setSelected(title) }}
-        selected={selected === title}
-      >
-        <ListItemIcon
+    <SidebarMenuContainer>
+      <ListItem key={title} sx={{
+        padding: 0,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+        <ListItemButton
           sx={{
-            minWidth: 0,
-            mr: sidebarOpened ? 3 : 'auto',
+            display: 'flex',
             justifyContent: 'center',
+            alignItems: 'center',
           }}
+          onClick={() => { router.push(to), setSelected(title) }}
+          selected={selected === title}
         >
-          {icon}
-        </ListItemIcon>
-        <ListItemText primary={title} sx={{ opacity: sidebarOpened ? 1 : 0 }} />
-      </ListItemButton>
-    </ListItem>
+          <ListItemIcon
+            sx={{
+              width: 80,
+            }}
+          >
+            {icon}
+          </ListItemIcon>
+          {/* <ListItemText primary={title} sx={{ visibility: sidebarOpened ? 'initial' : 'hidden' }} /> */}
+          <ListItemText primary={title} />
+        </ListItemButton>
+      </ListItem>
+    </SidebarMenuContainer>
   )
 }

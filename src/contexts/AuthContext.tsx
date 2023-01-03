@@ -47,8 +47,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
 
   async function signIn({ email, password }: SignInCredentials) {
     const res = await api.post('/sessions', { email, password })
-    const { token, user } = res.data;
-
+    const { token, user } = res.data.data;
     setCookie(undefined, '@MyBills:token', token, {
       maxAge: 60 * 60 * 1, // 1 hour
     })
@@ -59,7 +58,6 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
 
     router.push('/dashboard');
   }
-
 
   return (
     <AuthContext.Provider value={{ signIn, isAuthenticated, user }}>

@@ -8,18 +8,21 @@ export const LayoutContainer = styled.div`
   justify-content: flex-start;
 `
 
-export const MainContentLayout = styled.div`
-  width: 100vw;
-  height: 100vh;
+export const MainContentLayout = styled.main`
+  width: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  overflow: hidden;
 `
 
 export const ChildrenLayout = styled.div`
-  width: calc(100% - 2.5rem);
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1.25rem 1rem 1.5rem;
   height: calc(100% - 2rem);
-  margin: 1rem 1.25rem 0;
   overflow-y: scroll;
 `

@@ -13,7 +13,6 @@ import { BalanceCard } from '../components/shared/BalanceCard';
 import { ResumeCard } from '../components/shared/ResumeCard';
 import { MyIncomes } from '../components/shared/ResumeCard/MyIncomes';
 import { MyExpenses } from '../components/shared/ResumeCard/MyExpenses';
-import { TableTransactions } from '../components/dashboard/TableTransactions';
 
 export default function Dashboard() {
   const { incomeSum, outcomeSum, total } = useSummary()
@@ -91,7 +90,6 @@ export default function Dashboard() {
             </Grid>
           </Grid>
         </MainCardsContent>
-        <TableTransactions />
       </div>
       <Image src={bottomImage} alt="" width={600} height={325} />
     </DashboardContainer>
