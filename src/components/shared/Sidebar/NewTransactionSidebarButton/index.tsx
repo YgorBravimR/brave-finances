@@ -1,9 +1,9 @@
 import { useContext, useState, ReactNode } from 'react'
 import { Button, Menu, MenuItem } from '@mui/material';
-import { TrendingUp, TrendingDown } from '@mui/icons-material';
 import { TransactionsModalContext } from '../../../../contexts/TransactionsModalContext';
 import { BaseModal } from '../../BaseModal';
 import { FormTransaction } from '../../TransactionModal/FormTransaction';
+import { ArrowsCounterClockwise, CreditCard, TrendDown, TrendUp } from 'phosphor-react';
 
 type Props = {
 	buttonText?: ReactNode
@@ -11,20 +11,42 @@ type Props = {
 }
 
 export function NewTransactionSidebarButton({ buttonText, startIcon }: Props) {
-	const { handleCloseModal, openTransactionModal, setOpenTransactionModal } = useContext(TransactionsModalContext)
+	const [isNewTransactionMenuOpen, setIsNewTransactionMenuOpen] = useState<null | HTMLElement>(null);
 
-	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-	const openMenu = Boolean(anchorEl);
+	const { handleCloseModal, openTransactionModal, setOpenTransactionModal, setTransactionType, transactionType } = useContext(TransactionsModalContext)
+
+	const openMenu = Boolean(isNewTransactionMenuOpen);
+
 	const handleClickMenu = (event: React.MouseEvent<HTMLElement>) => {
-		setAnchorEl(event.currentTarget);
-	};
-	const handleCloseMenu = () => {
-		setAnchorEl(null);
+		setIsNewTransactionMenuOpen(event.currentTarget);
 	};
 
-	const handleCLoseMenuOpenModal = () => {
-		setAnchorEl(null)
+	const handleCloseMenu = () => {
+		setIsNewTransactionMenuOpen(null);
+	};
+
+	const handleCLoseMenuOpenModalExpense = () => {
+		setIsNewTransactionMenuOpen(null)
 		setOpenTransactionModal(true)
+		setTransactionType("expense")
+	}
+
+	const handleCLoseMenuOpenModalIncome = () => {
+		setIsNewTransactionMenuOpen(null)
+		setOpenTransactionModal(true)
+		setTransactionType("income")
+	}
+
+	const handleCLoseMenuOpenModalCreditCard = () => {
+		setIsNewTransactionMenuOpen(null)
+		setOpenTransactionModal(true)
+		setTransactionType("creditCard")
+	}
+
+	const handleCLoseMenuOpenModalTransfer = () => {
+		setIsNewTransactionMenuOpen(null)
+		setOpenTransactionModal(true)
+		setTransactionType("transfer")
 	}
 
 	return (
@@ -37,7 +59,7 @@ export function NewTransactionSidebarButton({ buttonText, startIcon }: Props) {
 				{buttonText}
 			</Button>
 			<Menu
-				anchorEl={anchorEl}
+				anchorEl={isNewTransactionMenuOpen}
 				open={openMenu}
 				onClose={handleCloseMenu}
 				anchorOrigin={{
@@ -50,22 +72,38 @@ export function NewTransactionSidebarButton({ buttonText, startIcon }: Props) {
 				}}
 				PaperProps={{
 					style: {
-						width: '290px',
-						borderRadius: '12px'
+						width: '180px',
+						borderRadius: '12px',
 					}
 				}}
 			>
 				<MenuItem
-					onClick={handleCLoseMenuOpenModal}
+					onClick={handleCLoseMenuOpenModalExpense}
 				>
-					<TrendingDown color='error' />
-					<p>Despesa</p>
+					<TrendDown size={20} color="#f44336" />
+					<p>Expense</p>
 				</MenuItem>
 				<MenuItem
-					onClick={handleCLoseMenuOpenModal}
+					onClick={handleCLoseMenuOpenModalIncome}
 				>
-					<TrendingUp color='success' />
-					<p>Receita</p>
+					<TrendUp size={20} color="#4caf50" />
+					<p>Income</p>
+				</MenuItem>
+				<MenuItem
+					onClick={handleCLoseMenuOpenModalCreditCard}
+				>
+					<CreditCard size={20} color="#00796b" />
+					<p>Credit Card</p>
+				</MenuItem>
+				<MenuItem
+					onClick={handleCLoseMenuOpenModalTransfer}
+					sx={{
+						display: 'flex',
+						gap: '1rem'
+					}}
+				>
+					<ArrowsCounterClockwise size={20} color="#2296f3" />
+					<p>Transfer</p>
 				</MenuItem>
 			</Menu>
 			<BaseModal closeModal={handleCloseModal} openModal={openTransactionModal}>

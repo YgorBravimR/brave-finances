@@ -2,8 +2,11 @@ import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "re
 
 interface ModalContextType {
   openTransactionModal: boolean
-  handleCloseModal: () => void
   setOpenTransactionModal: Dispatch<SetStateAction<boolean>>
+  transactionType: string
+  setTransactionType: Dispatch<SetStateAction<string>>
+
+  handleCloseModal: () => void
 }
 
 interface ModalContextProviderProps {
@@ -14,10 +17,11 @@ export const TransactionsModalContext = createContext({} as ModalContextType)
 
 export function ModalContextProvider({ children }: ModalContextProviderProps) {
   const [openTransactionModal, setOpenTransactionModal] = useState(false);
+  const [transactionType, setTransactionType] = useState("expense")
   const handleCloseModal = () => setOpenTransactionModal(false);
 
   return (
-    <TransactionsModalContext.Provider value={{ openTransactionModal, handleCloseModal, setOpenTransactionModal }}>
+    <TransactionsModalContext.Provider value={{ openTransactionModal, handleCloseModal, transactionType, setTransactionType, setOpenTransactionModal }}>
       {children}
     </TransactionsModalContext.Provider>
   )

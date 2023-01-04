@@ -1,10 +1,11 @@
 import * as yup from 'yup'
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useFormik } from 'formik';
 import { Button, Chip, FormControl, FormControlLabel, InputLabel, MenuItem, OutlinedInput, Select, SelectChangeEvent, Switch, TextField, useTheme } from '@mui/material';
 import { SwitchContent, FormTransactionContainer, FormTransactionLeftBlock, FormTransactionRightBlock, } from './styles'
 import { InputDateFormatter } from '../../../../utils/formatter';
 import { categoriesArray, accountsArray, tagsArray } from '../../../../utils/transactionts';
+import { TransactionsModalContext } from '../../../../contexts/TransactionsModalContext';
 
 
 interface NewTransactionFormInputs {
@@ -35,6 +36,9 @@ export function FormTransaction() {
 	const [tagsSelect, setTagsSelect] = useState<string[]>([]);
 	const [fixedExpense, setFixedExpense] = useState(false);
 	const [repeatExpense, setRepeatExpense] = useState(false);
+
+	const { setTransactionType, transactionType } = useContext(TransactionsModalContext)
+
 
 	const handleChangeReceivedPaid = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const { checked } = event.target
@@ -124,7 +128,7 @@ export function FormTransaction() {
 			repeat: false,
 			repeated_times: 0,
 			time_period: "days",
-			type: "expense",
+			type: transactionType,
 
 		},
 		validationSchema: validationSchema,
