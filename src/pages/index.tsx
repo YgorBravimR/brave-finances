@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { Button, Link } from '@mui/material'
 import { HomepageContainer, ImageSectionContainer, FormSectionContainer, } from '../styles/pages/homepage'
 
@@ -7,9 +7,19 @@ import mobills_home from '../assets/mobills_home.svg'
 import mobills_logo from '../assets/mybills-logo-noBg.png'
 import { RegisterUserForm } from '../components/homepage/RegisterUserForm'
 import { LoginUserForm } from '../components/homepage/LoginUserForm'
+import { AuthContext } from '../contexts/AuthContext'
+import router from 'next/router'
+import { GetServerSideProps } from 'next'
+import { parseCookies } from 'nookies'
+import { getAPIClient } from '../services/axios'
 
 export default function HomePage() {
   const [userPageShowed, setUserPageShowed] = useState('register')
+  const { isAuthenticated } = useContext(AuthContext)
+
+  const redirectToDashboard = () => {
+    !isAuthenticated ?? router.push('/dashboard');
+  }
 
   return (
     <HomepageContainer>
@@ -45,4 +55,24 @@ export default function HomePage() {
       </FormSectionContainer>
     </HomepageContainer>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const apiClient = getAPIClient(ctx)
+  const { '@MyBills:token': token } = parseCookies(ctx)
+
+  if (token) {
+    return {
+      redirect: {
+        destination: '/dashboard',
+        permanent: false
+      }
+    }
+  }
+
+  await apiClient.get('/users')
+
+  return {
+    props: {}
+  }
 }

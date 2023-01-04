@@ -1,7 +1,10 @@
 import { Button } from "@mui/material";
+import { GetServerSideProps } from "next";
+import { parseCookies } from "nookies";
 import { ArrowDown, ArrowUp, Bank, Plus, Scales } from "phosphor-react";
 import TransactionsTable from "../components/dashboard/TableTransactions";
 import { BalanceCard } from "../components/shared/BalanceCard";
+import { getAPIClient } from "../services/axios";
 import { BalancesContainer, TableContainer, TransactionsPageContainer, TransactionsPageHeader } from "../styles/pages/transactions";
 
 export default function Transactions() {
@@ -26,4 +29,24 @@ export default function Transactions() {
       </TableContainer>
     </TransactionsPageContainer>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const apiClient = getAPIClient(ctx)
+  const { '@MyBills:token': token } = parseCookies(ctx)
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  }
+
+  await apiClient.get('/users')
+
+  return {
+    props: {}
+  }
 }

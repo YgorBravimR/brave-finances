@@ -5,6 +5,9 @@ import { AccountsPageHeader, BalancesContainer, AccountsPageContainer, AccountsC
 import { AccountCard } from "../components/account/AccountCard";
 import { AccountForm } from "../components/account/AccountForm";
 import { BalanceCard } from "../components/shared/BalanceCard";
+import { GetServerSideProps } from "next";
+import { getAPIClient } from "../services/axios";
+import { parseCookies } from "nookies";
 
 
 
@@ -50,6 +53,26 @@ export default function Accounts() {
       </AccountsPageBody>
     </AccountsPageContainer>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const apiClient = getAPIClient(ctx)
+  const { '@MyBills:token': token } = parseCookies(ctx)
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  }
+
+  await apiClient.get('/users')
+
+  return {
+    props: {}
+  }
 }
 
 

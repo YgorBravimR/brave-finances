@@ -1,15 +1,14 @@
 import Image from 'next/image'
 import { useContext, useState } from 'react';
 import mybillsShop from '../../../assets/mybills-shop.png'
-import { ChevronLeft, ChevronRight, KeyboardArrowDown } from '@mui/icons-material';
-import { Avatar, Typography, Button, Menu, MenuItem, IconButton } from '@mui/material';
+import { KeyboardArrowDown } from '@mui/icons-material';
+import { Avatar, Typography, Button, Menu, MenuItem } from '@mui/material';
 import { CalendarButtonContainer, CoinsShopContainer, HeaderContainer, ProfileModalContainer, } from './styles'
 import { AuthContext } from '../../../contexts/AuthContext';
 import { SidebarContext } from '../../../contexts/SidebarContext';
 
 export function Header() {
-  const { user } = useContext(AuthContext)
-  const { setSidebarOpened, sidebarOpened } = useContext(SidebarContext)
+  const { singOut, user } = useContext(AuthContext)
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -19,9 +18,6 @@ export function Header() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-
-
 
   return (
     <HeaderContainer>
@@ -56,7 +52,7 @@ export function Header() {
           >
             <MenuItem onClick={handleClose} sx={{ width: "180px" }}>Profile</MenuItem>
             <MenuItem onClick={handleClose}>My account</MenuItem>
-            <MenuItem onClick={handleClose}>Logout</MenuItem>
+            <MenuItem onClick={singOut}>Logout</MenuItem>
           </Menu>
         </div>
       </ProfileModalContainer>

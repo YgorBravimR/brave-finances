@@ -3,8 +3,10 @@ import { Plus, CreditCard, Coins, Money } from "phosphor-react";
 import { CreditCardsCard } from "../components/creditCards/creditCardsCards";
 import { BalanceCard } from "../components/shared/BalanceCard";
 import { BalancesContainer, CreditCardsPageContainer, CreditCardsPageHeader, CreditCardsCardsContainer } from "../styles/pages/credit-cards";
-import { api } from "../services/axios";
+import { api, getAPIClient } from "../services/axios";
 import { useEffect, useState } from "react";
+import { GetServerSideProps } from "next";
+import { parseCookies } from "nookies";
 
 interface CreditCardsProps {
   id: string,
@@ -69,6 +71,26 @@ export default function CreditCardss() {
       </BalancesContainer>
     </CreditCardsPageContainer>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const apiClient = getAPIClient(ctx)
+  const { '@MyBills:token': token } = parseCookies(ctx)
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  }
+
+  await apiClient.get('/users')
+
+  return {
+    props: {}
+  }
 }
 
 

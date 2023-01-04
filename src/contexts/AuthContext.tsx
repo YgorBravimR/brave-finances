@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { api } from "../services/axios";
-import { parseCookies, setCookie } from 'nookies'
+import { destroyCookie, parseCookies, setCookie } from 'nookies'
 
 interface SignInCredentials {
   email: string;
@@ -21,6 +21,7 @@ interface AuthContextType {
   signIn(credentials: SignInCredentials): Promise<void>;
   user: User | null
   isAuthenticated: boolean
+  singOut(): void
 }
 
 interface AuthContextProviderProps {
@@ -59,8 +60,14 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     router.push('/dashboard');
   }
 
+  function singOut() {
+    destroyCookie(null, "@MyBills:token")
+
+    router.push('/')
+  }
+
   return (
-    <AuthContext.Provider value={{ signIn, isAuthenticated, user }}>
+    <AuthContext.Provider value={{ signIn, isAuthenticated, user, singOut }}>
       {children}
     </AuthContext.Provider>
   )
