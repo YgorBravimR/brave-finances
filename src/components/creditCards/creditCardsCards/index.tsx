@@ -1,8 +1,9 @@
 import { Button, Card, Divider, Menu, MenuItem } from '@mui/material';
-import { ReactNode, useState } from 'react';
+import { ReactNode, useContext, useState } from 'react';
 import { CreditCardsCardContent, HeaderContent, CreditCardsCardContainer, BodyContent, ProgressBar, ProgressContainer, PartialValueContent, AvaiableLimitContent, ClosingOnContent, LimitCompareContent } from './styles';
 import { DotsThreeVertical } from 'phosphor-react';
 import { SeeMoreButton } from '../../shared/SeeMoreButton';
+import { TransactionsModalContext } from '../../../contexts/TransactionsModalContext';
 
 interface CreditCardsCardProps {
   network_icon: ReactNode;
@@ -11,9 +12,10 @@ interface CreditCardsCardProps {
   closing_on: string;
   limit: number;
   due_date: string;
+  onClick: any;
 }
 
-export function CreditCardsCard({ network_icon, card_name, partial_value, closing_on, limit, due_date }: CreditCardsCardProps) {
+export function CreditCardsCard({ onClick, network_icon, card_name, partial_value, closing_on, limit, due_date }: CreditCardsCardProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -22,7 +24,6 @@ export function CreditCardsCard({ network_icon, card_name, partial_value, closin
   const handleClose = () => {
     setAnchorEl(null);
   };
-
 
 
   return (
@@ -69,7 +70,7 @@ export function CreditCardsCard({ network_icon, card_name, partial_value, closin
           </BodyContent>
         </CreditCardsCardContent>
         <Divider />
-        <SeeMoreButton text="new expense" />
+        <SeeMoreButton text="new expense" onClick={onClick} />
       </Card>
     </CreditCardsCardContainer>
   );

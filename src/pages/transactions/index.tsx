@@ -2,10 +2,10 @@ import { Button } from "@mui/material";
 import { GetServerSideProps } from "next";
 import { parseCookies } from "nookies";
 import { ArrowDown, ArrowUp, Bank, Plus, Scales } from "phosphor-react";
-import TransactionsTable from "../components/dashboard/TableTransactions";
-import { BalanceCard } from "../components/shared/BalanceCard";
-import { getAPIClient } from "../services/axios";
-import { BalancesContainer, TableContainer, TransactionsPageContainer, TransactionsPageHeader } from "../styles/pages/transactions";
+import TransactionsTable from "../../components/dashboard/TableTransactions";
+import { BalanceCard } from "../../components/shared/BalanceCard";
+import { getAPIClient } from "../../services/axios";
+import { BalancesContainer, TableContainer, TransactionsPageContainer, TransactionsPageHeader } from "../../styles/pages/transactions";
 
 export default function Transactions() {
   return (

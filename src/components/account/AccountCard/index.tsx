@@ -1,5 +1,5 @@
 import { Button, Card, Divider, Menu, MenuItem } from '@mui/material';
-import { ReactNode, useState } from 'react';
+import { Dispatch, ReactNode, SetStateAction, useState } from 'react';
 import { AccountCardContent, HeaderContent, AccountCardContainer, BalanceContent } from './styles';
 import { DotsThreeVertical } from 'phosphor-react';
 import { SeeMoreButton } from '../../shared/SeeMoreButton';
@@ -9,14 +9,16 @@ interface AccountCardProps {
   account_name: string;
   balance: number;
   predicted_balance: number;
+  onClick: any
 }
 
-export function AccountCard({ icon, account_name, balance, predicted_balance }: AccountCardProps) {
+export function AccountCard({ icon, account_name, balance, predicted_balance, onClick }: AccountCardProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -52,7 +54,7 @@ export function AccountCard({ icon, account_name, balance, predicted_balance }: 
           </BalanceContent>
         </AccountCardContent>
         <Divider />
-        <SeeMoreButton text="new expense" />
+        <SeeMoreButton onClick={onClick} text="new expense" />
       </Card>
     </AccountCardContainer>
   );

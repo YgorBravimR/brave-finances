@@ -36,20 +36,20 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
   const isAuthenticated = !!user;
 
   useEffect(() => {
-    const { '@MyBills:token': token } = parseCookies()
+    const { '@MyBills:token': cookie } = parseCookies()
+    if (cookie) {
+      const { user, token } = JSON.parse(cookie)
 
-    if (token) {
-      api.get('/users')
-        .then((res) => {
-          setUser(res.data)
-        })
+      if (token) {
+        setUser(user)
+      }
     }
   }, [])
 
   async function signIn({ email, password }: SignInCredentials) {
     const res = await api.post('/sessions', { email, password })
     const { token, user } = res.data.data;
-    setCookie(undefined, '@MyBills:token', token, {
+    setCookie(undefined, '@MyBills:token', JSON.stringify({ token, user }), {
       maxAge: 60 * 60 * 1, // 1 hour
     })
 

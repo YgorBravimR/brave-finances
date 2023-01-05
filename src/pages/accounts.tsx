@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Button, Fade, Modal } from "@mui/material";
 import { Bank, Money, Coin, Plus } from "phosphor-react";
 import { AccountsPageHeader, BalancesContainer, AccountsPageContainer, AccountsCardsContainer, AccountsPageBody } from '../styles/pages/accounts'
@@ -8,6 +8,8 @@ import { BalanceCard } from "../components/shared/BalanceCard";
 import { GetServerSideProps } from "next";
 import { getAPIClient } from "../services/axios";
 import { parseCookies } from "nookies";
+import { AccountsContext } from "../contexts/AccountsContext";
+import { TransactionsModalContext } from "../contexts/TransactionsModalContext";
 
 
 
@@ -15,6 +17,14 @@ export default function Accounts() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const { setOpenTransactionModal } = useContext(TransactionsModalContext)
+  const { setAccount } = useContext(AccountsContext)
+
+  function openModalSetAccount() {
+    setAccount("conta2")
+    setOpenTransactionModal(true)
+  }
 
   return (
     <AccountsPageContainer>
@@ -24,8 +34,6 @@ export default function Accounts() {
           <Plus weight="bold" />
         </Button>
         <Modal
-          aria-labelledby="spring-modal-title"
-          aria-describedby="spring-modal-description"
           open={open}
           onClose={handleClose}
           closeAfterTransition
@@ -40,10 +48,10 @@ export default function Accounts() {
 
       <AccountsPageBody>
         <AccountsCardsContainer>
-          <AccountCard account_name="NuBank" balance={200} icon={<Bank size={32} />} predicted_balance={200} />
-          <AccountCard account_name="NuBank" balance={200} icon={<Bank size={32} />} predicted_balance={200} />
-          <AccountCard account_name="NuBank" balance={200} icon={<Bank size={32} />} predicted_balance={200} />
-          <AccountCard account_name="NuBank" balance={200} icon={<Bank size={32} />} predicted_balance={200} />
+          <AccountCard account_name="NuBank" balance={200} icon={<Bank size={32} />} predicted_balance={200} onClick={openModalSetAccount} />
+          <AccountCard account_name="NuBank" balance={200} icon={<Bank size={32} />} predicted_balance={200} onClick={openModalSetAccount} />
+          <AccountCard account_name="NuBank" balance={200} icon={<Bank size={32} />} predicted_balance={200} onClick={openModalSetAccount} />
+          <AccountCard account_name="NuBank" balance={200} icon={<Bank size={32} />} predicted_balance={200} onClick={openModalSetAccount} />
         </AccountsCardsContainer>
 
         <BalancesContainer>

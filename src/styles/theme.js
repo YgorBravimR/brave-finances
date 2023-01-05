@@ -13,6 +13,18 @@ export const theme = createTheme({
     primary: {
       main: mybillsMainPurple,
     },
+    secondary: {
+      main: mybillsCreditCard
+    },
+    error: {
+      main: mybillsOutcome
+    },
+    success: {
+      main: mybillsIncome
+    },
+    warning: {
+      main: mybillsLightBlue
+    },
     common: {
       purple: mybillsMainPurple,
       lightBlue: mybillsLightBlue,

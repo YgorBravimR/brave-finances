@@ -2,7 +2,7 @@ import { useContext, useState, ReactNode } from 'react'
 import { Button, Menu, MenuItem } from '@mui/material';
 import { TransactionsModalContext } from '../../../../contexts/TransactionsModalContext';
 import { BaseModal } from '../../BaseModal';
-import { FormTransaction } from '../../TransactionModal/FormTransaction';
+import { FormTransaction } from '../../Modals/FormTransaction';
 import { ArrowsCounterClockwise, CreditCard, TrendDown, TrendUp } from 'phosphor-react';
 
 type Props = {

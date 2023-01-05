@@ -5,7 +5,8 @@ export const ModalContainer = styled.aside`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 76rem;
+  max-width: 76rem;
+  width: fit-content;
   border: 1px solid #000;
   box-shadow: 24;
   padding: 4rem 2rem;

@@ -1,11 +1,13 @@
 import * as yup from 'yup'
 import { useContext, useState } from 'react';
 import { useFormik } from 'formik';
-import { Button, Chip, FormControl, FormControlLabel, InputLabel, MenuItem, OutlinedInput, Select, SelectChangeEvent, Switch, TextField, useTheme } from '@mui/material';
-import { SwitchContent, FormTransactionContainer, FormTransactionLeftBlock, FormTransactionRightBlock, } from './styles'
+import { Button, Chip, FormControl, FormControlLabel, InputAdornment, InputLabel, MenuItem, Select, SelectChangeEvent, Switch, TextField, useTheme } from '@mui/material';
+import { SwitchLabelContent, RepeatBlockContainer, SwitchContent, FormTransactionContainer, FormTransactionLeftBlock, FormTransactionRightBlock, } from './styles'
 import { InputDateFormatter } from '../../../../utils/formatter';
 import { categoriesArray, accountsArray, tagsArray } from '../../../../utils/transactionts';
 import { TransactionsModalContext } from '../../../../contexts/TransactionsModalContext';
+import { CalendarCheck, CheckCircle, XCircle, Bookmark, File, Bank, Tag } from 'phosphor-react';
+import { AccountsContext } from '../../../../contexts/AccountsContext';
 
 
 interface NewTransactionFormInputs {
@@ -22,22 +24,18 @@ interface NewTransactionFormInputs {
 	repeat: boolean;
 	repeated_times: number;
 	time_period: string;
-	divided?: boolean; // Only to creditCards
-	origin?: number; // Only to transfers
-	destiny?: number; // Only to transfers
-	card?: number; // Only to creditCards
 }
 
 export function FormTransaction() {
 	const [category, setCategory] = useState(categoriesArray[0].value);
-	const [account, setAccount] = useState(accountsArray[0].value);
 	const [timePeriod, setTimePeriod] = useState('days');
 	const [paidChecked, setPaidChecked] = useState(true);
 	const [tagsSelect, setTagsSelect] = useState<string[]>([]);
 	const [fixedExpense, setFixedExpense] = useState(false);
 	const [repeatExpense, setRepeatExpense] = useState(false);
 
-	const { setTransactionType, transactionType } = useContext(TransactionsModalContext)
+	const { setAccount, account } = useContext(AccountsContext)
+	const { transactionType } = useContext(TransactionsModalContext)
 
 
 	const handleChangeReceivedPaid = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -140,13 +138,30 @@ export function FormTransaction() {
 		},
 	});
 
+	const switchLabel = (
+		paidChecked ? (
+			<SwitchLabelContent>
+				<CheckCircle size={24} />
+				<span>It was paid</span>
+			</SwitchLabelContent>
+		) : (
+			<SwitchLabelContent>
+				<XCircle size={24} />
+				<span>Not paid</span>
+			</SwitchLabelContent>
+		)
+	)
+
+
+	const iconSize = 24
+
 	return (
 		<FormTransactionContainer onSubmit={formik.handleSubmit}>
 			<FormTransactionLeftBlock>
+				<h2>New {transactionType}</h2>
 				<TextField
 					type="number"
 					variant='standard'
-					fullWidth
 					id="price"
 					name="price"
 					placeholder="R$ 0,00"
@@ -159,13 +174,12 @@ export function FormTransaction() {
 					<FormControlLabel
 						value={paidChecked}
 						control={<Switch color="primary" checked={paidChecked} onChange={handleChangeReceivedPaid} />}
-						label={paidChecked ? "It was Paid" : "Not Paid"}
+						label={switchLabel}
 						labelPlacement="start"
 					/>
 				</SwitchContent>
 				<TextField
 					variant='standard'
-					fullWidth
 					id="date"
 					name="date"
 					type="date"
@@ -173,10 +187,16 @@ export function FormTransaction() {
 					onChange={formik.handleChange}
 					error={formik.touched.date && Boolean(formik.errors.date)}
 					helperText={formik.touched.date && formik.errors.date}
+					InputProps={{
+						startAdornment: (
+							<InputAdornment position="start">
+								<CalendarCheck size={iconSize} />
+							</InputAdornment>
+						),
+					}}
 				/>
 				<TextField
 					variant='standard'
-					fullWidth
 					id="description"
 					name="description"
 					type="text"
@@ -185,6 +205,13 @@ export function FormTransaction() {
 					onChange={formik.handleChange}
 					error={formik.touched.description && Boolean(formik.errors.description)}
 					helperText={formik.touched.description && formik.errors.description}
+					InputProps={{
+						startAdornment: (
+							<InputAdornment position="start">
+								<File size={iconSize} />
+							</InputAdornment>
+						),
+					}}
 				/>
 				<FormControl>
 					<Select
@@ -192,6 +219,11 @@ export function FormTransaction() {
 						name="category"
 						id="category"
 						value={category}
+						startAdornment={
+							<InputAdornment position="start">
+								<Bookmark size={iconSize} />
+							</InputAdornment>
+						}
 						onChange={handleChangeCategorySelect}
 					>
 						{categoriesArray.map((category) => (
@@ -205,6 +237,11 @@ export function FormTransaction() {
 						name="account"
 						id="account"
 						value={account}
+						startAdornment={
+							<InputAdornment position="start">
+								<Bank size={iconSize} />
+							</InputAdornment>
+						}
 						onChange={handleChangeAccountSelect}
 					>
 						{accountsArray.map(account => (
@@ -215,7 +252,7 @@ export function FormTransaction() {
 			</FormTransactionLeftBlock>
 			<FormTransactionRightBlock>
 				<FormControl>
-					<InputLabel id="tags">Tags</InputLabel>
+					{/* <InputLabel id="tags">Tags</InputLabel> */}
 					<Select
 						labelId="tags"
 						multiple
@@ -224,6 +261,11 @@ export function FormTransaction() {
 						name="tags"
 						value={tagsSelect}
 						onChange={handleChangeTagsSelect}
+						startAdornment={
+							<InputAdornment position="start">
+								<Tag size={iconSize} />
+							</InputAdornment>
+						}
 						renderValue={(selected) => (
 							<div>
 								{selected.map((value) => (
@@ -248,7 +290,7 @@ export function FormTransaction() {
 						id="fixed"
 						name="fixed"
 						control={<Switch color="primary" checked={fixedExpense} onChange={handleChangeFixedExpense} />}
-						label="Fixed Expense"
+						label={`Fixed ${transactionType}`}
 						labelPlacement="start"
 					/>
 				</SwitchContent>
@@ -262,10 +304,9 @@ export function FormTransaction() {
 						labelPlacement="start"
 					/>
 				</SwitchContent>
-				<div>
+				<RepeatBlockContainer>
 					<TextField
 						variant='standard'
-						fullWidth
 						id="repeated_times"
 						disabled={!repeatExpense}
 						name="repeated_times"
@@ -294,7 +335,7 @@ export function FormTransaction() {
 							<MenuItem value='years'>Years</MenuItem>
 						</Select>
 					</FormControl>
-				</div>
+				</RepeatBlockContainer>
 			</FormTransactionRightBlock>
 			<Button color="primary" variant="contained" type="submit">
 				Submit

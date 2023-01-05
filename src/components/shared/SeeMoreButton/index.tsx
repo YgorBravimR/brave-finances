@@ -3,12 +3,13 @@ import { SeeMoreContainer } from "./styles";
 
 interface Props {
   text: string
+  onClick: any
 }
 
-export function SeeMoreButton({ text }: Props) {
+export function SeeMoreButton({ text, onClick }: Props) {
   return (
     <SeeMoreContainer>
-      <Button>
+      <Button onClick={onClick}>
         <p>{text}</p>
       </Button>
     </SeeMoreContainer>
