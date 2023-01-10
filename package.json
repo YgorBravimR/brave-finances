@@ -8,9 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "eslint": "eslint \"**/*.+(js|jsx|ts|tsx)\"",
-    "eslint:fix": "eslint --fix \"**/*.+(js|jsx|ts|tsx)\"",
-    "prettier": "prettier --check \"**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|scss|css)\"",
-    "prettier:fix": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|scss|css)\""
+    "eslint:fix": "eslint --fix \"**/*.+(js|jsx|ts|tsx)\""
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -18,6 +16,7 @@
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.11",
     "@mui/system": "^5.11.1",
+    "@ramonak/react-progress-bar": "^5.0.3",
     "axios": "^1.2.1",
     "formik": "^2.2.9",
     "next": "13.0.0",
@@ -33,16 +32,18 @@
     "@types/node": "18.11.7",
     "@types/react": "18.0.24",
     "@types/react-dom": "18.0.8",
-    "@typescript-eslint/eslint-plugin": "^5.47.0",
-    "@typescript-eslint/parser": "^5.47.0",
-    "eslint": "^7.32.0",
+    "@typescript-eslint/eslint-plugin": "^5.48.1",
+    "@typescript-eslint/parser": "^5.48.1",
+    "eslint": "^8.31.0",
     "eslint-config-next": "^11.1.2",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.24.2",
-    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-import-resolver-typescript": "^3.5.2",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.11",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "prettier": "2.4.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "prettier": "^2.8.2",
     "typescript": "4.8.4"
   }
 }

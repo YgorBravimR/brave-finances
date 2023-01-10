@@ -1,10 +1,12 @@
-import * as yup from 'yup'
-import { useState } from 'react';
-import { useFormik } from 'formik';
-import { AccountFormContainer } from "./styles";
 import { Button, FormControl, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material';
+import { useFormik } from 'formik';
+import { useState } from 'react';
+import * as yup from 'yup';
 
-export function AccountForm() {
+import { AccountFormContainer } from "./styles";
+
+
+export function AccountFormasdads() {
   const [bankSelect, setBankSelect] = useState('')
   const [typeSelect, setTypeSelect] = useState('')
 

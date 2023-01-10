@@ -1,4 +1,5 @@
 import { Button } from "@mui/material";
+
 import { SeeMoreContainer } from "./styles";
 
 interface Props {

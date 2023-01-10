@@ -9,7 +9,7 @@ export const TransactionsListContainer = styled.ul`
 
   li {
     display: grid;
-    grid-template-columns: 8fr 4fr;
+    grid-template-columns: 3fr 2fr 1fr;
 
     span {
       font-weight: 500;

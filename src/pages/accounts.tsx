@@ -1,62 +1,49 @@
-import { useContext, useState } from "react";
-import { Button, Fade, Modal } from "@mui/material";
-import { Bank, Money, Coin, Plus } from "phosphor-react";
-import { AccountsPageHeader, BalancesContainer, AccountsPageContainer, AccountsCardsContainer, AccountsPageBody } from '../styles/pages/accounts'
-import { AccountCard } from "../components/account/AccountCard";
-import { AccountForm } from "../components/account/AccountForm";
-import { BalanceCard } from "../components/shared/BalanceCard";
+import { Button } from "@mui/material";
 import { GetServerSideProps } from "next";
-import { getAPIClient } from "../services/axios";
 import { parseCookies } from "nookies";
+import { Bank, Coin, Money, Plus } from "phosphor-react";
+import { useContext, useState } from "react";
+
+import { accountsApiResponse } from "../api/accountsAPI";
+import { AccountCard } from "../components/account/AccountCard";
+import { BalanceCard } from "../components/shared/BalanceCard";
+import { BaseModal } from "../components/shared/Modals/BaseModal";
+import { NewAccountForm } from "../components/shared/Modals/Forms/NewAccountModal";
 import { AccountsContext } from "../contexts/AccountsContext";
-import { TransactionsModalContext } from "../contexts/TransactionsModalContext";
-
-
+import { getAPIClient } from "../services/axios";
+import { AccountsCardsContainer, AccountsPageBody, AccountsPageContainer, AccountsPageHeader, BalancesContainer } from '../styles/pages/accounts'
 
 export default function Accounts() {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  const { setOpenTransactionModal } = useContext(TransactionsModalContext)
-  const { setAccount } = useContext(AccountsContext)
+  const { setAccount, openNewAccountModal, setOpenNewAccountModal, handleCloseNewAccountModal } = useContext(AccountsContext)
+  const [accountsArray, setAccountsArray] = useState(accountsApiResponse.data)
 
   function openModalSetAccount() {
     setAccount("conta2")
-    setOpenTransactionModal(true)
+    setOpenNewAccountModal(true)
   }
 
   return (
     <AccountsPageContainer>
       <AccountsPageHeader>
         <h2>Accounts</h2>
-        <Button onClick={handleOpen}>
+        <Button onClick={openModalSetAccount}>
           <Plus weight="bold" />
         </Button>
-        <Modal
-          open={open}
-          onClose={handleClose}
-          closeAfterTransition
-        >
-          <Fade in={open}>
-            <div>
-              <AccountForm />
-            </div>
-          </Fade>
-        </Modal>
+        <BaseModal openModal={openNewAccountModal} closeModal={handleCloseNewAccountModal}>
+          <NewAccountForm />
+        </BaseModal>
       </AccountsPageHeader>
 
       <AccountsPageBody>
         <AccountsCardsContainer>
-          <AccountCard account_name="NuBank" balance={200} icon={<Bank size={32} />} predicted_balance={200} onClick={openModalSetAccount} />
-          <AccountCard account_name="NuBank" balance={200} icon={<Bank size={32} />} predicted_balance={200} onClick={openModalSetAccount} />
-          <AccountCard account_name="NuBank" balance={200} icon={<Bank size={32} />} predicted_balance={200} onClick={openModalSetAccount} />
-          <AccountCard account_name="NuBank" balance={200} icon={<Bank size={32} />} predicted_balance={200} onClick={openModalSetAccount} />
+          {accountsArray.per_account.map((account, i) => (
+            <AccountCard key={i} account_name={account.account_name} balance={account.current_balance} icon={<Bank size={32} />} predicted_balance={account.predicted_balance} onClick={openModalSetAccount} />
+          ))}
         </AccountsCardsContainer>
 
         <BalancesContainer>
-          <BalanceCard icon={<Money size={32} />} iconColor='purple' title='Current Balance' value={300} to={'/'} />
-          <BalanceCard icon={<Coin size={32} />} iconColor='green' title='Predicted Balance' value={300} to={'/'} />
+          <BalanceCard icon={<Money size={32} />} iconColor='#2296f3' title='Current Balance' value={accountsArray.current_balance} to={'/dashboard'} />
+          <BalanceCard icon={<Coin size={32} />} iconColor='#6514dd' title='Predicted Balance' value={accountsArray.predicted_valance} to={'/dashboard'} />
         </BalancesContainer>
       </AccountsPageBody>
     </AccountsPageContainer>

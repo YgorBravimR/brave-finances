@@ -1,9 +1,12 @@
-import { useContext, useState, ReactNode } from 'react'
 import { Button, Menu, MenuItem } from '@mui/material';
-import { TransactionsModalContext } from '../../../../contexts/TransactionsModalContext';
-import { BaseModal } from '../../BaseModal';
-import { FormTransaction } from '../../Modals/FormTransaction';
 import { ArrowsCounterClockwise, CreditCard, TrendDown, TrendUp } from 'phosphor-react';
+import { ReactNode, useContext, useState } from 'react'
+
+import { TransactionsModalContext } from '../../../../contexts/TransactionsModalContext';
+import { BaseModal } from '../../Modals/BaseModal';
+import { CreditCardTransactionForm } from '../../Modals/Forms/CreditCardTransactionForm';
+import { FormTransaction } from '../../Modals/Forms/InOutTransaction';
+import { TransferForm } from '../../Modals/Forms/TransferForm';
 
 type Props = {
 	buttonText?: ReactNode
@@ -13,7 +16,16 @@ type Props = {
 export function NewTransactionSidebarButton({ buttonText, startIcon }: Props) {
 	const [isNewTransactionMenuOpen, setIsNewTransactionMenuOpen] = useState<null | HTMLElement>(null);
 
-	const { handleCloseModal, openTransactionModal, setOpenTransactionModal, setTransactionType, transactionType } = useContext(TransactionsModalContext)
+	const {
+		handleCloseModal,
+		openTransactionModal,
+		setOpenTransactionModal,
+		setTransactionType,
+		setOpenCreditCardTransactionModal,
+		openCreditCardTransactionModal,
+		openTransferModal,
+		setOpenTransferModal
+	} = useContext(TransactionsModalContext)
 
 	const openMenu = Boolean(isNewTransactionMenuOpen);
 
@@ -39,13 +51,13 @@ export function NewTransactionSidebarButton({ buttonText, startIcon }: Props) {
 
 	const handleCLoseMenuOpenModalCreditCard = () => {
 		setIsNewTransactionMenuOpen(null)
-		setOpenTransactionModal(true)
-		setTransactionType("creditCard")
+		setOpenCreditCardTransactionModal(true)
+		setTransactionType("credit-card")
 	}
 
 	const handleCLoseMenuOpenModalTransfer = () => {
 		setIsNewTransactionMenuOpen(null)
-		setOpenTransactionModal(true)
+		setOpenTransferModal(true)
 		setTransactionType("transfer")
 	}
 
@@ -108,6 +120,12 @@ export function NewTransactionSidebarButton({ buttonText, startIcon }: Props) {
 			</Menu>
 			<BaseModal closeModal={handleCloseModal} openModal={openTransactionModal}>
 				<FormTransaction />
+			</BaseModal>
+			<BaseModal closeModal={handleCloseModal} openModal={openCreditCardTransactionModal}>
+				<CreditCardTransactionForm />
+			</BaseModal>
+			<BaseModal closeModal={handleCloseModal} openModal={openTransferModal}>
+				<TransferForm />
 			</BaseModal>
 		</div>
 	);

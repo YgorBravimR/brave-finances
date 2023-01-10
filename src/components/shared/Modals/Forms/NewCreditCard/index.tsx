@@ -1,10 +1,11 @@
-import * as yup from 'yup'
-import { useFormik } from 'formik';
 import { Button, FormControl, InputAdornment, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, } from '@mui/material';
-import { FormTransactionContainer } from './styles'
+import { useFormik } from 'formik';
 import { Bank, CalendarBlank, CalendarCheck, File, TagChevron } from 'phosphor-react';
 import { useState } from 'react';
-import { daysOfTheMonth } from '../../../../utils/transactionts';
+import * as yup from 'yup'
+
+import { daysOfTheMonth } from '../../../../../utils/transactionts';
+import { FormTransactionContainer } from './styles'
 
 interface CreditCardProps {
   limit: string;
@@ -30,7 +31,7 @@ export function FormCreditCard() {
 
   const handleChangeAccountNameSelect = (event: SelectChangeEvent) => {
     const { value } = event.target
-    formik.setFieldValue("account_name", value)
+    formik.setFieldValue("account", value)
     setAccountName(value as string);
   };
 
@@ -51,7 +52,7 @@ export function FormCreditCard() {
     limit: yup.string().required(),
     description: yup.string().required(),
     flag: yup.string().required(),
-    account_name: yup.string().required(),
+    account: yup.string().required(),
     closing_day: yup.number().required(),
     due_date: yup.number().required(),
   });
@@ -61,7 +62,7 @@ export function FormCreditCard() {
       limit: "",
       description: "",
       flag: "cartao1",
-      account_name: "conta1",
+      account: "conta1",
       closing_day: 1,
       due_date: 5,
     },
@@ -73,12 +74,14 @@ export function FormCreditCard() {
   });
 
   const iconSize = 24
+  const muiColor = "secondary"
 
   return (
     <FormTransactionContainer onSubmit={formik.handleSubmit}>
       <h2>New credit card</h2>
       <TextField
         variant='standard'
+        color={muiColor}
         id="limit"
         name="limit"
         type="text"
@@ -97,6 +100,7 @@ export function FormCreditCard() {
       />
       <TextField
         variant='standard'
+        color={muiColor}
         id="description"
         name="description"
         type="text"
@@ -116,6 +120,7 @@ export function FormCreditCard() {
       <FormControl>
         <Select
           variant="standard"
+          color={muiColor}
           name="flag"
           id="flag"
           value={flag}
@@ -136,8 +141,9 @@ export function FormCreditCard() {
       <FormControl>
         <Select
           variant="standard"
-          name="account_name"
-          id="account_name"
+          color={muiColor}
+          name="account"
+          id="account"
           value={accountName}
           startAdornment={
             <InputAdornment position="start">
@@ -158,6 +164,7 @@ export function FormCreditCard() {
         <Select
           labelId='closing_day_label'
           variant="standard"
+          color={muiColor}
           name="closing_day"
           id="closing_day"
           value={closingDay}
@@ -180,6 +187,7 @@ export function FormCreditCard() {
         <Select
           labelId='due_date_label'
           variant="standard"
+          color={muiColor}
           name="due_date"
           id="due_date"
           value={dueDate}
@@ -197,7 +205,7 @@ export function FormCreditCard() {
           })}
         </Select>
       </FormControl>
-      <Button color="primary" variant="contained" type="submit">
+      <Button color={muiColor} variant="contained" type="submit">
         Submit
       </Button>
     </FormTransactionContainer>

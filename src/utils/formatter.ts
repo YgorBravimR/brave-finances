@@ -12,3 +12,5 @@ export function InputDateFormatter(dateValue: number) {
 
   return formattedDate;
 }
+
+export const todayDate = InputDateFormatter(new Date().getTime())

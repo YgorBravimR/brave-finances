@@ -10,7 +10,7 @@ export const LayoutContainer = styled.div`
 
 export const MainContentLayout = styled.main`
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -22,7 +22,9 @@ export const ChildrenLayout = styled.div`
   max-width: 1440px;
   width: 100%;
   margin: 0 auto;
-  padding: 1.25rem 1rem 1.5rem;
+  padding-top: 2rem;
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
   height: calc(100% - 2rem);
   overflow-y: scroll;
 `

@@ -1,11 +1,12 @@
+import { Avatar, Card, Tooltip } from '@mui/material'
 import Link from 'next/link';
 import { ReactNode } from 'react';
-import { Avatar, Card, Tooltip } from '@mui/material'
+
 import { BalanceCardContent } from './styles'
 
 interface BalanceCardProps {
   title: string;
-  value: number | string;
+  value: string;
   icon: ReactNode;
   to: string;
   iconColor: string;

@@ -1,9 +1,9 @@
 import styled from '@emotion/styled'
 
 export const ResumeCardContainer = styled.div`
-  > p {
+  > strong {
     font-size: 1.15rem;
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 0.5rem;
   }
 

@@ -1,13 +1,14 @@
-import * as yup from 'yup'
-import { useContext, useState } from 'react';
+import { Button, Chip, FormControl, FormControlLabel, InputAdornment, MenuItem, Select, SelectChangeEvent, Switch, TextField } from '@mui/material';
 import { useFormik } from 'formik';
-import { Button, Chip, FormControl, FormControlLabel, InputAdornment, InputLabel, MenuItem, Select, SelectChangeEvent, Switch, TextField, useTheme } from '@mui/material';
-import { SwitchLabelContent, RepeatBlockContainer, SwitchContent, FormTransactionContainer, FormTransactionLeftBlock, FormTransactionRightBlock, } from './styles'
-import { InputDateFormatter } from '../../../../utils/formatter';
-import { categoriesArray, accountsArray, tagsArray } from '../../../../utils/transactionts';
-import { TransactionsModalContext } from '../../../../contexts/TransactionsModalContext';
-import { CalendarCheck, CheckCircle, XCircle, Bookmark, File, Bank, Tag } from 'phosphor-react';
-import { AccountsContext } from '../../../../contexts/AccountsContext';
+import { Bank, Bookmark, CalendarCheck, CheckCircle, File, Tag, XCircle } from 'phosphor-react';
+import { useContext, useState } from 'react';
+import * as yup from 'yup'
+
+import { AccountsContext } from '../../../../../contexts/AccountsContext';
+import { TransactionsModalContext } from '../../../../../contexts/TransactionsModalContext';
+import { todayDate } from '../../../../../utils/formatter';
+import { accountsArray, categoriesArray, tagsArray } from '../../../../../utils/transactionts';
+import { FormTransactionContainer, FormTransactionLeftBlock, FormTransactionRightBlock, RepeatBlockContainer, SwitchContent, SwitchLabelContent, } from './styles'
 
 
 interface NewTransactionFormInputs {
@@ -111,8 +112,6 @@ export function FormTransaction() {
 		time_period: yup.string(),
 	});
 
-	const todayDate = InputDateFormatter(new Date().getTime())
-
 	const formik = useFormik({
 		initialValues: {
 			price: "",
@@ -127,7 +126,6 @@ export function FormTransaction() {
 			repeated_times: 0,
 			time_period: "days",
 			type: transactionType,
-
 		},
 		validationSchema: validationSchema,
 		onSubmit: (values) => {
@@ -152,8 +150,17 @@ export function FormTransaction() {
 		)
 	)
 
-
 	const iconSize = 24
+	const muiColor = () => {
+		switch (transactionType) {
+			case "income":
+				return "success";
+			case "expense":
+				return "error";
+			default:
+				return "primary"
+		}
+	}
 
 	return (
 		<FormTransactionContainer onSubmit={formik.handleSubmit}>
@@ -162,6 +169,7 @@ export function FormTransaction() {
 				<TextField
 					type="number"
 					variant='standard'
+					color={muiColor()}
 					id="price"
 					name="price"
 					placeholder="R$ 0,00"
@@ -173,13 +181,15 @@ export function FormTransaction() {
 				<SwitchContent>
 					<FormControlLabel
 						value={paidChecked}
-						control={<Switch color="primary" checked={paidChecked} onChange={handleChangeReceivedPaid} />}
+						control={<Switch color={muiColor()} checked={paidChecked} onChange={handleChangeReceivedPaid} />}
 						label={switchLabel}
 						labelPlacement="start"
 					/>
 				</SwitchContent>
 				<TextField
 					variant='standard'
+					color={muiColor()}
+
 					id="date"
 					name="date"
 					type="date"
@@ -197,6 +207,8 @@ export function FormTransaction() {
 				/>
 				<TextField
 					variant='standard'
+					color={muiColor()}
+
 					id="description"
 					name="description"
 					type="text"
@@ -216,6 +228,8 @@ export function FormTransaction() {
 				<FormControl>
 					<Select
 						variant="standard"
+						color={muiColor()}
+
 						name="category"
 						id="category"
 						value={category}
@@ -234,6 +248,8 @@ export function FormTransaction() {
 				<FormControl>
 					<Select
 						variant="standard"
+						color={muiColor()}
+
 						name="account"
 						id="account"
 						value={account}
@@ -257,6 +273,8 @@ export function FormTransaction() {
 						labelId="tags"
 						multiple
 						variant="standard"
+						color={muiColor()}
+
 						id="tags"
 						name="tags"
 						value={tagsSelect}
@@ -289,7 +307,7 @@ export function FormTransaction() {
 						value={fixedExpense}
 						id="fixed"
 						name="fixed"
-						control={<Switch color="primary" checked={fixedExpense} onChange={handleChangeFixedExpense} />}
+						control={<Switch color={muiColor()} checked={fixedExpense} onChange={handleChangeFixedExpense} />}
 						label={`Fixed ${transactionType}`}
 						labelPlacement="start"
 					/>
@@ -299,7 +317,7 @@ export function FormTransaction() {
 						value={repeatExpense}
 						id="repeat"
 						name="repeat"
-						control={<Switch color="primary" checked={repeatExpense} onChange={handleChangeRepeatExpense} />}
+						control={<Switch color={muiColor()} checked={repeatExpense} onChange={handleChangeRepeatExpense} />}
 						label="Repeat"
 						labelPlacement="start"
 					/>
@@ -307,6 +325,8 @@ export function FormTransaction() {
 				<RepeatBlockContainer>
 					<TextField
 						variant='standard'
+						color={muiColor()}
+
 						id="repeated_times"
 						disabled={!repeatExpense}
 						name="repeated_times"
@@ -323,6 +343,8 @@ export function FormTransaction() {
 					<FormControl>
 						<Select
 							variant="standard"
+							color={muiColor()}
+
 							name="time_period"
 							id="time_period"
 							disabled={!repeatExpense}
@@ -337,13 +359,9 @@ export function FormTransaction() {
 					</FormControl>
 				</RepeatBlockContainer>
 			</FormTransactionRightBlock>
-			<Button color="primary" variant="contained" type="submit">
+			<Button color={muiColor()} variant="contained" type="submit">
 				Submit
 			</Button>
 		</FormTransactionContainer>
 	)
 }
-
-
-
-

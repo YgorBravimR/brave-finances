@@ -1,6 +1,6 @@
-import { styled as muiStyled, Theme, CSSObject } from '@mui/material/styles';
 import styled from '@emotion/styled'
 import MuiDrawer from '@mui/material/Drawer';
+import { CSSObject, Theme, styled as muiStyled } from '@mui/material/styles';
 
 export const SidebarContainer = styled.div`
 .MuiListItemIcon-root {

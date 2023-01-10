@@ -1,15 +1,18 @@
 import { Button } from "@mui/material";
-import { Plus, CreditCard, Coins, Money } from "phosphor-react";
-import { CreditCardsCard } from "../components/creditCards/creditCardsCards";
-import { BalanceCard } from "../components/shared/BalanceCard";
-import { BalancesContainer, CreditCardsPageContainer, CreditCardsPageHeader, CreditCardsCardsContainer } from "../styles/pages/credit-cards";
-import { api, getAPIClient } from "../services/axios";
-import { useContext, useEffect, useState } from "react";
 import { GetServerSideProps } from "next";
 import { parseCookies } from "nookies";
-import { BaseModal } from "../components/shared/BaseModal";
+import { Coins, CreditCard, Money, Plus } from "phosphor-react";
+import { useContext, useState } from "react";
+
+import { creditCardsApiResponse } from "../api/creditCardAPI";
+import { CreditCardsCard } from "../components/creditCards/creditCardsCards";
+import { BalanceCard } from "../components/shared/BalanceCard";
+import { BaseModal } from "../components/shared/Modals/BaseModal";
+import { FormCreditCard } from "../components/shared/Modals/Forms/NewCreditCard";
 import { CreditCardContext } from "../contexts/CreditCardContext";
-import { FormCreditCard } from "../components/shared/Modals/FormCreditCard";
+import { TransactionsModalContext } from "../contexts/TransactionsModalContext";
+import { getAPIClient } from "../services/axios";
+import { BalancesContainer, CreditCardsCardsContainer, CreditCardsPageContainer, CreditCardsPageHeader } from "../styles/pages/credit-cards";
 
 interface CreditCardsProps {
   id: string,
@@ -26,33 +29,43 @@ interface CreditCardsProps {
 }
 
 export default function CreditCardss() {
-  const [creditCards, setCreditCards] = useState<CreditCardsProps[]>([])
+  // const [creditCards, setCreditCards] = useState<CreditCardsProps[]>([])
+  const [creditCardsArray, setCreditCardsArray] = useState(creditCardsApiResponse.data);
+
   const { handleCloseCreditCardModal, openCreditCardModal, setOpenCreditCardModal } = useContext(CreditCardContext)
+  const { setTransactionType, setOpenCreditCardTransactionModal } = useContext(TransactionsModalContext)
+
+
 
   function handleOpenCreditCardModal() {
     setOpenCreditCardModal(true)
   }
 
+  function handleOpenModalSetTransactionType() {
+    setTransactionType("credit-card")
+    setOpenCreditCardTransactionModal(true)
+  }
 
-  useEffect(() => {
-    async function getCreditCards() {
-      try {
-        const res = await api.get('/creditCards')
-        console.log(res)
 
-        if (res.data.status) {
-          setCreditCards(res.data.data.creditCards)
-        } else {
-          // implement response's error
-        }
+  // useEffect(() => {
+  //   async function getCreditCards() {
+  //     try {
+  //       const res = await api.get('/creditCards')
+  //       console.log(res)
 
-        return res
-      } catch (error) {
-        // Set error
-      }
-    }
-    getCreditCards()
-  }, [])
+  //       if (res.data.status) {
+  //         setCreditCards(res.data.data.creditCards)
+  //       } else {
+  //         // implement response's error
+  //       }
+
+  //       return res
+  //     } catch (error) {
+  //       // Set error
+  //     }
+  //   }
+  //   getCreditCards()
+  // }, [])
 
 
   return (
@@ -67,22 +80,25 @@ export default function CreditCardss() {
         </BaseModal>
       </CreditCardsPageHeader>
       <CreditCardsCardsContainer>
-        {creditCards.map((creditCard) => (
+        {creditCardsArray.cards.map((creditCard, i) => (
           <CreditCardsCard
-            key={creditCard.id}
+            key={i}
             network_icon={creditCard.flag}
             card_name={creditCard.description}
-            partial_value={3000}
-            closing_on={`January ${creditCard.close_date}`}
+            partial_value={creditCard.spent_value}
+            closing_on={`January ${creditCard.closing_day}`}
             limit={creditCard.limit}
-            onClick={console.log("null")}
-            due_date={`January ${creditCard.due_date}`} />
+            onClick={handleOpenModalSetTransactionType}
+            due_date={`December ${creditCard.due_date}`}
+            avaiable_limit={creditCard.avaiable_limit}
+            completed={creditCard.percent}
+          />
         ))}
       </CreditCardsCardsContainer>
       <BalancesContainer>
-        <BalanceCard icon={<CreditCard />} iconColor='#00796b' title='Best CreditCard tp Buy' value={300} to={'/credit-cards'} />
-        <BalanceCard icon={<Coins />} iconColor='#00796b' title='Avaiable Limit' value={300} to={'/credit-cards'} />
-        <BalanceCard icon={<Money />} iconColor='#00796b' title='Total amount' value={300} to={'/credit-cards'} />
+        <BalanceCard icon={<CreditCard />} iconColor='#00796b' title='Best Credit Card to Buy' value={creditCardsArray.cards[2].description} to={'/credit-cards'} />
+        <BalanceCard icon={<Coins />} iconColor='#00796b' title='Avaiable Limit' value={creditCardsArray.cards[2].limit} to={'/credit-cards'} />
+        <BalanceCard icon={<Money />} iconColor='#00796b' title='Total amount' value={"R$ 4100,00"} to={'/credit-cards'} />
       </BalancesContainer>
     </CreditCardsPageContainer>
   )

@@ -1,6 +1,7 @@
+import { ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import router from "next/router";
 import { ReactNode, useContext } from "react";
-import { ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+
 import { SidebarContext } from "../../../../contexts/SidebarContext";
 import { SidebarMenuContainer } from "./styles";
 

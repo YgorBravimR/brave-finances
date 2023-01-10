@@ -1,5 +1,6 @@
 import { Fade, Modal } from '@mui/material'
 import { ReactNode } from 'react'
+
 import { ModalContainer } from './styles'
 
 type Props = {

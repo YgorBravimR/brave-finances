@@ -1,7 +1,8 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { api } from "../services/axios";
 import { destroyCookie, parseCookies, setCookie } from 'nookies'
+import { ReactNode, createContext, useEffect, useState } from "react";
+
+import { api } from "../services/axios";
 
 interface SignInCredentials {
   email: string;
@@ -50,7 +51,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     const res = await api.post('/sessions', { email, password })
     const { token, user } = res.data.data;
     setCookie(undefined, '@MyBills:token', JSON.stringify({ token, user }), {
-      maxAge: 60 * 60 * 1, // 1 hour
+      maxAge: 60 * 60 * 12, // 12 hour
     })
 
     api.defaults.headers['Authorization'] = `Bearer ${token}`;

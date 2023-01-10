@@ -1,18 +1,16 @@
+import { Add, ChevronLeft , ChevronRight } from '@mui/icons-material/';
+import { List } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
-import { ChevronLeft, ChevronRight } from '@mui/icons-material/';
+import Image from "next/image";
+import { Bank, CreditCard, DotsThree, HouseLine, ListBullets } from 'phosphor-react';
 import { useContext, useState } from 'react';
 
-import Image from "next/image";
-import myBillsLogo from '../../../assets/mybills-logo-noBg.png'
 import logo from '../../../assets/logo.png'
-
-import { Add } from '@mui/icons-material';
-import { List } from '@mui/material';
-import { MaterialUiSidebarItem } from './SidebarMenu';
-import { SidebarButton, ButtonExpanded, ButtonContained, Drawer, DrawerHeader, SidebarContainer } from './styles';
+import myBillsLogo from '../../../assets/mybills-logo-noBg.png'
 import { SidebarContext } from '../../../contexts/SidebarContext';
 import { NewTransactionSidebarButton } from './NewTransactionSidebarButton';
-import { Bank, CreditCard, DotsThree, HouseLine, ListBullets } from 'phosphor-react';
+import { MaterialUiSidebarItem } from './SidebarMenu';
+import { ButtonContained, ButtonExpanded, Drawer, DrawerHeader, SidebarButton, SidebarContainer } from './styles';
 
 
 

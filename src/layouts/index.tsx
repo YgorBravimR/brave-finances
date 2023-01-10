@@ -1,8 +1,9 @@
 import { ReactElement } from "react";
+
 import { Header } from "../components/shared/Header";
 import { Sidebar } from "../components/shared/Sidebar";
+import { ChildrenLayout, LayoutContainer, MainContentLayout } from "./styles";
 
-import { LayoutContainer, MainContentLayout, ChildrenLayout } from "./styles";
 
 interface BaseLayoutProps {
   children: ReactElement;

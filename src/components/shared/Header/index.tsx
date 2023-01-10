@@ -1,11 +1,11 @@
+import { KeyboardArrowDown } from '@mui/icons-material';
+import { Avatar, Button, Menu, MenuItem, Typography } from '@mui/material';
 import Image from 'next/image'
 import { useContext, useState } from 'react';
+
 import mybillsShop from '../../../assets/mybills-shop.png'
-import { KeyboardArrowDown } from '@mui/icons-material';
-import { Avatar, Typography, Button, Menu, MenuItem } from '@mui/material';
-import { CalendarButtonContainer, CoinsShopContainer, HeaderContainer, ProfileModalContainer, } from './styles'
 import { AuthContext } from '../../../contexts/AuthContext';
-import { SidebarContext } from '../../../contexts/SidebarContext';
+import { CalendarButtonContainer, CoinsShopContainer, HeaderContainer, ProfileModalContainer, } from './styles'
 
 export function Header() {
   const { singOut, user } = useContext(AuthContext)

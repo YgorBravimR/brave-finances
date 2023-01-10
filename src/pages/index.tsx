@@ -1,17 +1,17 @@
-import Image from 'next/image'
-import { useContext, useState } from 'react'
 import { Button, Link } from '@mui/material'
-import { HomepageContainer, ImageSectionContainer, FormSectionContainer, } from '../styles/pages/homepage'
+import { GetServerSideProps } from 'next'
+import Image from 'next/image'
+import router from 'next/router'
+import { parseCookies } from 'nookies'
+import { useContext, useState } from 'react'
 
 import mobills_home from '../assets/mobills_home.svg'
 import mobills_logo from '../assets/mybills-logo-noBg.png'
-import { RegisterUserForm } from '../components/homepage/RegisterUserForm'
 import { LoginUserForm } from '../components/homepage/LoginUserForm'
+import { RegisterUserForm } from '../components/homepage/RegisterUserForm'
 import { AuthContext } from '../contexts/AuthContext'
-import router from 'next/router'
-import { GetServerSideProps } from 'next'
-import { parseCookies } from 'nookies'
 import { getAPIClient } from '../services/axios'
+import { FormSectionContainer, HomepageContainer, ImageSectionContainer, } from '../styles/pages/homepage'
 
 export default function HomePage() {
   const [userPageShowed, setUserPageShowed] = useState('register')

@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+
 import { EmptyDashboardCardContainer } from './styles'
 
 export interface EmptyDashboardCardProps {

@@ -1,9 +1,10 @@
-import * as yup from 'yup'
-import { useContext } from 'react'
-import { useFormik } from 'formik'
 import { Button, TextField } from '@mui/material'
-import { LoginFormContainer } from './styles'
+import { useFormik } from 'formik'
+import { useContext } from 'react'
+import * as yup from 'yup'
+
 import { AuthContext } from '../../../contexts/AuthContext'
+import { LoginFormContainer } from './styles'
 
 export function LoginUserForm() {
   const { signIn } = useContext(AuthContext)

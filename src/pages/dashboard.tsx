@@ -1,20 +1,23 @@
-import Image from 'next/image'
-import { useContext } from 'react';
-import { GetServerSideProps } from 'next';
-import { parseCookies } from 'nookies';
-import { getAPIClient } from '../services/axios';
-import { AuthContext } from '../contexts/AuthContext';
-import bottomImage from '../assets/dashboard-bottom-img.svg'
+import { AccountBalance, AccountBalanceWallet, ArrowDownwardOutlined, ArrowForwardOutlined, ArrowUpwardOutlined, EmojiFlags, PieChartOutline } from '@mui/icons-material/';
 import { Button, Grid } from '@mui/material';
-import { AccountBalance, PieChartOutline, ArrowUpwardOutlined, ArrowDownwardOutlined, ArrowForwardOutlined, AccountBalanceWallet, EmojiFlags } from '@mui/icons-material/';
-import { DashboardContainer, BalanceCardContainer, MainCardsContent } from '../styles/pages/dashboard'
+import { GetServerSideProps } from 'next';
+import Image from 'next/image';
+import { parseCookies } from 'nookies';
+import { useContext, useState } from 'react';
+
+import { dashboardApiResponse } from '../api/dashboardAPI';
+import bottomImage from '../assets/dashboard-bottom-img.svg';
 import { BalanceCard } from '../components/shared/BalanceCard';
 import { ResumeCard } from '../components/shared/ResumeCard';
-import { MyIncomes } from '../components/shared/ResumeCard/MyIncomes';
 import { MyExpenses } from '../components/shared/ResumeCard/MyExpenses';
+import { MyIncomes } from '../components/shared/ResumeCard/MyIncomes';
+import { AuthContext } from '../contexts/AuthContext';
+import { getAPIClient } from '../services/axios';
+import { BalanceCardContainer, DashboardContainer, MainCardsContent } from '../styles/pages/dashboard';
 
 export default function Dashboard() {
   const { user } = useContext(AuthContext)
+  const [dashboardApi, setDashboardApi] = useState(dashboardApiResponse.data)
 
   return (
     <DashboardContainer>
@@ -22,39 +25,38 @@ export default function Dashboard() {
         <>
           <div>
             <h2>Dashboard</h2>
-            <h3>Eu sou {user?.fullname}, meu email é {user?.email}</h3>
             <BalanceCardContainer>
               <BalanceCard
-                title="Saldo atual"
-                value="Get From API"
+                title="Actual Balance"
+                value={dashboardApi.current_balance}
                 iconColor="#2296f3"
                 icon={<AccountBalance />}
-                to="/"
-                tooltip="Esse aqui é apenas um teste do Saldo atual"
+                to="/transactions"
+                tooltip="Your month balance"
               />
               <BalanceCard
-                title="Receitas"
-                value="Get From API"
+                title="Incomes"
+                value={dashboardApi.incomes_sum}
                 iconColor="#4caf50"
                 icon={<ArrowUpwardOutlined />}
-                to="/accounts"
-                tooltip="Outro teste, dessa vez.. Receitas"
+                to="/transactions/incomes"
+                tooltip="Your month incomes balance"
               />
               <BalanceCard
-                title="Despesas"
-                value="Get From API"
+                title="Expenses"
+                value={dashboardApi.expenses_sum}
                 iconColor="#f44336"
                 icon={<ArrowDownwardOutlined />}
-                to="/"
-                tooltip="Testando.. depesas"
+                to="/transactions/expenses"
+                tooltip="Your month expenses balance"
               />
               <BalanceCard
-                title="Cartão de Crédito"
-                value="Get From API"
+                title="Credit Cards"
+                value={dashboardApi.credit_card_expenses_sum}
                 iconColor="#00796b"
                 icon={<AccountBalanceWallet />}
-                to="/accounts"
-                tooltip="Por ultimo, um teste, Cartão de credito"
+                to="/transactions/credit-cards"
+                tooltip="Your month credit card invoices balance"
               />
               <Button endIcon={<ArrowForwardOutlined />}>Meu Desempenho</Button>
             </BalanceCardContainer>
@@ -62,20 +64,24 @@ export default function Dashboard() {
               <Grid container rowSpacing={4} columnSpacing={2}>
                 <Grid item xs={6}>
                   <ResumeCard
-                    cardTitle="Receitas"
+                    cardTitle="Incomes"
                     icon={< PieChartOutline />}
                     title="Opa! Você ainda não possui receitas neste mês"
                     subtitle="Adicione suas receitas no mês atual através do botão (+), para ver seus gráficos."
                     cardContent={<MyIncomes />}
+                    buttonText="See more"
+                    destinationPage="/transactions/incomes"
                   />
                 </Grid>
                 <Grid item xs={6}>
                   <ResumeCard
-                    cardTitle="Despesas"
+                    cardTitle="Expenses"
                     icon={< PieChartOutline />}
                     title="Opa! Você ainda não possui um planejamento definido para este mês."
                     subtitle="Melhore seu controle financeiro agora!"
                     cardContent={<MyExpenses />}
+                    buttonText="See more"
+                    destinationPage="/transactions/expenses"
                   />
                 </Grid>
                 <Grid item xs={6}>
@@ -86,6 +92,8 @@ export default function Dashboard() {
                     subtitle="Melhore seu controle financeiro agora!"
                     cardContent=""
                     emptyCard
+                    buttonText="See more"
+                    destinationPage="/dashboard"
                   />
                 </Grid>
               </Grid>

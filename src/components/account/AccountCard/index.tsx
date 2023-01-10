@@ -1,14 +1,15 @@
 import { Button, Card, Divider, Menu, MenuItem } from '@mui/material';
-import { Dispatch, ReactNode, SetStateAction, useState } from 'react';
-import { AccountCardContent, HeaderContent, AccountCardContainer, BalanceContent } from './styles';
 import { DotsThreeVertical } from 'phosphor-react';
+import { ReactNode, useState } from 'react';
+
 import { SeeMoreButton } from '../../shared/SeeMoreButton';
+import { AccountCardContainer, AccountCardContent, BalanceContent, HeaderContent } from './styles';
 
 interface AccountCardProps {
   icon: ReactNode;
   account_name: string;
-  balance: number;
-  predicted_balance: number;
+  balance: string;
+  predicted_balance: string;
   onClick: any
 }
 

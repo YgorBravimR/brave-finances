@@ -24,7 +24,7 @@ export const AccountsPageBody = styled.div`
 
 `
 
-export const AccountsCardsContainer = styled.div`
+export const AccountsCardsContainer = styled.ul`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;

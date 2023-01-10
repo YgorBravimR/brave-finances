@@ -1,17 +1,18 @@
-import * as React from 'react';
-import Head from 'next/head';
-import { AppProps } from 'next/app';
-import { ThemeProvider } from '@mui/material/styles';
 import { CacheProvider, EmotionCache } from '@emotion/react';
-import theme from '../styles/theme.js';
+import { ThemeProvider } from '@mui/material/styles';
+import { AppProps } from 'next/app';
+import Head from 'next/head';
+import * as React from 'react';
+
 import createEmotionCache from '../../config/createEmotionCache';
 import '../styles/globals.scss';
-import { BaseLayout } from '../layouts';
-import { ModalContextProvider } from '../contexts/TransactionsModalContext';
-import { SidebarContextProvider } from '../contexts/SidebarContext';
-import { AuthContextProvider } from '../contexts/AuthContext';
 import { AccountsContextProvider } from '../contexts/AccountsContext';
+import { AuthContextProvider } from '../contexts/AuthContext';
 import { CreditCardContextProvider } from '../contexts/CreditCardContext';
+import { SidebarContextProvider } from '../contexts/SidebarContext';
+import { ModalContextProvider } from '../contexts/TransactionsModalContext';
+import { BaseLayout } from '../layouts';
+import theme from '../styles/theme.js';
 
 const clientSideEmotionCache = createEmotionCache();
 

@@ -1,8 +1,9 @@
-import * as yup from 'yup'
-import { useFormik } from 'formik'
 import { Button, TextField } from '@mui/material'
-import { RegisterUserFormContainer } from './styles'
+import { useFormik } from 'formik'
+import * as yup from 'yup'
+
 import { api } from '../../../services/axios'
+import { RegisterUserFormContainer } from './styles'
 
 export function RegisterUserForm() {
   const validationSchema = yup.object({

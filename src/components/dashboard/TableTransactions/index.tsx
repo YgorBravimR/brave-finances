@@ -1,7 +1,7 @@
-import * as React from 'react';
+import { FirstPage, KeyboardArrowLeft, KeyboardArrowRight, LastPage } from '@mui/icons-material';
+import { Box, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TablePagination, TableRow } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { LastPage, FirstPage, KeyboardArrowRight, KeyboardArrowLeft } from '@mui/icons-material';
-import { Table, Box, IconButton, TableContainer, Paper, TableHead, TableRow, TableCell, TableBody, TableFooter, TablePagination } from '@mui/material';
+import * as React from 'react';
 
 interface TablePaginationActionsProps {
   count: number;

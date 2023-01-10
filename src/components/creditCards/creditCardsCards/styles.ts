@@ -59,11 +59,9 @@ export const ButtonContainer = styled.div`
   }
 `
 
-export const ProgressBar = styled.div`
+export const ProgressBarContainer = styled.div`
   width: 100%;
   height: 1rem;
-  background-color: red;
-  display: block;
 `
 
 export const ProgressContainer = styled.div`
