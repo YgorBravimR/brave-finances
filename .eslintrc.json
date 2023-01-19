@@ -1,5 +1,4 @@
-{
-  "settings": {
+{  "settings": {
     "import/resolver": {
       "typescript": {
         "project": "./tsconfig.json"
@@ -11,12 +10,14 @@
     "unused-imports",
     "@typescript-eslint",
     "prettier"
+
   ],
   "extends": [
     "next/core-web-vitals",
     "prettier",
     "plugin:import/recommended",
-    "plugin:import/typescript"
+    "plugin:import/typescript",
+    "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
     "react/no-unescaped-entities": "off",
@@ -24,7 +25,7 @@
       "error",
       {
         "ignoreCase": false,
-        "ignoreDeclarationSort": true, // don"t want to sort import lines, use eslint-plugin-import instead
+        "ignoreDeclarationSort": true,
         "ignoreMemberSort": false,
         "memberSyntaxSortOrder": [
           "none",
@@ -36,26 +37,23 @@
       }
     ],
     "import/no-unresolved": "error",
-    // "import/no-named-as-default-member": "off",
     "import/order": [
       "error",
       {
         "groups": [
-          "builtin", // Built-in imports (come from NodeJS native) go first
-          "external", // <- External imports
-          "internal", // <- Absolute imports
+          "builtin",
+          "external",
+          "internal",
           [
             "sibling",
             "parent"
-          ], // <- Relative imports, the sibling and parent types they can be mingled together
-          "index", // <- index imports
-          "unknown" // <- unknown
+          ],
+          "index",
+          "unknown"
         ],
         "newlines-between": "always",
         "alphabetize": {
-          /* sort in ascending order. Options: ["ignore", "asc", "desc"] */
           "order": "asc",
-          /* ignore case. Options: [true, false] */
           "caseInsensitive": true
         }
       }

@@ -75,13 +75,13 @@ export function Sidebar() {
             selected={selected}
             setSelected={setSelected}
           />
-          <MaterialUiSidebarItem
+          {/* <MaterialUiSidebarItem
             title="Budgets"
             to="/budgets"
             icon={<ListBullets size={iconSize} weight="thin" />}
             selected={selected}
             setSelected={setSelected}
-          />
+          /> */}
           <MaterialUiSidebarItem
             title="More options"
             to="/others"

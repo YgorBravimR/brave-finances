@@ -30,8 +30,6 @@ export function LoginUserForm() {
   })
 
   return (
-    <>
-      <h2>Login Here</h2>
       <LoginFormContainer onSubmit={formik.handleSubmit}>
         <TextField
           fullWidth
@@ -60,9 +58,8 @@ export function LoginUserForm() {
           helperText={formik.touched.password && formik.errors.password}
         />
         <Button color="primary" variant="contained" type="submit">
-          Submit
+          LOGIN
         </Button>
       </LoginFormContainer>
-    </>
   )
 }

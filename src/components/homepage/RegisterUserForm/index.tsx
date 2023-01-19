@@ -1,11 +1,16 @@
 import { Button, TextField } from '@mui/material'
 import { useFormik } from 'formik'
+import { Dispatch, SetStateAction } from 'react'
 import * as yup from 'yup'
 
 import { api } from '../../../services/axios'
 import { RegisterUserFormContainer } from './styles'
 
-export function RegisterUserForm() {
+interface Props {
+  setFormState: Dispatch<SetStateAction<string>>
+}
+
+export function RegisterUserForm({setFormState}:Props) {
   const validationSchema = yup.object({
     fullname: yup.string().required('Name required'),
     email: yup.string().required('Email required'),
@@ -25,12 +30,11 @@ export function RegisterUserForm() {
     onSubmit: async (values) => {
       alert(JSON.stringify(values, null, 2))
       await api.post('/users', values)
+      setFormState('login')
     },
   })
 
   return (
-    <>
-      <h2>Register here</h2>
       <RegisterUserFormContainer onSubmit={formik.handleSubmit}>
         <TextField
           fullWidth
@@ -72,9 +76,8 @@ export function RegisterUserForm() {
           helperText={formik.touched.password && formik.errors.password}
         />
         <Button color="primary" variant="contained" type="submit">
-          Submit
+          REGISTER
         </Button>
       </RegisterUserFormContainer>
-    </>
   )
 }

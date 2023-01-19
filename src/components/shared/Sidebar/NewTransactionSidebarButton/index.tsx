@@ -27,6 +27,10 @@ export function NewTransactionSidebarButton({ buttonText, startIcon }: Props) {
 		setOpenTransferModal
 	} = useContext(TransactionsModalContext)
 
+	// const {creditCardsData, setCardInput} = useContext(CreditCardContext)
+
+	// const firstCreditCardOfArray = creditCardsData.cards[0]
+
 	const openMenu = Boolean(isNewTransactionMenuOpen);
 
 	const handleClickMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -38,27 +42,28 @@ export function NewTransactionSidebarButton({ buttonText, startIcon }: Props) {
 	};
 
 	const handleCLoseMenuOpenModalExpense = () => {
+		setTransactionType("expense")
 		setIsNewTransactionMenuOpen(null)
 		setOpenTransactionModal(true)
-		setTransactionType("expense")
 	}
 
 	const handleCLoseMenuOpenModalIncome = () => {
+		setTransactionType("income")
 		setIsNewTransactionMenuOpen(null)
 		setOpenTransactionModal(true)
-		setTransactionType("income")
 	}
 
 	const handleCLoseMenuOpenModalCreditCard = () => {
+		setTransactionType("credit-card")
+		// setCardInput(firstCreditCardOfArray)
 		setIsNewTransactionMenuOpen(null)
 		setOpenCreditCardTransactionModal(true)
-		setTransactionType("credit-card")
 	}
 
 	const handleCLoseMenuOpenModalTransfer = () => {
+		setTransactionType("transfer")
 		setIsNewTransactionMenuOpen(null)
 		setOpenTransferModal(true)
-		setTransactionType("transfer")
 	}
 
 	return (

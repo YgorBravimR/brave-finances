@@ -1,15 +1,19 @@
 import { Button, FormControl, InputAdornment, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, } from '@mui/material';
 import { useFormik } from 'formik';
 import { Bank, File } from 'phosphor-react';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import * as yup from 'yup'
 
+import { AccountsContext } from '../../../../../contexts/AccountsContext';
+import { api } from '../../../../../services/axios';
 import { accountTypesArray, banksArray } from '../../../../../utils/transactionts';
 import { FormTransactionContainer } from './styles'
 
 export function NewAccountForm() {
   const [bank, setBank] = useState(banksArray[0].value)
   const [type, setType] = useState(accountTypesArray[0].value)
+
+  const {setOpenNewAccountModal} = useContext(AccountsContext)
 
   const handleChangeBankSelect = (event: SelectChangeEvent) => {
     const { value } = event.target
@@ -24,23 +28,26 @@ export function NewAccountForm() {
   };
 
   const validationSchema = yup.object({
-    price: yup.string().required(),
+    initial_price: yup.string().required(),
     bank: yup.string().required(),
     type: yup.string().required(),
     description: yup.string().required(),
+    account_name: yup.string().required(),
   });
 
   const formik = useFormik({
     initialValues: {
-      price: "",
+      initial_price: "",
       description: "",
       bank: banksArray[0].value,
       type: accountTypesArray[0].value,
+      account_name: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       alert(JSON.stringify(values, null, 2));
-      console.log(values)
+      await api.post('/accounts', values)
+      setOpenNewAccountModal(false)
     },
   });
 
@@ -53,14 +60,14 @@ export function NewAccountForm() {
       <TextField
         variant='standard'
         color={muiColor}
-        id="price"
-        name="price"
+        id="initial_price"
+        name="initial_price"
         type="number"
         placeholder="R$ 0,00"
-        value={formik.values.price}
+        value={formik.values.initial_price}
         onChange={formik.handleChange}
-        error={formik.touched.price && Boolean(formik.errors.price)}
-        helperText={formik.touched.price && formik.errors.price}
+        error={formik.touched.initial_price && Boolean(formik.errors.initial_price)}
+        helperText={formik.touched.initial_price && formik.errors.initial_price}
       />
       <FormControl>
         <InputLabel id='bank_label'>Banking Institution</InputLabel>
@@ -87,6 +94,27 @@ export function NewAccountForm() {
       </FormControl>
       <TextField
         variant='standard'
+        label='Account name'
+        color={muiColor}
+        id="account_name"
+        name="account_name"
+        type="text"
+        placeholder="How you gonna call your account?"
+        value={formik.values.account_name}
+        onChange={formik.handleChange}
+        error={formik.touched.account_name && Boolean(formik.errors.account_name)}
+        helperText={formik.touched.account_name && formik.errors.account_name}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <File size={iconSize} />
+            </InputAdornment>
+          ),
+        }}
+      />
+      <TextField
+        variant='standard'
+        label="Description"
         color={muiColor}
         id="description"
         name="description"

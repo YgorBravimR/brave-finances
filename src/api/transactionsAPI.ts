@@ -21,10 +21,6 @@ interface Props {
   }
 }
 
-interface TableProps {
-
-}
-
 export const transactionsApiResponse: Props = {
   data: {
     current_balance: "R$ 2000,00",
@@ -47,7 +43,7 @@ export const transactionsApiResponse: Props = {
   }
 }
 
-export const transactionsTableApiResponse: TableProps = {
+export const transactionsTableApiResponse = {
   data: {
     transactions: [
       {

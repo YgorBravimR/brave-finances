@@ -1,27 +1,29 @@
 import { Button, FormControl, InputAdornment, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, } from '@mui/material';
 import { useFormik } from 'formik';
 import { Bank, CalendarBlank, CalendarCheck, File, TagChevron } from 'phosphor-react';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import * as yup from 'yup'
 
+import { creditCardsArray, flagsArray } from '../../../../../api/mockArrays';
+import { AccountsContext } from '../../../../../contexts/AccountsContext';
+import { CreditCardContext } from '../../../../../contexts/CreditCardContext';
+import { api } from '../../../../../services/axios';
 import { daysOfTheMonth } from '../../../../../utils/transactionts';
 import { FormTransactionContainer } from './styles'
 
-interface CreditCardProps {
-  limit: string;
-  description: string;
-  flag: string;
-  account: string;
-  closing_day: number;
-  due_date: number;
-}
-
 export function FormCreditCard() {
-  const [flag, setFlag] = useState('cartao1');
-  const [accountName, setAccountName] = useState('conta1');
+  const [flag, setFlag] = useState(creditCardsArray[0].flag);
   const [closingDay, setClosingDay] = useState('01');
   const [dueDate, setDueDate] = useState('05');
 
+  const {setOpenCreditCardModal} = useContext(CreditCardContext)
+  const { accountsData, account, setAccount } = useContext(AccountsContext)
+
+  const accountsArray = accountsData?.accounts
+
+  useEffect(() => {
+    accountsArray && setAccount(accountsArray[0].id)
+  }, [])
 
   const handleChangeFlagSelect = (event: SelectChangeEvent) => {
     const { value } = event.target
@@ -31,13 +33,13 @@ export function FormCreditCard() {
 
   const handleChangeAccountNameSelect = (event: SelectChangeEvent) => {
     const { value } = event.target
-    formik.setFieldValue("account", value)
-    setAccountName(value as string);
+    formik.setFieldValue("account_id", value)
+    setAccount(value as string);
   };
 
   const handleChangeClosingDaySelect = (event: SelectChangeEvent) => {
     const { value } = event.target
-    formik.setFieldValue("closing_day", value)
+    formik.setFieldValue("close_date", value)
     setClosingDay(value as string);
   };
 
@@ -52,29 +54,30 @@ export function FormCreditCard() {
     limit: yup.string().required(),
     description: yup.string().required(),
     flag: yup.string().required(),
-    account: yup.string().required(),
-    closing_day: yup.number().required(),
+    account_id: yup.string().required(),
+    close_date: yup.number().required(),
     due_date: yup.number().required(),
   });
-
   const formik = useFormik({
     initialValues: {
       limit: "",
       description: "",
-      flag: "cartao1",
-      account: "conta1",
-      closing_day: 1,
+      flag: creditCardsArray[0].flag,
+      account_id: account,
+      close_date: 1,
       due_date: 5,
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       alert(JSON.stringify(values, null, 2));
-      console.log(values)
+      await api.post('/creditCards', values)
+      setOpenCreditCardModal(false)
     },
   });
 
   const iconSize = 24
   const muiColor = "secondary"
+
 
   return (
     <FormTransactionContainer onSubmit={formik.handleSubmit}>
@@ -90,16 +93,10 @@ export function FormCreditCard() {
         onChange={formik.handleChange}
         error={formik.touched.limit && Boolean(formik.errors.limit)}
         helperText={formik.touched.limit && formik.errors.limit}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <File size={iconSize} />
-            </InputAdornment>
-          ),
-        }}
       />
       <TextField
         variant='standard'
+        label="Description"
         color={muiColor}
         id="description"
         name="description"
@@ -118,8 +115,10 @@ export function FormCreditCard() {
         }}
       />
       <FormControl>
+        <InputLabel id="flag_label">Flag</InputLabel>
         <Select
           variant="standard"
+          labelId='flag_label'
           color={muiColor}
           name="flag"
           id="flag"
@@ -131,20 +130,22 @@ export function FormCreditCard() {
           }
           onChange={handleChangeFlagSelect}
         >
-          <MenuItem value="cartao1">Cartão 01</MenuItem>
-          <MenuItem value="cartao2">Cartão 02</MenuItem>
-          <MenuItem value="cartao3">Cartão 03</MenuItem>
-          <MenuItem value="cartao4">Cartão 04</MenuItem>
-          <MenuItem value="cartao5">Cartão 05</MenuItem>
+          {
+            flagsArray.map((flag, i) => (
+              <MenuItem key={i} value={flag}>{flag}</MenuItem>
+            ))
+          }
         </Select>
       </FormControl>
       <FormControl>
+        <InputLabel id="account_id_label">Account</InputLabel>
         <Select
           variant="standard"
+          labelId='account_id_label'
           color={muiColor}
-          name="account"
-          id="account"
-          value={accountName}
+          name="account_id"
+          id="account_id"
+          value={account}
           startAdornment={
             <InputAdornment position="start">
               <Bank size={iconSize} />
@@ -152,11 +153,12 @@ export function FormCreditCard() {
           }
           onChange={handleChangeAccountNameSelect}
         >
-          <MenuItem value="conta1">Conta 01</MenuItem>
-          <MenuItem value="conta2">Conta 02</MenuItem>
-          <MenuItem value="conta3">Conta 03</MenuItem>
-          <MenuItem value="conta4">Conta 04</MenuItem>
-          <MenuItem value="conta5">Conta 05</MenuItem>
+          {
+            accountsArray &&
+            accountsArray.map((account) => (
+              <MenuItem key={account.id} value={account.id}>{account.account_name}</MenuItem>
+            ))
+          }
         </Select>
       </FormControl>
       <FormControl>
@@ -165,8 +167,8 @@ export function FormCreditCard() {
           labelId='closing_day_label'
           variant="standard"
           color={muiColor}
-          name="closing_day"
-          id="closing_day"
+          name="close_date"
+          id="close_date"
           value={closingDay}
           startAdornment={
             <InputAdornment position="start">

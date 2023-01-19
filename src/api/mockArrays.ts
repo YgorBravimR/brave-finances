@@ -29,14 +29,6 @@ export const expensesCategoriesArray = [
   "Miscellaneous"
 ]
 
-export const accountsArray = [
-  "Wallet",
-  "Bank",
-  "Cash",
-  "Checking",
-  "Investment account"
-]
-
 export const tagsArray = [
   "work",
   "family",
@@ -61,8 +53,8 @@ export const creditCardsArray = [
   },
   {
     limit: "$5,000",
-    description: "American Express Platinum",
-    flag: "American Express",
+    description: "Amex Platinum",
+    flag: "Amex",
     account: "Checking",
     closing_day: 28,
     due_date: 3
@@ -163,7 +155,7 @@ export const invoicesArray = [
 export const flagsArray = [
   "Visa",
   "Mastercard",
-  "American Express",
+  "Amex",
   "Discover",
   "Diners Club",
   "JCB",
@@ -184,52 +176,14 @@ export const flagsArray = [
 ]
 
 export const banksArray = [
-  "Bank of America",
-  "Chase",
-  "Citigroup",
-  "Wells Fargo",
-  "Goldman Sachs",
-  "Morgan Stanley",
-  "JPMorgan Chase",
-  "American Express",
-  "PNC Bank",
-  "US Bank",
-  "Banco do Brasil",
-  "Caixa Econômica Federal",
-  "Bradesco",
-  "Itaú Unibanco",
-  "Santander",
-  "Banco Inter",
-  "Banco do Nordeste",
-  "Banco da Amazônia",
-  "Banco de Desenvolvimento de Minas Gerais",
-  "Banco de Desenvolvimento de Santa Catarina",
-  "HSBC",
-  "Barclays",
-  "Deutsche Bank",
-  "BNP Paribas",
-  "Credit Suisse",
-  "Société Générale",
-  "UBS",
-  "UniCredit",
-  "ING Group",
-  "Standard Chartered",
-  "Mitsubishi UFJ Financial Group",
-  "China Development Bank",
-  "Industrial and Commercial Bank of China",
-  "Agricultural Bank of China",
-  "Bank of China",
-  "China Construction Bank",
-  "Mizuho Financial Group",
-  "Sumitomo Mitsui Financial Group",
-  "ANZ",
-  "National Australia Bank",
-  "Westpac",
-  "Commonwealth Bank of Australia",
-  "Korea Development Bank",
-  "Export-Import Bank of Korea",
-  "Bank of Korea"
-];
+  {title: 'NuBank', value: 'nubank'},
+  {title: 'Inter', value:'inter'},
+  {title: 'Itaú', value:'itau'},
+  {title: 'Santander', value:'santander'},
+  {title: 'Bradesco', value:'bradesco'},
+  {title: 'Xp', value:'xp'},
+  {title: 'Other', value:'other'}
+]
 
 export const accountsCategoriesArray = [
   "Checking",

@@ -22,3 +22,7 @@ export function getAPIClient(ctx?: any) {
 }
 
 export const api = getAPIClient()
+
+export const jsonApi = axios.create({
+  baseURL: "http://localhost:3334"
+})

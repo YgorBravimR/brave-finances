@@ -64,8 +64,8 @@ export const creditCardsApiResponse: Props = {
         spent_value: "$800",
         percent: 27,
         limit: "$11,000",
-        description: "American Express Blue",
-        flag: "American Express",
+        description: "Amex Blue",
+        flag: "Amex",
         account: "Other",
         closing_day: 27,
         due_date: 25
@@ -96,8 +96,8 @@ export const creditCardsArray = [
   },
   {
     limit: "$5,000",
-    description: "American Express Platinum",
-    flag: "American Express",
+    description: "Amex Platinum",
+    flag: "Amex",
     account: "Checking",
     closing_day: 28,
     due_date: 3
