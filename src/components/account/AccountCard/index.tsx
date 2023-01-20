@@ -31,7 +31,7 @@ export function AccountCard({ icon, account_name, balance, predicted_balance, on
           <HeaderContent>
             <div>
               {icon}
-              <p>{account_name}</p>
+              <strong>{account_name}</strong>
             </div>
             <Button onClick={handleClick}>
               <DotsThreeVertical size={24} />
@@ -41,17 +41,16 @@ export function AccountCard({ icon, account_name, balance, predicted_balance, on
               open={open}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose} sx={{ width: '120px' }}>Edit</MenuItem>
-              <MenuItem onClick={handleClose}>Delete</MenuItem>
+              <MenuItem onClick={handleClose} sx={{ width: '80px' }}>Edit</MenuItem>
             </Menu>
           </HeaderContent>
           <BalanceContent>
             <p>Current balance</p>
-            <p>{balance}</p>
+            <span>{balance}</span>
           </BalanceContent>
           <BalanceContent>
             <p>Predicted balance</p>
-            <p>{predicted_balance}</p>
+            <span>{predicted_balance}</span>
           </BalanceContent>
         </AccountCardContent>
         <Divider />

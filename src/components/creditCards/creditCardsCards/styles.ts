@@ -5,11 +5,19 @@ export const CreditCardsCardContainer = styled.div`
     border-radius: 25px;
     min-width: 22rem;
   }
+    button {
+      color: var(--mybillsCreditCard);
+
+      :hover {
+        background-color: rgba(0, 0, 0, 0.04);
+      }
+    }
 `
 
 export const CreditCardsCardContent = styled.div`
   padding: 1rem;
   font-weight: 500;
+  color: var(--mybillsTextLight);
 `
 
 export const HeaderContent = styled.div`
@@ -21,7 +29,6 @@ export const HeaderContent = styled.div`
   button {
     min-width: 0;
     border-radius: 100%;
-    color: black;
   }
 
   div {
@@ -30,9 +37,8 @@ export const HeaderContent = styled.div`
     align-items: center;
     gap: 1rem;
 
-    > p {
+    > strong {
       font-size: 1.15rem;
-      font-weight: 500;
     }
   }
 `
@@ -69,14 +75,20 @@ export const ProgressContainer = styled.div`
   flex-direction: column;
   font-size: 0.85rem;
   font-weight: 400;
-  gap: 0.25rem;
+  gap: 0.5rem;
 `
 export const AvaiableLimitContent = styled.div`
-
+display: flex;
+flex-direction: column;
+gap: 0.12rem;
 `
 export const LimitCompareContent = styled.div`
 `
 export const ClosingOnContent = styled.div`
+  color: var(--mybillsText);
 `
 export const PartialValueContent = styled.div`
+  strong {
+    color: var(--mybillsOutcome)
+  }
 `

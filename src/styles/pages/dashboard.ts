@@ -2,6 +2,8 @@ import styled from "@emotion/styled"
 
 
 export const DashboardContainer = styled.div`
+  max-width: 1440px;
+  margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

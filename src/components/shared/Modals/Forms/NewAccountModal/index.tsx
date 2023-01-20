@@ -5,7 +5,6 @@ import { useContext, useState } from 'react';
 import * as yup from 'yup'
 
 import { AccountsContext } from '../../../../../contexts/AccountsContext';
-import { api } from '../../../../../services/axios';
 import { accountTypesArray, banksArray } from '../../../../../utils/transactionts';
 import { FormTransactionContainer } from './styles'
 
@@ -46,7 +45,6 @@ export function NewAccountForm() {
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       alert(JSON.stringify(values, null, 2));
-      await api.post('/accounts', values)
       setOpenNewAccountModal(false)
     },
   });

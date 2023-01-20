@@ -9,13 +9,13 @@ import { BalanceCard } from "../components/shared/BalanceCard";
 import { BaseModal } from "../components/shared/Modals/BaseModal";
 import { FormCreditCard } from "../components/shared/Modals/Forms/NewCreditCard";
 import { CreditCardContext } from "../contexts/CreditCardContext";
-import { TransactionsModalContext } from "../contexts/TransactionsModalContext";
+import { TransactionsContext } from "../contexts/TransactionsContext";
 import { getAPIClient } from "../services/axios";
 import { BalancesContainer, CreditCardsCardsContainer, CreditCardsPageContainer, CreditCardsPageHeader } from "../styles/pages/credit-cards";
 
 export default function CreditCards() {
   const { handleCloseCreditCardModal, openCreditCardModal, setOpenCreditCardModal } = useContext(CreditCardContext)
-  const { setTransactionType, setOpenCreditCardTransactionModal } = useContext(TransactionsModalContext)
+  const { setTransactionType, setOpenCreditCardTransactionModal } = useContext(TransactionsContext)
   const { creditCardsData, setCardInput } = useContext(CreditCardContext)
 
   function handleOpenCreditCardModal() {

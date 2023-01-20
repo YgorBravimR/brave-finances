@@ -10,9 +10,9 @@ import { AccountsContextProvider } from '../contexts/AccountsContext';
 import { AuthContextProvider } from '../contexts/AuthContext';
 import { CreditCardContextProvider } from '../contexts/CreditCardContext';
 import { SidebarContextProvider } from '../contexts/SidebarContext';
-import { ModalContextProvider } from '../contexts/TransactionsModalContext';
+import { ModalContextProvider } from '../contexts/TransactionsContext';
 import { BaseLayout } from '../layouts';
-import theme from '../styles/theme.js';
+import { theme } from '../styles/theme';
 
 const clientSideEmotionCache = createEmotionCache();
 

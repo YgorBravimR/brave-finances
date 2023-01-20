@@ -1,10 +1,10 @@
 import { Button } from "@mui/material";
 import { useContext } from "react";
 
-import { TransactionsModalContext } from "../../contexts/TransactionsModalContext";
+import { TransactionsContext } from "../../contexts/TransactionsContext";
 
 export default function Expenses() {
-  const { setOpenTransactionModal, setTransactionType } = useContext(TransactionsModalContext)
+  const { setOpenTransactionModal, setTransactionType } = useContext(TransactionsContext)
   function handleOpenModalSetTransactionType() {
     setOpenTransactionModal(true)
     setTransactionType("expense")

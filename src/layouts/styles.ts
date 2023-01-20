@@ -19,7 +19,6 @@ export const MainContentLayout = styled.main`
 `
 
 export const ChildrenLayout = styled.div`
-  max-width: 1440px;
   width: 100%;
   margin: 0 auto;
   padding-top: 2rem;

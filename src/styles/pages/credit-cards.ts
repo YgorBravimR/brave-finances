@@ -1,6 +1,8 @@
 import styled from '@emotion/styled'
 
 export const CreditCardsPageContainer = styled.div`
+  max-width: 1440px;
+  margin: auto;
   display: grid;
   grid-template-areas:
     'head head head head head head head'

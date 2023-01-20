@@ -1,10 +1,10 @@
 import { Button } from "@mui/material";
 import { useContext } from "react";
 
-import { TransactionsModalContext } from "../../contexts/TransactionsModalContext";
+import { TransactionsContext } from "../../contexts/TransactionsContext";
 
 export default function CreditCard() {
-  const { setOpenCreditCardTransactionModal, setTransactionType } = useContext(TransactionsModalContext)
+  const { setOpenCreditCardTransactionModal, setTransactionType } = useContext(TransactionsContext)
   function handleOpenModalSetTransactionType() {
     setOpenCreditCardTransactionModal(true)
     setTransactionType("credit-card")

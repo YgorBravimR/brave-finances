@@ -8,13 +8,18 @@ export const AccountCardContainer = styled.div`
 `
 
 export const AccountCardContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   padding: 1rem;
+  margin-bottom: 1rem;
 `
 
 export const HeaderContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 0.5rem;
 
   button {
     min-width: 0;
@@ -28,10 +33,13 @@ export const HeaderContent = styled.div`
     align-items: center;
     gap: 1rem;
 
-    > p {
+    strong {
       font-size: 1.15rem;
-      font-weight: 500;
-      margin-bottom: 0.5rem;
+      color: var(--mybillsTextLight)
+    }
+
+    svg {
+      color: var(--mybillsLightBlue)
     }
   }
 `
@@ -39,6 +47,11 @@ export const HeaderContent = styled.div`
 export const BalanceContent = styled.div`
   display: flex;
   justify-content: space-between;
+  font-weight: 500;
+
+  span {
+    color: var(--mybillsIncome);
+  }
 `
 
 export const ButtonContainer = styled.div`

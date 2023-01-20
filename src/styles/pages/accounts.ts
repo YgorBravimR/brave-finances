@@ -3,6 +3,8 @@ import styled from '@emotion/styled'
 export const AccountsPageContainer = styled.div`
   display: flex;
   flex-direction: column;
+  max-width: 78rem;
+  margin: auto;
 `
 export const AccountsPageHeader = styled.div`
   display: flex;
@@ -34,4 +36,6 @@ export const BalancesContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  width: 100%;
+  max-width: 18rem;
 `

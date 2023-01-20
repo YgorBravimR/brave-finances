@@ -9,20 +9,27 @@ import { BalanceCard } from "../components/shared/BalanceCard";
 import { BaseModal } from "../components/shared/Modals/BaseModal";
 import { NewAccountForm } from "../components/shared/Modals/Forms/NewAccountModal";
 import { AccountsContext } from "../contexts/AccountsContext";
+import { TransactionsContext } from "../contexts/TransactionsContext";
 import { getAPIClient } from "../services/axios";
 import { AccountsCardsContainer, AccountsPageBody, AccountsPageContainer, AccountsPageHeader, BalancesContainer } from '../styles/pages/accounts'
 
 export default function Accounts() {
+  const {setOpenTransactionModal, setTransactionType} = useContext(TransactionsContext)
   const {
     setAccount,
     openNewAccountModal,
-    setOpenNewAccountModal,
     handleCloseNewAccountModal,
     accountsData,
+    setOpenNewAccountModal
   } = useContext(AccountsContext)
 
-  function openModalSetAccount() {
-    setAccount("conta2")
+  function openTransactionModalSetAccount(account_id: string) {
+    setAccount(account_id)
+    setTransactionType("expense")
+    setOpenTransactionModal(true)
+  }
+
+  function handleOpenNewAccountModal() {
     setOpenNewAccountModal(true)
   }
 
@@ -32,7 +39,7 @@ export default function Accounts() {
         <>
           <AccountsPageHeader>
             <h2>Accounts</h2>
-            <Button onClick={openModalSetAccount}>
+          <Button onClick={handleOpenNewAccountModal}>
               <Plus weight="bold" />
             </Button>
             <BaseModal openModal={openNewAccountModal} closeModal={handleCloseNewAccountModal}>
@@ -48,7 +55,7 @@ export default function Accounts() {
                   balance={account.current_balance}
                   icon={<Bank size={32} />}
                   predicted_balance={account.predicted_balance}
-                  onClick={openModalSetAccount}
+                  onClick={() => (openTransactionModalSetAccount(account.id))}
                 />
               ))}
             </AccountsCardsContainer>

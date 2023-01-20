@@ -16,7 +16,7 @@ interface ModalContextProviderProps {
   children: ReactNode;
 }
 
-export const TransactionsModalContext = createContext({} as ModalContextType)
+export const TransactionsContext = createContext({} as ModalContextType)
 
 export function ModalContextProvider({ children }: ModalContextProviderProps) {
   const [openTransactionModal, setOpenTransactionModal] = useState(false);
@@ -32,8 +32,8 @@ export function ModalContextProvider({ children }: ModalContextProviderProps) {
   };
 
   return (
-    <TransactionsModalContext.Provider value={{ setOpenTransferModal, openTransferModal, setOpenCreditCardTransactionModal, openCreditCardTransactionModal, openTransactionModal, handleCloseModal, transactionType, setTransactionType, setOpenTransactionModal }}>
+    <TransactionsContext.Provider value={{ setOpenTransferModal, openTransferModal, setOpenCreditCardTransactionModal, openCreditCardTransactionModal, openTransactionModal, handleCloseModal, transactionType, setTransactionType, setOpenTransactionModal }}>
       {children}
-    </TransactionsModalContext.Provider>
+    </TransactionsContext.Provider>
   )
 }

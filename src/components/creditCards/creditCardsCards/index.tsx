@@ -4,7 +4,7 @@ import { DotsThreeVertical } from 'phosphor-react';
 import { ReactNode, useState } from 'react';
 
 import { SeeMoreButton } from '../../shared/SeeMoreButton';
-import { AvaiableLimitContent, BodyContent, ClosingOnContent, CreditCardsCardContainer, CreditCardsCardContent, HeaderContent, LimitCompareContent, PartialValueContent, ProgressBarContainer, ProgressContainer } from './styles';
+import { BodyContent, ClosingOnContent, CreditCardsCardContainer, CreditCardsCardContent, HeaderContent, LimitCompareContent, PartialValueContent, ProgressBarContainer, ProgressContainer } from './styles';
 
 interface CreditCardsCardProps {
   network_icon: ReactNode;
@@ -12,13 +12,12 @@ interface CreditCardsCardProps {
   partial_value: string;
   closing_on: string;
   limit: string;
-  due_date: string;
-  onClick: any;
+  onClick: () => void;
   avaiable_limit: string
   completed: number
 }
 
-export function CreditCardsCard({ completed, avaiable_limit, onClick, network_icon, card_name, partial_value, closing_on, limit, due_date }: CreditCardsCardProps) {
+export function CreditCardsCard({ completed, avaiable_limit, onClick, network_icon, card_name, partial_value, closing_on, limit }: CreditCardsCardProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -28,15 +27,14 @@ export function CreditCardsCard({ completed, avaiable_limit, onClick, network_ic
     setAnchorEl(null);
   };
 
-
   return (
     <CreditCardsCardContainer>
       <Card>
         <CreditCardsCardContent>
           <HeaderContent>
             <div>
-              {network_icon}
-              <p>{card_name}</p>
+              <div>{network_icon}</div>
+              <strong>{card_name}</strong>
             </div>
             <Button onClick={handleClick}>
               <DotsThreeVertical size={24} />
@@ -58,7 +56,7 @@ export function CreditCardsCard({ completed, avaiable_limit, onClick, network_ic
             </PartialValueContent>
             <ClosingOnContent>
               <p>Closing on</p>
-              <strong>{closing_on}</strong>
+              <strong>{`December ${closing_on}, 2023`}</strong>
             </ClosingOnContent>
             <ProgressContainer>
               <LimitCompareContent>
@@ -67,15 +65,14 @@ export function CreditCardsCard({ completed, avaiable_limit, onClick, network_ic
               <ProgressBarContainer>
                 <ProgressBar completed={completed} bgColor="#00796b" />
               </ProgressBarContainer>
-              <AvaiableLimitContent>
                 <span>Avaiable limit {avaiable_limit}</span>
-                <p>Due date: {due_date}</p>
-              </AvaiableLimitContent>
             </ProgressContainer>
           </BodyContent>
         </CreditCardsCardContent>
         <Divider />
-        <SeeMoreButton text="new expense" onClick={onClick} />
+        <div id='btn__addExpense'>
+          <SeeMoreButton text="add expense" onClick={onClick} />
+        </div>
       </Card>
     </CreditCardsCardContainer>
   );

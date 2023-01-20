@@ -23,7 +23,7 @@ export function FormCreditCard() {
 
   useEffect(() => {
     accountsArray && setAccount(accountsArray[0].id)
-  }, [])
+  }, [accountsArray, setAccount])
 
   const handleChangeFlagSelect = (event: SelectChangeEvent) => {
     const { value } = event.target

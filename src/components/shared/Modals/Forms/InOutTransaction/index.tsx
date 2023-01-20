@@ -5,9 +5,9 @@ import { useContext, useState } from 'react';
 import * as yup from 'yup'
 
 import { AccountsContext } from '../../../../../contexts/AccountsContext';
-import { TransactionsModalContext } from '../../../../../contexts/TransactionsModalContext';
+import { TransactionsContext } from '../../../../../contexts/TransactionsContext';
 import { todayDate } from '../../../../../utils/formatter';
-import { accountsArray, categoriesArray, tagsArray } from '../../../../../utils/transactionts';
+import { categoriesArray, tagsArray } from '../../../../../utils/transactionts';
 import { FormTransactionContainer, FormTransactionLeftBlock, FormTransactionRightBlock, RepeatBlockContainer, SwitchContent, SwitchLabelContent, } from './styles'
 
 
@@ -35,8 +35,10 @@ export function FormTransaction() {
 	const [fixedExpense, setFixedExpense] = useState(false);
 	const [repeatExpense, setRepeatExpense] = useState(false);
 
-	const { setAccount, account } = useContext(AccountsContext)
-	const { transactionType } = useContext(TransactionsModalContext)
+	const { setAccount, account, accountsData } = useContext(AccountsContext)
+	const { transactionType } = useContext(TransactionsContext)
+
+	const accountsArray = accountsData?.accounts
 
 
 	const handleChangeReceivedPaid = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -89,14 +91,6 @@ export function FormTransaction() {
 		formik.setFieldValue('tags', value)
 	};
 
-	// async function handleCreateNewTransaction(data: NewTransactionFormInputs) {
-	// 	const { account, category, date, description, price, type } = data;
-
-	// 	await api.post('transactions', {
-	// 		account, category, date, description, price, type
-	// 	})
-	// }
-
 	const validationSchema = yup.object({
 		price: yup.string().required('Digite um valor acima de 1'),
 		date: yup.string().required('Selecione o dia da transação'),
@@ -119,7 +113,7 @@ export function FormTransaction() {
 			date: todayDate,
 			description: "",
 			category: categoriesArray[0].value,
-			account: accountsArray[0].value,
+			account: account,
 			tags: "",
 			fixed: false,
 			repeat: false,
@@ -249,7 +243,6 @@ export function FormTransaction() {
 					<Select
 						variant="standard"
 						color={muiColor()}
-
 						name="account"
 						id="account"
 						value={account}
@@ -260,8 +253,8 @@ export function FormTransaction() {
 						}
 						onChange={handleChangeAccountSelect}
 					>
-						{accountsArray.map(account => (
-							<MenuItem key={account.title} value={account.value}>{account.title}</MenuItem>
+						{accountsArray && accountsArray.map(account => (
+							<MenuItem key={account.id} value={account.id}>{account.account_name}</MenuItem>
 						))}
 					</Select>
 				</FormControl>

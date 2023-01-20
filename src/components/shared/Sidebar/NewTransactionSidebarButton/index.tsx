@@ -2,7 +2,7 @@ import { Button, Menu, MenuItem } from '@mui/material';
 import { ArrowsCounterClockwise, CreditCard, TrendDown, TrendUp } from 'phosphor-react';
 import { ReactNode, useContext, useState } from 'react'
 
-import { TransactionsModalContext } from '../../../../contexts/TransactionsModalContext';
+import { TransactionsContext } from '../../../../contexts/TransactionsContext';
 import { BaseModal } from '../../Modals/BaseModal';
 import { CreditCardTransactionForm } from '../../Modals/Forms/CreditCardTransactionForm';
 import { FormTransaction } from '../../Modals/Forms/InOutTransaction';
@@ -25,7 +25,7 @@ export function NewTransactionSidebarButton({ buttonText, startIcon }: Props) {
 		openCreditCardTransactionModal,
 		openTransferModal,
 		setOpenTransferModal
-	} = useContext(TransactionsModalContext)
+	} = useContext(TransactionsContext)
 
 	// const {creditCardsData, setCardInput} = useContext(CreditCardContext)
 
