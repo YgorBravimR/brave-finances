@@ -9,16 +9,6 @@ import { accountsArray, daysOfTheMonth, tagsArray } from '../../../../../utils/t
 import { SwitchContent } from '../InOutTransaction/styles';
 import { FormTransactionContainer, TransferFormLeftBlock, TransferFormRightBlock } from './styles'
 
-interface TransferFormProps {
-  price: string;
-  date: string;
-  origin_account: string;
-  destination_account: string;
-  tags: string[];
-  recurring: boolean;
-  repeat_on_day: string;
-}
-
 export function TransferForm() {
   const [originAccount, setOriginAccount] = useState(accountsArray[0].value)
   const [destinationAccount, setDestinationAccount] = useState(accountsArray[1].value)
@@ -84,12 +74,11 @@ export function TransferForm() {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
-      console.log(values)
     },
   });
 
   const iconSize = 24
-  const muiColor = "warning"
+  const muiColor = "transfer"
 
   return (
     <FormTransactionContainer onSubmit={formik.handleSubmit}>
@@ -237,7 +226,7 @@ export function TransferForm() {
           </Select>
         </FormControl>
       </TransferFormRightBlock>
-      <Button color="warning" variant="contained" type="submit">
+      <Button color={muiColor} variant="contained" type="submit">
         Submit
       </Button>
     </FormTransactionContainer>

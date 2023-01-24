@@ -1,52 +1,51 @@
-import { CacheProvider, EmotionCache } from '@emotion/react';
 import { ThemeProvider } from '@mui/material/styles';
-import { AppProps } from 'next/app';
+import type { AppProps } from 'next/app'
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import * as React from 'react';
+import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 
-import createEmotionCache from '../../config/createEmotionCache';
-import '../styles/globals.scss';
 import { AccountsContextProvider } from '../contexts/AccountsContext';
 import { AuthContextProvider } from '../contexts/AuthContext';
 import { CreditCardContextProvider } from '../contexts/CreditCardContext';
 import { SidebarContextProvider } from '../contexts/SidebarContext';
 import { ModalContextProvider } from '../contexts/TransactionsContext';
 import { BaseLayout } from '../layouts';
-import { theme } from '../styles/theme';
+import { GlobalStyle } from '../styles/global';
+import { defaultTheme, theme } from '../styles/theme';
 
-const clientSideEmotionCache = createEmotionCache();
+export default function App({ Component, pageProps }: AppProps) {
 
-interface MyAppProps extends AppProps {
-  emotionCache?: EmotionCache;
-}
-
-export default function MyApp(props: MyAppProps) {
-  const { Component, emotionCache = clientSideEmotionCache, pageProps, ...appProps } = props;
+  const {pathname} = useRouter()
   const LayoutNotNeeded = ['/']
-  const isLayoutNotNeeded = LayoutNotNeeded.includes(appProps.router.pathname);
-  return (
-    <CacheProvider value={emotionCache}>
+  const isLayoutNotNeeded = LayoutNotNeeded.includes(pathname);
+
+    return (
+      <>
       <Head>
         <title>Brave finances</title>
       </Head>
-      <ThemeProvider theme={theme}>
-        <AccountsContextProvider>
-          <AuthContextProvider>
-            <CreditCardContextProvider>
-              <SidebarContextProvider>
-                <ModalContextProvider>
-                  {
-                    isLayoutNotNeeded ? (<Component {...pageProps} />) : (
-                      <BaseLayout>
-                        <Component {...pageProps} />
-                      </BaseLayout>)
-                  }
-                </ModalContextProvider>
-              </SidebarContextProvider>
-            </CreditCardContextProvider>
-          </AuthContextProvider>
-        </AccountsContextProvider>
-      </ThemeProvider>
-    </CacheProvider>
+        <StyledThemeProvider theme={defaultTheme}>
+          <ThemeProvider theme={theme}>
+            <AccountsContextProvider>
+              <AuthContextProvider>
+                <CreditCardContextProvider>
+                  <SidebarContextProvider>
+                    <ModalContextProvider>
+                      <GlobalStyle />
+                      {
+                        isLayoutNotNeeded ? (<Component {...pageProps} />) : (
+                          <BaseLayout>
+                            <Component {...pageProps} />
+                          </BaseLayout>)
+                      }
+                    </ModalContextProvider>
+                  </SidebarContextProvider>
+                </CreditCardContextProvider>
+              </AuthContextProvider>
+            </AccountsContextProvider>
+          </ThemeProvider>
+        </StyledThemeProvider>
+      </>
   );
 }

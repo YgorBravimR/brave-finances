@@ -24,7 +24,6 @@ export function ModalContextProvider({ children }: ModalContextProviderProps) {
   const [openTransferModal, setOpenTransferModal] = useState(false);
   const [transactionType, setTransactionType] = useState("expense")
 
-
   const handleCloseModal = () => {
     setOpenTransactionModal(false)
     setOpenCreditCardTransactionModal(false)

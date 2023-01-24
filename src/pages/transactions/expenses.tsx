@@ -2,6 +2,7 @@ import { Button } from "@mui/material";
 import { useContext } from "react";
 
 import { TransactionsContext } from "../../contexts/TransactionsContext";
+import { theme } from "../../styles/theme";
 
 export default function Expenses() {
   const { setOpenTransactionModal, setTransactionType } = useContext(TransactionsContext)
@@ -14,7 +15,7 @@ export default function Expenses() {
     <>
       <Button
         variant="contained"
-        color="error"
+        color={theme.palette.outcome.main}
         onClick={handleOpenModalSetTransactionType}
       >
         New Expense

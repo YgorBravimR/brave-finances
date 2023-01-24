@@ -8,24 +8,15 @@ import { AccountsContext } from '../../../../../contexts/AccountsContext';
 import { TransactionsContext } from '../../../../../contexts/TransactionsContext';
 import { todayDate } from '../../../../../utils/formatter';
 import { categoriesArray, tagsArray } from '../../../../../utils/transactionts';
-import { FormTransactionContainer, FormTransactionLeftBlock, FormTransactionRightBlock, RepeatBlockContainer, SwitchContent, SwitchLabelContent, } from './styles'
-
-
-interface NewTransactionFormInputs {
-	price: string,
-	received_paid: boolean;
-	date: string,
-	description: string,
-	category: string,
-	type: 'income' | 'expense' | 'credit_card' | 'transfer',
-	account: string,
-	tag: string;
-	currency: string;
-	fixed: boolean;
-	repeat: boolean;
-	repeated_times: number;
-	time_period: string;
-}
+import {
+	CustomTextField,
+	FormTransactionContainer,
+	FormTransactionLeftBlock,
+	FormTransactionRightBlock,
+	RepeatBlockContainer,
+	SwitchContent,
+	SwitchLabelContent
+} from './styles'
 
 export function FormTransaction() {
 	const [category, setCategory] = useState(categoriesArray[0].value);
@@ -125,7 +116,6 @@ export function FormTransaction() {
 		onSubmit: (values) => {
 			// handleCreateNewTransaction(values)
 			alert(JSON.stringify(values, null, 2));
-			console.log(values)
 			// setOpenModal(false)
 		},
 	});
@@ -145,14 +135,15 @@ export function FormTransaction() {
 	)
 
 	const iconSize = 24
+
 	const muiColor = () => {
 		switch (transactionType) {
 			case "income":
-				return "success";
+				return "income";
 			case "expense":
-				return "error";
+				return "outcome";
 			default:
-				return "primary"
+				return "primary";
 		}
 	}
 
@@ -160,7 +151,7 @@ export function FormTransaction() {
 		<FormTransactionContainer onSubmit={formik.handleSubmit}>
 			<FormTransactionLeftBlock>
 				<h2>New {transactionType}</h2>
-				<TextField
+				<CustomTextField
 					type="number"
 					variant='standard'
 					color={muiColor()}
@@ -180,10 +171,9 @@ export function FormTransaction() {
 						labelPlacement="start"
 					/>
 				</SwitchContent>
-				<TextField
+				<CustomTextField
 					variant='standard'
 					color={muiColor()}
-
 					id="date"
 					name="date"
 					type="date"
@@ -202,7 +192,6 @@ export function FormTransaction() {
 				<TextField
 					variant='standard'
 					color={muiColor()}
-
 					id="description"
 					name="description"
 					type="text"
@@ -223,7 +212,6 @@ export function FormTransaction() {
 					<Select
 						variant="standard"
 						color={muiColor()}
-
 						name="category"
 						id="category"
 						value={category}
@@ -261,13 +249,11 @@ export function FormTransaction() {
 			</FormTransactionLeftBlock>
 			<FormTransactionRightBlock>
 				<FormControl>
-					{/* <InputLabel id="tags">Tags</InputLabel> */}
 					<Select
 						labelId="tags"
 						multiple
 						variant="standard"
 						color={muiColor()}
-
 						id="tags"
 						name="tags"
 						value={tagsSelect}
@@ -319,7 +305,6 @@ export function FormTransaction() {
 					<TextField
 						variant='standard'
 						color={muiColor()}
-
 						id="repeated_times"
 						disabled={!repeatExpense}
 						name="repeated_times"
@@ -337,7 +322,6 @@ export function FormTransaction() {
 						<Select
 							variant="standard"
 							color={muiColor()}
-
 							name="time_period"
 							id="time_period"
 							disabled={!repeatExpense}

@@ -5,7 +5,7 @@ import { ModalContainer } from './styles'
 
 type Props = {
   children: ReactNode
-  openModal: any;
+  openModal: any
   closeModal: () => void;
 }
 

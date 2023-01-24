@@ -2,6 +2,7 @@ import { Add, ChevronLeft , ChevronRight } from '@mui/icons-material/';
 import { List } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Image from "next/image";
+import router from 'next/router';
 import { Bank, CreditCard, DotsThree, HouseLine, ListBullets } from 'phosphor-react';
 import { useContext, useState } from 'react';
 
@@ -9,7 +10,7 @@ import logo from '../../../assets/logo.png'
 import myBillsLogo from '../../../assets/mybills-logo-noBg.png'
 import { SidebarContext } from '../../../contexts/SidebarContext';
 import { NewTransactionSidebarButton } from './NewTransactionSidebarButton';
-import { MaterialUiSidebarItem } from './SidebarMenu';
+import { MenuItemLink } from './SidebarMenu/MenuItemLink';
 import { ButtonContained, ButtonExpanded, Drawer, DrawerHeader, SidebarButton, SidebarContainer } from './styles';
 
 
@@ -17,6 +18,7 @@ import { ButtonContained, ButtonExpanded, Drawer, DrawerHeader, SidebarButton, S
 export function Sidebar() {
   const [selected, setSelected] = useState('');
   const { sidebarOpened, setSidebarOpened } = useContext(SidebarContext)
+
   const handleOpenCloseDrawer = () => {
     setSidebarOpened(openClose => !openClose);
   };
@@ -47,44 +49,44 @@ export function Sidebar() {
         )
         }
         <List>
-          <MaterialUiSidebarItem
+          <MenuItemLink
             title="Dashboard"
-            to="/dashboard"
+            onClick={() => router.push("/dashboard")}
             icon={<HouseLine size={iconSize} weight="thin" />}
             selected={selected}
             setSelected={setSelected}
           />
-          <MaterialUiSidebarItem
+          <MenuItemLink
             title="Accounts"
-            to="/accounts"
+            onClick={() => router.push("/accounts")}
             icon={<Bank size={iconSize} weight="thin" />}
             selected={selected}
             setSelected={setSelected}
           />
-          <MaterialUiSidebarItem
+          <MenuItemLink
             title="Transactions"
-            to="/transactions"
+            onClick={() => router.push("/transactions")}
             icon={<ListBullets size={iconSize} weight="thin" />}
             selected={selected}
             setSelected={setSelected}
           />
-          <MaterialUiSidebarItem
+          <MenuItemLink
             title="Credit cards"
-            to="/credit-cards"
+            onClick={() => router.push("/credit-cards")}
             icon={<CreditCard size={iconSize} weight="thin" />}
             selected={selected}
             setSelected={setSelected}
           />
-          {/* <MaterialUiSidebarItem
+          {/* <MenuItemLink
             title="Budgets"
             to="/budgets"
             icon={<ListBullets size={iconSize} weight="thin" />}
             selected={selected}
             setSelected={setSelected}
           /> */}
-          <MaterialUiSidebarItem
+          <MenuItemLink
             title="More options"
-            to="/others"
+            onClick={() => router.push("/others")}
             icon={<DotsThree size={iconSize} weight="fill" />}
             selected={selected}
             setSelected={setSelected}

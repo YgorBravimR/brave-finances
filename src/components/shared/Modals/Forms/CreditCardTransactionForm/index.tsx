@@ -63,6 +63,7 @@ export function CreditCardTransactionForm() {
     istallment: yup.string(),
     repeated_times: yup.number(),
   });
+
   const formik = useFormik({
     initialValues: {
       price: "",
@@ -79,12 +80,11 @@ export function CreditCardTransactionForm() {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
-      console.log(values)
     },
   });
 
   const iconSize = 24
-  const muiColor = "secondary"
+  const muiColor = "transfer"
 
   const switchLabel = (
     <div>
@@ -100,7 +100,6 @@ export function CreditCardTransactionForm() {
       {
         creditCardsData &&
         <>
-        {console.log(cardInput)}
             <h2> New credit card expense</h2>
             <CreditCardTransactionLeftBlock>
               <TextField

@@ -4,7 +4,7 @@ import { expensesArrayApi } from '../../../../api/mockTransactions'
 import { MyExpensesContainer, TransactionsListContainer } from './styles'
 
 export function MyExpenses() {
-  const [expensesArray, setExpensesArray] = useState(expensesArrayApi)
+  const [expensesArray] = useState(expensesArrayApi)
   const lastFiveExpenses = expensesArray.slice(0, 5)
 
   return (

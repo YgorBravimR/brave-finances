@@ -3,6 +3,7 @@ import ProgressBar from '@ramonak/react-progress-bar';
 import { DotsThreeVertical } from 'phosphor-react';
 import { ReactNode, useState } from 'react';
 
+import { theme } from '../../../styles/theme'
 import { SeeMoreButton } from '../../shared/SeeMoreButton';
 import { BodyContent, ClosingOnContent, CreditCardsCardContainer, CreditCardsCardContent, HeaderContent, LimitCompareContent, PartialValueContent, ProgressBarContainer, ProgressContainer } from './styles';
 
@@ -63,10 +64,10 @@ export function CreditCardsCard({ completed, avaiable_limit, onClick, network_ic
                 <span>{partial_value}</span><span>{' '}de{' '}</span><span>{limit}</span>
               </LimitCompareContent>
               <ProgressBarContainer>
-                <ProgressBar completed={completed} bgColor="#00796b" />
+                <ProgressBar completed={completed} bgColor={`${theme.palette.creditCard.main}`} />
               </ProgressBarContainer>
                 <span>Avaiable limit {avaiable_limit}</span>
-            </ProgressContainer>
+              </ProgressContainer>
           </BodyContent>
         </CreditCardsCardContent>
         <Divider />

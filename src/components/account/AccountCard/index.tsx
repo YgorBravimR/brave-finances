@@ -10,7 +10,7 @@ interface AccountCardProps {
   account_name: string;
   balance: string;
   predicted_balance: string;
-  onClick: any
+  onClick: () => void;
 }
 
 export function AccountCard({ icon, account_name, balance, predicted_balance, onClick }: AccountCardProps) {

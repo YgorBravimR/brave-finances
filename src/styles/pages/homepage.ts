@@ -1,4 +1,4 @@
-import styled from "@emotion/styled"
+import styled from "styled-components"
 
 export const HomepageContainer = styled.div`
   padding: 5rem;
@@ -68,7 +68,7 @@ export const FormSectionContainer = styled.section`
     }
 
     .selected {
-      border-bottom: 3px solid var(--mybillsMainPurple);;
+      border-bottom: 3px solid ${({theme}) => theme.colors.light.primary};
       border-top: 3px solid transparent;
     }
 

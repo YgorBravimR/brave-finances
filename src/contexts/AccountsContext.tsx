@@ -37,7 +37,6 @@ interface AccountsApiProps {
   accounts: IAccount[]
 }
 
-
 export const AccountsContext = createContext({} as AccountsContextType)
 
 export function AccountsContextProvider({ children }: AccountsContextProviderProps) {
@@ -45,8 +44,6 @@ export function AccountsContextProvider({ children }: AccountsContextProviderPro
   const handleCloseNewAccountModal = () => setOpenNewAccountModal(false);
   const [accountsData, setAccountsData] = useState<AccountsApiProps>()
   const [account, setAccount] = useState(accountsArray[0].value);
-
-
 
   useEffect(() => {
     async function fetchData() {
@@ -59,7 +56,6 @@ export function AccountsContextProvider({ children }: AccountsContextProviderPro
     }
     fetchData();
   }, []);
-
 
   return (
     <AccountsContext.Provider value={{

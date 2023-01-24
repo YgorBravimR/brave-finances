@@ -5,6 +5,7 @@ import { useContext, useState } from 'react';
 import * as yup from 'yup'
 
 import { AccountsContext } from '../../../../../contexts/AccountsContext';
+import { theme } from '../../../../../styles/theme';
 import { accountTypesArray, banksArray } from '../../../../../utils/transactionts';
 import { FormTransactionContainer } from './styles'
 
@@ -50,7 +51,7 @@ export function NewAccountForm() {
   });
 
   const iconSize = 24
-  const muiColor = "primary"
+  const muiColor = theme.palette.primary.main
 
   return (
     <FormTransactionContainer onSubmit={formik.handleSubmit}>

@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from 'styled-components'
 
 export const MyExpensesContainer = styled.div``
 
@@ -17,7 +17,7 @@ export const TransactionsListContainer = styled.ul`
 
     strong {
       font-weight: 600;
-      color: darkred;
+      color: ${({theme}) => theme.colors.light.outcome};
     }
   }
 `

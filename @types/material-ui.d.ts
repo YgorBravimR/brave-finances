@@ -9,19 +9,46 @@ import {
 } from "@mui/material/styles";
 
 interface ExtraPalette {
-  third: {
-    main: string;
-  }
-  outcome: {
+  primary: {
+    main: string
+  },
+  primaryLight: {
+    main: string
+  },
+  primaryDark: {
+    main: string
+  },
+  primaryDarker: {
+    main: string
+  },
+  secondary: {
+    main: string
+  },
+  secondaryDark: {
+    main: string
+  },
+  secondaryLight: {
+    main: string
+  },
+  transfer: {
     main: string
   },
   income: {
     main: string
   },
-  lightBlue: {
+  outcome: {
     main: string
   },
   creditCard: {
+    main: string
+  },
+  background: {
+    main: string
+  },
+  textColor: {
+    main: string
+  },
+  textLightColor: {
     main: string
   },
 }

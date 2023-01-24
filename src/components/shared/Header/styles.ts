@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from 'styled-components'
 
 export const HeaderContainer = styled.header`
   display: flex;
@@ -21,8 +21,6 @@ export const HeaderContainer = styled.header`
     :hover {
       background-color: rgba(0, 0, 0, 0.04);
     }
-
-
   }
 `
 

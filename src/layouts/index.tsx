@@ -4,7 +4,6 @@ import { Header } from "../components/shared/Header";
 import { Sidebar } from "../components/shared/Sidebar";
 import { ChildrenLayout, LayoutContainer, MainContentLayout } from "./styles";
 
-
 interface BaseLayoutProps {
   children: ReactElement;
 }

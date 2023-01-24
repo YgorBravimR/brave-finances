@@ -2,7 +2,6 @@ import { Card, Divider } from '@mui/material'
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 
-
 import { EmptyDashboardCard, EmptyDashboardCardProps } from '../../dashboard/EmptyDashboardCard';
 import { SeeMoreButton } from '../SeeMoreButton';
 import { ResumeCardContainer } from './styles'

@@ -12,6 +12,7 @@ import { AccountsContext } from "../contexts/AccountsContext";
 import { TransactionsContext } from "../contexts/TransactionsContext";
 import { getAPIClient } from "../services/axios";
 import { AccountsCardsContainer, AccountsPageBody, AccountsPageContainer, AccountsPageHeader, BalancesContainer } from '../styles/pages/accounts'
+import { theme } from "../styles/theme";
 
 export default function Accounts() {
   const {setOpenTransactionModal, setTransactionType} = useContext(TransactionsContext)
@@ -32,6 +33,8 @@ export default function Accounts() {
   function handleOpenNewAccountModal() {
     setOpenNewAccountModal(true)
   }
+
+  const iconSize = 32
 
   return (
     <AccountsPageContainer>
@@ -60,8 +63,8 @@ export default function Accounts() {
               ))}
             </AccountsCardsContainer>
             <BalancesContainer>
-              <BalanceCard icon={<Money size={32} />} iconColor='#2296f3' title='Current Balance' value={accountsData.current_balance} to={'/dashboard'} />
-              <BalanceCard icon={<Coin size={32} />} iconColor='#6514dd' title='Predicted Balance' value={accountsData.predicted_valance} to={'/dashboard'} />
+              <BalanceCard icon={<Money size={iconSize} />} iconColor={theme.palette.primary.main} title='Current Balance' value={accountsData.current_balance} to={'/dashboard'} />
+              <BalanceCard icon={<Coin size={iconSize} />} iconColor={theme.palette.secondary.main} title='Predicted Balance' value={accountsData.predicted_valance} to={'/dashboard'} />
             </BalancesContainer>
           </AccountsPageBody>
         </>

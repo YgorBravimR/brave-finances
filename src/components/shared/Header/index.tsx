@@ -1,5 +1,5 @@
 import { KeyboardArrowDown } from '@mui/icons-material';
-import { Avatar, Button, Menu, MenuItem, Typography } from '@mui/material';
+import { Avatar, Button, Menu, MenuItem } from '@mui/material';
 import Image from 'next/image'
 import { useContext, useState } from 'react';
 
@@ -41,9 +41,9 @@ export function Header() {
             startIcon={<Avatar src="https://avatars.githubusercontent.com/ygorbravimr" />}
             endIcon={<KeyboardArrowDown />}
           >
-            <Typography>
+            <p>
               {user?.fullname}
-            </Typography>
+            </p>
           </Button>
           <Menu
             anchorEl={anchorEl}

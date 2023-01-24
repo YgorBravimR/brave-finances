@@ -3,6 +3,7 @@ import { ArrowsCounterClockwise, CreditCard, TrendDown, TrendUp } from 'phosphor
 import { ReactNode, useContext, useState } from 'react'
 
 import { TransactionsContext } from '../../../../contexts/TransactionsContext';
+import theme from '../../../../styles/theme';
 import { BaseModal } from '../../Modals/BaseModal';
 import { CreditCardTransactionForm } from '../../Modals/Forms/CreditCardTransactionForm';
 import { FormTransaction } from '../../Modals/Forms/InOutTransaction';
@@ -26,10 +27,6 @@ export function NewTransactionSidebarButton({ buttonText, startIcon }: Props) {
 		openTransferModal,
 		setOpenTransferModal
 	} = useContext(TransactionsContext)
-
-	// const {creditCardsData, setCardInput} = useContext(CreditCardContext)
-
-	// const firstCreditCardOfArray = creditCardsData.cards[0]
 
 	const openMenu = Boolean(isNewTransactionMenuOpen);
 
@@ -97,19 +94,19 @@ export function NewTransactionSidebarButton({ buttonText, startIcon }: Props) {
 				<MenuItem
 					onClick={handleCLoseMenuOpenModalExpense}
 				>
-					<TrendDown size={20} color="#f44336" />
+					<TrendDown size={20} color={theme.palette.outcome.main} />
 					<p>Expense</p>
 				</MenuItem>
 				<MenuItem
 					onClick={handleCLoseMenuOpenModalIncome}
 				>
-					<TrendUp size={20} color="#4caf50" />
+					<TrendUp size={20} color={theme.palette.income.main} />
 					<p>Income</p>
 				</MenuItem>
 				<MenuItem
 					onClick={handleCLoseMenuOpenModalCreditCard}
 				>
-					<CreditCard size={20} color="#00796b" />
+					<CreditCard size={20} color={theme.palette.creditCard.main} />
 					<p>Credit Card</p>
 				</MenuItem>
 				<MenuItem
@@ -119,7 +116,7 @@ export function NewTransactionSidebarButton({ buttonText, startIcon }: Props) {
 						gap: '1rem'
 					}}
 				>
-					<ArrowsCounterClockwise size={20} color="#2296f3" />
+					<ArrowsCounterClockwise size={20} color={theme.palette.transfer.main} />
 					<p>Transfer</p>
 				</MenuItem>
 			</Menu>

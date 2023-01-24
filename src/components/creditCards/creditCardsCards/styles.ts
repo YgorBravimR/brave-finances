@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from "styled-components"
 
 export const CreditCardsCardContainer = styled.div`
   .MuiPaper-root {
@@ -6,7 +6,7 @@ export const CreditCardsCardContainer = styled.div`
     min-width: 22rem;
   }
     button {
-      color: var(--mybillsCreditCard);
+      color: ${({ theme }) => theme.colors.light.creditCard};
 
       :hover {
         background-color: rgba(0, 0, 0, 0.04);
@@ -17,7 +17,7 @@ export const CreditCardsCardContainer = styled.div`
 export const CreditCardsCardContent = styled.div`
   padding: 1rem;
   font-weight: 500;
-  color: var(--mybillsTextLight);
+      color: ${({ theme }) => theme.colors.light.textLightColor};
 `
 
 export const HeaderContent = styled.div`
@@ -85,10 +85,10 @@ gap: 0.12rem;
 export const LimitCompareContent = styled.div`
 `
 export const ClosingOnContent = styled.div`
-  color: var(--mybillsText);
-`
+    color: ${({ theme }) => theme.colors.light.textColor};
+  `
+
 export const PartialValueContent = styled.div`
   strong {
-    color: var(--mybillsOutcome)
-  }
+    color: ${({ theme }) => theme.colors.light.outcome};  }
 `

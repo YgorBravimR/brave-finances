@@ -49,7 +49,6 @@ export function FormCreditCard() {
     setDueDate(value as string);
   };
 
-
   const validationSchema = yup.object({
     limit: yup.string().required(),
     description: yup.string().required(),
@@ -58,6 +57,7 @@ export function FormCreditCard() {
     close_date: yup.number().required(),
     due_date: yup.number().required(),
   });
+
   const formik = useFormik({
     initialValues: {
       limit: "",
@@ -76,8 +76,8 @@ export function FormCreditCard() {
   });
 
   const iconSize = 24
-  const muiColor = "secondary"
 
+  const muiColor = "creditCard"
 
   return (
     <FormTransactionContainer onSubmit={formik.handleSubmit}>

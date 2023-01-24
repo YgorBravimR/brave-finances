@@ -12,6 +12,7 @@ import { CreditCardContext } from "../contexts/CreditCardContext";
 import { TransactionsContext } from "../contexts/TransactionsContext";
 import { getAPIClient } from "../services/axios";
 import { BalancesContainer, CreditCardsCardsContainer, CreditCardsPageContainer, CreditCardsPageHeader } from "../styles/pages/credit-cards";
+import { theme } from "../styles/theme";
 
 export default function CreditCards() {
   const { handleCloseCreditCardModal, openCreditCardModal, setOpenCreditCardModal } = useContext(CreditCardContext)
@@ -27,6 +28,8 @@ export default function CreditCards() {
     setTransactionType("credit-card")
     setOpenCreditCardTransactionModal(true)
   }
+
+  const iconColor = theme.palette.creditCard.main
 
   return (
     <CreditCardsPageContainer>
@@ -52,7 +55,6 @@ export default function CreditCards() {
                 closing_on={`${card.close_date}`}
                 limit={card.limit}
                 onClick={() => (handleOpenModalSetTransactionType(card.id))}
-                due_date={`December ${card.due_date}`}
                 avaiable_limit={card.avaiable_limit}
                 completed={card.percent}
               />
@@ -61,21 +63,21 @@ export default function CreditCards() {
           <BalancesContainer>
             <BalanceCard
               icon={<CreditCard />}
-              iconColor='#00796b'
+              iconColor={iconColor}
               title='Best Credit Card to Buy'
               value={creditCardsData.best_cc_to_buy}
               to={'/credit-cards'}
             />
             <BalanceCard
               icon={<Coins />}
-              iconColor='#00796b'
+              iconColor={iconColor}
               title='Avaiable Limit'
               value={creditCardsData.avaiable_limit}
               to={'/credit-cards'}
             />
             <BalanceCard
               icon={<Money />}
-              iconColor='#00796b'
+              iconColor={iconColor}
               title='Total amount'
               value={creditCardsData.total_amount}
               to={'/credit-cards'}

@@ -4,7 +4,7 @@ import { SeeMoreContainer } from "./styles";
 
 interface Props {
   text: string
-  onClick: any
+  onClick: () => void
 }
 
 export function SeeMoreButton({ text, onClick }: Props) {

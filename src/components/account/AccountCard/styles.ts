@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from 'styled-components'
 
 export const AccountCardContainer = styled.div`
   .MuiPaper-root {
@@ -35,11 +35,11 @@ export const HeaderContent = styled.div`
 
     strong {
       font-size: 1.15rem;
-      color: var(--mybillsTextLight)
+      color: ${({ theme }) => theme.colors.light.textLightColor}
     }
 
     svg {
-      color: var(--mybillsLightBlue)
+      color: ${({ theme }) => theme.colors.light.transfer}
     }
   }
 `
@@ -50,7 +50,7 @@ export const BalanceContent = styled.div`
   font-weight: 500;
 
   span {
-    color: var(--mybillsIncome);
+    color: ${({ theme }) => theme.colors.light.income}
   }
 `
 

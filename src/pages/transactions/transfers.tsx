@@ -2,6 +2,7 @@ import { Button } from "@mui/material";
 import { useContext } from "react";
 
 import { TransactionsContext } from "../../contexts/TransactionsContext";
+import { theme } from "../../styles/theme";
 
 export default function Transfer() {
   const { setOpenCreditCardTransactionModal, setTransactionType } = useContext(TransactionsContext)
@@ -14,7 +15,7 @@ export default function Transfer() {
     <>
       <Button
         variant="contained"
-        color="secondary"
+        color={theme.palette.transfer.main}
         onClick={handleOpenModalSetTransactionType}
       >
         New Expense

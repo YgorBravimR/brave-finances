@@ -24,7 +24,7 @@
     "**/*.ts",
     "**/*.tsx",
     "src/styles/globals.css"
-  ],
+, "src/styles/theme.ts"  ],
   "exclude": [
     "node_modules"
   ]

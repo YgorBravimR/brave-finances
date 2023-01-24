@@ -14,10 +14,11 @@ import { MyIncomes } from '../components/shared/ResumeCard/MyIncomes';
 import { AuthContext } from '../contexts/AuthContext';
 import { getAPIClient } from '../services/axios';
 import { BalanceCardContainer, DashboardContainer, MainCardsContent } from '../styles/pages/dashboard';
+import { theme } from '../styles/theme';
 
 export default function Dashboard() {
   const { user } = useContext(AuthContext)
-  const [dashboardApi, setDashboardApi] = useState(dashboardApiResponse.data)
+  const [dashboardApi] = useState(dashboardApiResponse.data)
 
   return (
     <DashboardContainer>
@@ -29,7 +30,7 @@ export default function Dashboard() {
               <BalanceCard
                 title="Actual Balance"
                 value={dashboardApi.current_balance}
-                iconColor="#2296f3"
+                iconColor={theme.palette.transfer.main}
                 icon={<AccountBalance />}
                 to="/transactions"
                 tooltip="Your month balance"
@@ -37,7 +38,7 @@ export default function Dashboard() {
               <BalanceCard
                 title="Incomes"
                 value={dashboardApi.incomes_sum}
-                iconColor="#4caf50"
+                iconColor={theme.palette.income.main}
                 icon={<ArrowUpwardOutlined />}
                 to="/transactions/incomes"
                 tooltip="Your month incomes balance"
@@ -45,7 +46,7 @@ export default function Dashboard() {
               <BalanceCard
                 title="Expenses"
                 value={dashboardApi.expenses_sum}
-                iconColor="#f44336"
+                iconColor={theme.palette.outcome.main}
                 icon={<ArrowDownwardOutlined />}
                 to="/transactions/expenses"
                 tooltip="Your month expenses balance"
@@ -53,7 +54,7 @@ export default function Dashboard() {
               <BalanceCard
                 title="Credit Cards"
                 value={dashboardApi.credit_card_expenses_sum}
-                iconColor="#00796b"
+                iconColor={theme.palette.creditCard.main}
                 icon={<AccountBalanceWallet />}
                 to="/transactions/credit-cards"
                 tooltip="Your month credit card invoices balance"

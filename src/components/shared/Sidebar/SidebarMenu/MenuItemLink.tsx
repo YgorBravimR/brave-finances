@@ -1,20 +1,17 @@
 import { ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
-import router from "next/router";
-import { ReactNode, useContext } from "react";
+import { ReactNode } from "react";
 
-import { SidebarContext } from "../../../../contexts/SidebarContext";
 import { SidebarMenuContainer } from "./styles";
 
 interface ItemProps {
   title: string;
-  to: string;
+  onClick: () => void;
   icon: ReactNode;
   selected: string;
   setSelected(item: string): void;
 }
 
-export function MaterialUiSidebarItem({ title, to, icon, selected, setSelected }: ItemProps) {
-  const { sidebarOpened } = useContext(SidebarContext)
+export function MenuItemLink({ title, onClick, icon, selected, setSelected }: ItemProps) {
   return (
     <SidebarMenuContainer>
       <ListItem key={title} sx={{
@@ -29,7 +26,7 @@ export function MaterialUiSidebarItem({ title, to, icon, selected, setSelected }
             justifyContent: 'center',
             alignItems: 'center',
           }}
-          onClick={() => { router.push(to), setSelected(title) }}
+          onClick={() => { setSelected(title), onClick() }}
           selected={selected === title}
         >
           <ListItemIcon
@@ -39,7 +36,6 @@ export function MaterialUiSidebarItem({ title, to, icon, selected, setSelected }
           >
             {icon}
           </ListItemIcon>
-          {/* <ListItemText primary={title} sx={{ visibility: sidebarOpened ? 'initial' : 'hidden' }} /> */}
           <ListItemText primary={title} />
         </ListItemButton>
       </ListItem>

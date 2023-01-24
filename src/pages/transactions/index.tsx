@@ -9,9 +9,10 @@ import TransactionsTable from "../../components/dashboard/TableTransactions";
 import { BalanceCard } from "../../components/shared/BalanceCard";
 import { getAPIClient } from "../../services/axios";
 import { BalancesContainer, TableContainer, TransactionsPageContainer, TransactionsPageHeader } from "../../styles/pages/transactions";
+import { theme } from "../../styles/theme";
 
 export default function Transactions() {
-  const [transactionsApi, setTransactionsApi] = useState(transactionsApiResponse.data)
+  const [transactionsApi] = useState(transactionsApiResponse.data)
 
   return (
     <TransactionsPageContainer>
@@ -21,14 +22,12 @@ export default function Transactions() {
           <Plus weight="bold" />
         </Button>
       </TransactionsPageHeader>
-
       <BalancesContainer>
-        <BalanceCard icon={<Bank />} iconColor='#2296f3' title='Current Balance' value={transactionsApi.current_balance} to={'/'} />
-        <BalanceCard icon={<ArrowUp />} iconColor='#4caf50' title='Incomes' value={transactionsApi.incomes_balance} to={'/'} />
-        <BalanceCard icon={<ArrowDown />} iconColor='#f44336' title='Expenses' value={transactionsApi.expenses_balance} to={'/'} />
-        <BalanceCard icon={<Scales />} iconColor='#00796b' title='Monthly balance' value={transactionsApi.month_balance} to={'/'} />
+        <BalanceCard icon={<Bank />} iconColor={theme.palette.primaryDarker.main} title='Current Balance' value={transactionsApi.current_balance} to={'/'} />
+        <BalanceCard icon={<ArrowUp />} iconColor={theme.palette.income.main} title='Incomes' value={transactionsApi.incomes_balance} to={'/'} />
+        <BalanceCard icon={<ArrowDown />} iconColor={theme.palette.outcome.main} title='Expenses' value={transactionsApi.expenses_balance} to={'/'} />
+        <BalanceCard icon={<Scales />} iconColor={theme.palette.secondary.main} title='Monthly balance' value={transactionsApi.month_balance} to={'/'} />
       </BalancesContainer>
-
       <TableContainer>
         <TransactionsTable />
       </TableContainer>

@@ -75,7 +75,7 @@ export function RegisterUserForm({setFormState}:Props) {
           error={formik.touched.password && Boolean(formik.errors.password)}
           helperText={formik.touched.password && formik.errors.password}
         />
-        <Button color="primary" variant="contained" type="submit">
+        <Button variant="contained" type="submit">
           REGISTER
         </Button>
       </RegisterUserFormContainer>

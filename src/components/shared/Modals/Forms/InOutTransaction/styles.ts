@@ -1,4 +1,5 @@
-import styled from '@emotion/styled'
+import { TextField } from '@mui/material'
+import styled from 'styled-components'
 
 export const FormTransactionContainer = styled.form`
   display: grid;
@@ -58,4 +59,8 @@ export const SwitchLabelContent = styled.div`
 export const RepeatBlockContainer = styled.div`
   display: flex;
   gap: 2rem;
+`
+
+export const CustomTextField = styled(TextField)`
+  color: #f44336
 `

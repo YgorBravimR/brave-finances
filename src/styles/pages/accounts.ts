@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from 'styled-components'
 
 export const AccountsPageContainer = styled.div`
   display: flex;
@@ -23,7 +23,6 @@ export const AccountsPageBody = styled.div`
   display: flex;
   justify-content: space-between;
     gap: 4rem;
-
 `
 
 export const AccountsCardsContainer = styled.ul`

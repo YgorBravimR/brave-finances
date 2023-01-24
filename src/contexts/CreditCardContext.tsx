@@ -48,7 +48,6 @@ export function CreditCardContextProvider({ children }: CreditCardContextProvide
     async function fetchData() {
       try {
         const response = await jsonApi.get('/creditCards');
-        console.log(response)
         setCreditCardsData(response.data);
       } catch (error) {
         console.error(error);
@@ -56,8 +55,6 @@ export function CreditCardContextProvider({ children }: CreditCardContextProvide
     }
     fetchData();
   }, []);
-
-
 
   return (
     <CreditCardContext.Provider value={{

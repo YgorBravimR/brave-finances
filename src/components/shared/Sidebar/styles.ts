@@ -1,6 +1,6 @@
-import styled from '@emotion/styled'
 import MuiDrawer from '@mui/material/Drawer';
 import { CSSObject, Theme, styled as muiStyled } from '@mui/material/styles';
+import styled from 'styled-components'
 
 export const SidebarContainer = styled.div`
 .MuiListItemIcon-root {
@@ -13,8 +13,6 @@ export const SidebarContainer = styled.div`
 
 img {
   margin-left: 10px;
-  /* -webkit-animation: puff-in-center 0.7s cubic-bezier(0.470, 0.000, 0.745, 0.715) both;
-  animation: puff-in-center 0.7s cubic-bezier(0.470, 0.000, 0.745, 0.715) both; */
 }
 `
 
